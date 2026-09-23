@@ -1,0 +1,3834 @@
+[
+  {
+    "path": "Layout Assets - Learning Tab\\+5.png",
+    "sha256": "59bfa78aa25c28b7fe6316dcd8bba0dd5db14160542aeb1e5539c9f4a5c0e9eb",
+    "bytes": 1262,
+    "valid": true,
+    "width": 80,
+    "height": 57
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\-530.png",
+    "sha256": "1ab9af0180f44d688915a3f37f4e5f8228a32fe283ca42f20166d7978653f4be",
+    "bytes": 3110,
+    "valid": true,
+    "width": 163,
+    "height": 57
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\0.5h.png",
+    "sha256": "e94018542201d4a58ac50649eff1f5837b179351449587211dff8022d73624be",
+    "bytes": 2640,
+    "valid": true,
+    "width": 148,
+    "height": 57
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\01_12_03.png",
+    "sha256": "f602e209a28c62c539fdcbbc58b8ce0ce453d1fb22db8a7e3c30355f5bd3deb0",
+    "bytes": 6646,
+    "valid": true,
+    "width": 432,
+    "height": 75
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\06_27.png",
+    "sha256": "f2ee9e3a6641b32bab8a7ebd797abd97fadc219c6773306e52b3d467d864aec1",
+    "bytes": 5174,
+    "valid": true,
+    "width": 278,
+    "height": 78
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\06_32_08.png",
+    "sha256": "aaef928dab0ce55d36726dbd1b532ccbc7555f110d2c3ced290b67d300f5b52c",
+    "bytes": 8488,
+    "valid": true,
+    "width": 434,
+    "height": 77
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\12_38 AM.png",
+    "sha256": "297a4e57626870263536f769a05db604add6070fbe458a112ddb9a98cab1c2d0",
+    "bytes": 5655,
+    "valid": true,
+    "width": 339,
+    "height": 56
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\2.png",
+    "sha256": "2f1ec1b25794774d80cfec98ada6e957314cdd12a4bdc530a324887bd181f9ed",
+    "bytes": 977,
+    "valid": true,
+    "width": 39,
+    "height": 56
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\2h.png",
+    "sha256": "1bc247adca7058ce3cda1e84dd1ce01d49d65e5374f360762255cc6317232d5a",
+    "bytes": 1647,
+    "valid": true,
+    "width": 85,
+    "height": 57
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\4,250.png",
+    "sha256": "4beda1400ecf0c78cca588f8c8173a010ef1aefb96e40b4ac689edf44f9aa918",
+    "bytes": 3785,
+    "valid": true,
+    "width": 209,
+    "height": 68
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\65.png",
+    "sha256": "21a3b4bb1d06f9ad18214392972d8404aa1656f7a03e1a94bc11d427b48c9806",
+    "bytes": 2085,
+    "valid": true,
+    "width": 88,
+    "height": 57
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\72BPM.png",
+    "sha256": "223239e93b6830bee3676f240571429090f64f3218be182ef504350c5e8c89b6",
+    "bytes": 4301,
+    "valid": true,
+    "width": 275,
+    "height": 59
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Annual Heat Map.png",
+    "sha256": "2536cb6ed5ff8bc058463add1ab2d859d09661736e284f3585f5e340e8a4c58a",
+    "bytes": 9245,
+    "valid": true,
+    "width": 698,
+    "height": 82
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Average.png",
+    "sha256": "554abff8dcf2a57e20327bc27d23ec3e6a4f8269486fb2ab9626913b114580dc",
+    "bytes": 5235,
+    "valid": true,
+    "width": 275,
+    "height": 72
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Awake.png",
+    "sha256": "07e7abf91c408d4d372d7004dfc52e5372537bf15e967744b7cbd4fbf7e07df9",
+    "bytes": 3904,
+    "valid": true,
+    "width": 193,
+    "height": 49
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Body Battery.png",
+    "sha256": "c1a064b2cbecf36e2eef6e1de15a98446a1d4f6efbf3e306c8fbe5b41c665409",
+    "bytes": 6953,
+    "valid": true,
+    "width": 455,
+    "height": 74
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Calories.png",
+    "sha256": "b2247a93d4bf34768167200a62cbde3518d669d3f3a523fe78872eb5b6207e2b",
+    "bytes": 4656,
+    "valid": true,
+    "width": 276,
+    "height": 57
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Creatives.png",
+    "sha256": "c1630630b8c969fb5673fb44cd98df21bd5e4a7bffe79e5216e47c6b82f924af",
+    "bytes": 5287,
+    "valid": true,
+    "width": 317,
+    "height": 57
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Cups of Water.png",
+    "sha256": "fb00c85f6ff81519996f9f21b1c6eeda28c5334149794e9b023622294a931b08",
+    "bytes": 7647,
+    "valid": true,
+    "width": 487,
+    "height": 73
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Daily.png",
+    "sha256": "3e580f9b96646b0f8da0b14feef8b805784d62405473b00e7c09015f08ef7c27",
+    "bytes": 4137,
+    "valid": true,
+    "width": 242,
+    "height": 98
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Deep.png",
+    "sha256": "cce6ce5e0cf399f43881a74078c4be6917fddbe7d29ae77f7407e92e3d66391a",
+    "bytes": 3199,
+    "valid": true,
+    "width": 143,
+    "height": 61
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\footsteps-silhouette-variant-svgrepo-com 2.png",
+    "sha256": "6c4e6debbdbe91dad484823dad13e545a8d1bfa1fa110b5e78cd5390d8769910",
+    "bytes": 1998,
+    "valid": true,
+    "width": 153,
+    "height": 153
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Frame 2.png",
+    "sha256": "5cbfd0fc1c7e5fb843608bf83b995d6cdd111d60fa7f7ef09051f7d08c3ebaf8",
+    "bytes": 11748,
+    "valid": true,
+    "width": 837,
+    "height": 275
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Group 3.png",
+    "sha256": "a1a980642ad29ed51341d30235bf62dd98154e0b2d33a18422bd030a10fe40e3",
+    "bytes": 11829,
+    "valid": true,
+    "width": 2366,
+    "height": 970
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Group 4.png",
+    "sha256": "c73e405be200544b412cc7b43da04d00fe9b97a6bc1afeeaad14d4aa33aeeeb6",
+    "bytes": 12137,
+    "valid": true,
+    "width": 2395,
+    "height": 992
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Health.png",
+    "sha256": "37af693e8d301411ee1d84de57688d58ee5027d58d2f697eed70066ea61d87b2",
+    "bytes": 4079,
+    "valid": true,
+    "width": 308,
+    "height": 76
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Highest.png",
+    "sha256": "83f3994eead13763f50cf441d40af470394ee031ffb63da7579dd417644672c2",
+    "bytes": 4559,
+    "valid": true,
+    "width": 267,
+    "height": 74
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Last Night\u2019s Sleep Details.png",
+    "sha256": "1873f611fd1c0e16e270bd0bcdae4e129b30b88cc0e595a1a182a571712c2a85",
+    "bytes": 12191,
+    "valid": true,
+    "width": 862,
+    "height": 74
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Last Week Learing.png",
+    "sha256": "ac6ea52b14300c2b40563909b7eed830983c8fe0c04afacf470e9d9b1563eec9",
+    "bytes": 9742,
+    "valid": true,
+    "width": 635,
+    "height": 74
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Last Week\u2019s Sleep.png",
+    "sha256": "def129ed249619c42a13026649b15a3d657d6fe68dddb090cc0f48a08550b194",
+    "bytes": 8911,
+    "valid": true,
+    "width": 601,
+    "height": 73
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Learning Analytics.png",
+    "sha256": "9446ca856fd80ff96f4b365797aec8fb533b2755043276b9a18f2f6e0a5ac7cd",
+    "bytes": 11931,
+    "valid": true,
+    "width": 858,
+    "height": 98
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Learning.png",
+    "sha256": "2763f3388789d7d1fc77b9e5a636217d0a220a454ec99b6e117c0ddc6c84d4d2",
+    "bytes": 6363,
+    "valid": true,
+    "width": 411,
+    "height": 97
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Light.png",
+    "sha256": "df0568da4a8f116fd0a029b213ef538bdfa34921c7058c4b5123790b1b4dfd31",
+    "bytes": 3571,
+    "valid": true,
+    "width": 151,
+    "height": 64
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Line 13.png",
+    "sha256": "0c61aa95555cd4d5edab1c034755d631ea46f369e132436be84c38bfdebf506d",
+    "bytes": 319,
+    "valid": true,
+    "width": 31,
+    "height": 32
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Line 14.png",
+    "sha256": "0625c90416f5b8827c42f05a05729ef0c132d8a7f493fc0dcf9d94b596a35653",
+    "bytes": 279,
+    "valid": true,
+    "width": 31,
+    "height": 31
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Line 15.png",
+    "sha256": "54319ffedd994b3a1ce74cb98323e5ab631bbbb67f80852df1955266fabdd589",
+    "bytes": 218,
+    "valid": true,
+    "width": 3000,
+    "height": 4
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Line 16.png",
+    "sha256": "54319ffedd994b3a1ce74cb98323e5ab631bbbb67f80852df1955266fabdd589",
+    "bytes": 218,
+    "valid": true,
+    "width": 3000,
+    "height": 4
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Line 17.png",
+    "sha256": "54319ffedd994b3a1ce74cb98323e5ab631bbbb67f80852df1955266fabdd589",
+    "bytes": 218,
+    "valid": true,
+    "width": 3000,
+    "height": 4
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Line 18.png",
+    "sha256": "24eb736880ef2e20db211a8d880a7373bbe7abfced3f62ee2407f5e16fa67e07",
+    "bytes": 182,
+    "valid": true,
+    "width": 88,
+    "height": 10
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Line 19.png",
+    "sha256": "bb71d768b908f8eec79db5459a4a912d6977913617979ae2131afb89fbd62475",
+    "bytes": 594,
+    "valid": true,
+    "width": 20,
+    "height": 62
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Line 20.png",
+    "sha256": "ee4d5a60b62650b495d18ac9c8ee862a4e1fa9050380aa39764ddbe7bddc057f",
+    "bytes": 593,
+    "valid": true,
+    "width": 19,
+    "height": 61
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Line 21.png",
+    "sha256": "0c61aa95555cd4d5edab1c034755d631ea46f369e132436be84c38bfdebf506d",
+    "bytes": 319,
+    "valid": true,
+    "width": 31,
+    "height": 32
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Line 22.png",
+    "sha256": "0625c90416f5b8827c42f05a05729ef0c132d8a7f493fc0dcf9d94b596a35653",
+    "bytes": 279,
+    "valid": true,
+    "width": 31,
+    "height": 31
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Lowest.png",
+    "sha256": "2b8e27f83b722bdf56d67dcaf94b18d1192905f04d3b0008794120f2d9cf0b99",
+    "bytes": 4018,
+    "valid": true,
+    "width": 245,
+    "height": 56
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Meals.png",
+    "sha256": "25f6bd3a542490275e24286415eadfb0bee98147ecfe93a4895550b91a0c3232",
+    "bytes": 3965,
+    "valid": true,
+    "width": 204,
+    "height": 57
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Monthly Graph.png",
+    "sha256": "3c022faa6b0f19dadd63a5a8339da0b05f660e735d6c7a2765bbf0c4e3c242a6",
+    "bytes": 8756,
+    "valid": true,
+    "width": 608,
+    "height": 83
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 489.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 490.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 491.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 492.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 493.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 494.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 495.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 496.png",
+    "sha256": "509c0281cb615a9d6251678542708422f37ce061bf0269df48a1e079d8ea3fe7",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 497.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 498.png",
+    "sha256": "509c0281cb615a9d6251678542708422f37ce061bf0269df48a1e079d8ea3fe7",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 499.png",
+    "sha256": "509c0281cb615a9d6251678542708422f37ce061bf0269df48a1e079d8ea3fe7",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 500.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 501.png",
+    "sha256": "509c0281cb615a9d6251678542708422f37ce061bf0269df48a1e079d8ea3fe7",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 502.png",
+    "sha256": "509c0281cb615a9d6251678542708422f37ce061bf0269df48a1e079d8ea3fe7",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 503.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 504.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 505.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 506.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 507.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 508.png",
+    "sha256": "702da47935ed78065174aa5dc9777394636046fca93b59a577ed4ce7675243f6",
+    "bytes": 1831,
+    "valid": true,
+    "width": 2855,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 509.png",
+    "sha256": "5a0e40d39963fdb015ea75e29ff9bd6d012e565c79ec06d7c8449ad49b462ad4",
+    "bytes": 1412,
+    "valid": true,
+    "width": 2079,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 510.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 511.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 512.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 513.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 514.png",
+    "sha256": "509c0281cb615a9d6251678542708422f37ce061bf0269df48a1e079d8ea3fe7",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 515.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 516.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 517.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 518.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 519.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 520.png",
+    "sha256": "509c0281cb615a9d6251678542708422f37ce061bf0269df48a1e079d8ea3fe7",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 521.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 522.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 523.png",
+    "sha256": "509c0281cb615a9d6251678542708422f37ce061bf0269df48a1e079d8ea3fe7",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 524.png",
+    "sha256": "509c0281cb615a9d6251678542708422f37ce061bf0269df48a1e079d8ea3fe7",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 525.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 526.png",
+    "sha256": "509c0281cb615a9d6251678542708422f37ce061bf0269df48a1e079d8ea3fe7",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 527.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 528.png",
+    "sha256": "062982893acd5139533d1e1df882d5defe429720c7bd0f3dc03ebc68b6790fe3",
+    "bytes": 456,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 529.png",
+    "sha256": "062982893acd5139533d1e1df882d5defe429720c7bd0f3dc03ebc68b6790fe3",
+    "bytes": 456,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 530.png",
+    "sha256": "062982893acd5139533d1e1df882d5defe429720c7bd0f3dc03ebc68b6790fe3",
+    "bytes": 456,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 531.png",
+    "sha256": "062982893acd5139533d1e1df882d5defe429720c7bd0f3dc03ebc68b6790fe3",
+    "bytes": 456,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 532.png",
+    "sha256": "3fae162714dba261ad6d647d5ae598a291678733d784a83de28bdb4509eaea7c",
+    "bytes": 454,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 533.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 534.png",
+    "sha256": "3fae162714dba261ad6d647d5ae598a291678733d784a83de28bdb4509eaea7c",
+    "bytes": 454,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 535.png",
+    "sha256": "062982893acd5139533d1e1df882d5defe429720c7bd0f3dc03ebc68b6790fe3",
+    "bytes": 456,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 536.png",
+    "sha256": "062982893acd5139533d1e1df882d5defe429720c7bd0f3dc03ebc68b6790fe3",
+    "bytes": 456,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 537.png",
+    "sha256": "062982893acd5139533d1e1df882d5defe429720c7bd0f3dc03ebc68b6790fe3",
+    "bytes": 456,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 538.png",
+    "sha256": "062982893acd5139533d1e1df882d5defe429720c7bd0f3dc03ebc68b6790fe3",
+    "bytes": 456,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 539.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 540.png",
+    "sha256": "062982893acd5139533d1e1df882d5defe429720c7bd0f3dc03ebc68b6790fe3",
+    "bytes": 456,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 541.png",
+    "sha256": "062982893acd5139533d1e1df882d5defe429720c7bd0f3dc03ebc68b6790fe3",
+    "bytes": 456,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 542.png",
+    "sha256": "062982893acd5139533d1e1df882d5defe429720c7bd0f3dc03ebc68b6790fe3",
+    "bytes": 456,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 543.png",
+    "sha256": "062982893acd5139533d1e1df882d5defe429720c7bd0f3dc03ebc68b6790fe3",
+    "bytes": 456,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 544.png",
+    "sha256": "062982893acd5139533d1e1df882d5defe429720c7bd0f3dc03ebc68b6790fe3",
+    "bytes": 456,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 545.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 546.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 547.png",
+    "sha256": "062982893acd5139533d1e1df882d5defe429720c7bd0f3dc03ebc68b6790fe3",
+    "bytes": 456,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 548.png",
+    "sha256": "062982893acd5139533d1e1df882d5defe429720c7bd0f3dc03ebc68b6790fe3",
+    "bytes": 456,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 549.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 550.png",
+    "sha256": "062982893acd5139533d1e1df882d5defe429720c7bd0f3dc03ebc68b6790fe3",
+    "bytes": 456,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 551.png",
+    "sha256": "062982893acd5139533d1e1df882d5defe429720c7bd0f3dc03ebc68b6790fe3",
+    "bytes": 456,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 552.png",
+    "sha256": "062982893acd5139533d1e1df882d5defe429720c7bd0f3dc03ebc68b6790fe3",
+    "bytes": 456,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 553.png",
+    "sha256": "062982893acd5139533d1e1df882d5defe429720c7bd0f3dc03ebc68b6790fe3",
+    "bytes": 456,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 554.png",
+    "sha256": "062982893acd5139533d1e1df882d5defe429720c7bd0f3dc03ebc68b6790fe3",
+    "bytes": 456,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 555.png",
+    "sha256": "062982893acd5139533d1e1df882d5defe429720c7bd0f3dc03ebc68b6790fe3",
+    "bytes": 456,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 556.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 557.png",
+    "sha256": "062982893acd5139533d1e1df882d5defe429720c7bd0f3dc03ebc68b6790fe3",
+    "bytes": 456,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 558.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 559.png",
+    "sha256": "062982893acd5139533d1e1df882d5defe429720c7bd0f3dc03ebc68b6790fe3",
+    "bytes": 456,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 560.png",
+    "sha256": "062982893acd5139533d1e1df882d5defe429720c7bd0f3dc03ebc68b6790fe3",
+    "bytes": 456,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 561.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 562.png",
+    "sha256": "062982893acd5139533d1e1df882d5defe429720c7bd0f3dc03ebc68b6790fe3",
+    "bytes": 456,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 563.png",
+    "sha256": "062982893acd5139533d1e1df882d5defe429720c7bd0f3dc03ebc68b6790fe3",
+    "bytes": 456,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 564.png",
+    "sha256": "062982893acd5139533d1e1df882d5defe429720c7bd0f3dc03ebc68b6790fe3",
+    "bytes": 456,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 565.png",
+    "sha256": "062982893acd5139533d1e1df882d5defe429720c7bd0f3dc03ebc68b6790fe3",
+    "bytes": 456,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 566.png",
+    "sha256": "509c0281cb615a9d6251678542708422f37ce061bf0269df48a1e079d8ea3fe7",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 567.png",
+    "sha256": "062982893acd5139533d1e1df882d5defe429720c7bd0f3dc03ebc68b6790fe3",
+    "bytes": 456,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 568.png",
+    "sha256": "062982893acd5139533d1e1df882d5defe429720c7bd0f3dc03ebc68b6790fe3",
+    "bytes": 456,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 569.png",
+    "sha256": "062982893acd5139533d1e1df882d5defe429720c7bd0f3dc03ebc68b6790fe3",
+    "bytes": 456,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 570.png",
+    "sha256": "062982893acd5139533d1e1df882d5defe429720c7bd0f3dc03ebc68b6790fe3",
+    "bytes": 456,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 571.png",
+    "sha256": "062982893acd5139533d1e1df882d5defe429720c7bd0f3dc03ebc68b6790fe3",
+    "bytes": 456,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 572.png",
+    "sha256": "062982893acd5139533d1e1df882d5defe429720c7bd0f3dc03ebc68b6790fe3",
+    "bytes": 456,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 573.png",
+    "sha256": "062982893acd5139533d1e1df882d5defe429720c7bd0f3dc03ebc68b6790fe3",
+    "bytes": 456,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 574.png",
+    "sha256": "062982893acd5139533d1e1df882d5defe429720c7bd0f3dc03ebc68b6790fe3",
+    "bytes": 456,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 575.png",
+    "sha256": "509c0281cb615a9d6251678542708422f37ce061bf0269df48a1e079d8ea3fe7",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 576.png",
+    "sha256": "062982893acd5139533d1e1df882d5defe429720c7bd0f3dc03ebc68b6790fe3",
+    "bytes": 456,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 577.png",
+    "sha256": "062982893acd5139533d1e1df882d5defe429720c7bd0f3dc03ebc68b6790fe3",
+    "bytes": 456,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 578.png",
+    "sha256": "062982893acd5139533d1e1df882d5defe429720c7bd0f3dc03ebc68b6790fe3",
+    "bytes": 456,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 579.png",
+    "sha256": "062982893acd5139533d1e1df882d5defe429720c7bd0f3dc03ebc68b6790fe3",
+    "bytes": 456,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 580.png",
+    "sha256": "062982893acd5139533d1e1df882d5defe429720c7bd0f3dc03ebc68b6790fe3",
+    "bytes": 456,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 581.png",
+    "sha256": "062982893acd5139533d1e1df882d5defe429720c7bd0f3dc03ebc68b6790fe3",
+    "bytes": 456,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 582.png",
+    "sha256": "062982893acd5139533d1e1df882d5defe429720c7bd0f3dc03ebc68b6790fe3",
+    "bytes": 456,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 583.png",
+    "sha256": "64c5ebf53860a07e623fde23e7d85a412e3a6e2d50198166acecbb860383bcdd",
+    "bytes": 454,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 584.png",
+    "sha256": "64c5ebf53860a07e623fde23e7d85a412e3a6e2d50198166acecbb860383bcdd",
+    "bytes": 454,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 585.png",
+    "sha256": "509c0281cb615a9d6251678542708422f37ce061bf0269df48a1e079d8ea3fe7",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 586.png",
+    "sha256": "64c5ebf53860a07e623fde23e7d85a412e3a6e2d50198166acecbb860383bcdd",
+    "bytes": 454,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 587.png",
+    "sha256": "64c5ebf53860a07e623fde23e7d85a412e3a6e2d50198166acecbb860383bcdd",
+    "bytes": 454,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 588.png",
+    "sha256": "64c5ebf53860a07e623fde23e7d85a412e3a6e2d50198166acecbb860383bcdd",
+    "bytes": 454,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 589.png",
+    "sha256": "64c5ebf53860a07e623fde23e7d85a412e3a6e2d50198166acecbb860383bcdd",
+    "bytes": 454,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 590.png",
+    "sha256": "64c5ebf53860a07e623fde23e7d85a412e3a6e2d50198166acecbb860383bcdd",
+    "bytes": 454,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 591.png",
+    "sha256": "64c5ebf53860a07e623fde23e7d85a412e3a6e2d50198166acecbb860383bcdd",
+    "bytes": 454,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 592.png",
+    "sha256": "64c5ebf53860a07e623fde23e7d85a412e3a6e2d50198166acecbb860383bcdd",
+    "bytes": 454,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 593.png",
+    "sha256": "64c5ebf53860a07e623fde23e7d85a412e3a6e2d50198166acecbb860383bcdd",
+    "bytes": 454,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 594.png",
+    "sha256": "64c5ebf53860a07e623fde23e7d85a412e3a6e2d50198166acecbb860383bcdd",
+    "bytes": 454,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 595.png",
+    "sha256": "64c5ebf53860a07e623fde23e7d85a412e3a6e2d50198166acecbb860383bcdd",
+    "bytes": 454,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 596.png",
+    "sha256": "64c5ebf53860a07e623fde23e7d85a412e3a6e2d50198166acecbb860383bcdd",
+    "bytes": 454,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 597.png",
+    "sha256": "3fae162714dba261ad6d647d5ae598a291678733d784a83de28bdb4509eaea7c",
+    "bytes": 454,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 598.png",
+    "sha256": "509c0281cb615a9d6251678542708422f37ce061bf0269df48a1e079d8ea3fe7",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 599.png",
+    "sha256": "64c5ebf53860a07e623fde23e7d85a412e3a6e2d50198166acecbb860383bcdd",
+    "bytes": 454,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 600.png",
+    "sha256": "64c5ebf53860a07e623fde23e7d85a412e3a6e2d50198166acecbb860383bcdd",
+    "bytes": 454,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 601.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 602.png",
+    "sha256": "64c5ebf53860a07e623fde23e7d85a412e3a6e2d50198166acecbb860383bcdd",
+    "bytes": 454,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 603.png",
+    "sha256": "64c5ebf53860a07e623fde23e7d85a412e3a6e2d50198166acecbb860383bcdd",
+    "bytes": 454,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 604.png",
+    "sha256": "64c5ebf53860a07e623fde23e7d85a412e3a6e2d50198166acecbb860383bcdd",
+    "bytes": 454,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 605.png",
+    "sha256": "64c5ebf53860a07e623fde23e7d85a412e3a6e2d50198166acecbb860383bcdd",
+    "bytes": 454,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 606.png",
+    "sha256": "64c5ebf53860a07e623fde23e7d85a412e3a6e2d50198166acecbb860383bcdd",
+    "bytes": 454,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 607.png",
+    "sha256": "64c5ebf53860a07e623fde23e7d85a412e3a6e2d50198166acecbb860383bcdd",
+    "bytes": 454,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 608.png",
+    "sha256": "64c5ebf53860a07e623fde23e7d85a412e3a6e2d50198166acecbb860383bcdd",
+    "bytes": 454,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 609.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 610.png",
+    "sha256": "64c5ebf53860a07e623fde23e7d85a412e3a6e2d50198166acecbb860383bcdd",
+    "bytes": 454,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 611.png",
+    "sha256": "64c5ebf53860a07e623fde23e7d85a412e3a6e2d50198166acecbb860383bcdd",
+    "bytes": 454,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 612.png",
+    "sha256": "64c5ebf53860a07e623fde23e7d85a412e3a6e2d50198166acecbb860383bcdd",
+    "bytes": 454,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 613.png",
+    "sha256": "64c5ebf53860a07e623fde23e7d85a412e3a6e2d50198166acecbb860383bcdd",
+    "bytes": 454,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 614.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 615.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 616.png",
+    "sha256": "3fae162714dba261ad6d647d5ae598a291678733d784a83de28bdb4509eaea7c",
+    "bytes": 454,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 617.png",
+    "sha256": "64c5ebf53860a07e623fde23e7d85a412e3a6e2d50198166acecbb860383bcdd",
+    "bytes": 454,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 618.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 619.png",
+    "sha256": "64c5ebf53860a07e623fde23e7d85a412e3a6e2d50198166acecbb860383bcdd",
+    "bytes": 454,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 620.png",
+    "sha256": "64c5ebf53860a07e623fde23e7d85a412e3a6e2d50198166acecbb860383bcdd",
+    "bytes": 454,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 621.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 622.png",
+    "sha256": "64c5ebf53860a07e623fde23e7d85a412e3a6e2d50198166acecbb860383bcdd",
+    "bytes": 454,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 623.png",
+    "sha256": "64c5ebf53860a07e623fde23e7d85a412e3a6e2d50198166acecbb860383bcdd",
+    "bytes": 454,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 624.png",
+    "sha256": "64c5ebf53860a07e623fde23e7d85a412e3a6e2d50198166acecbb860383bcdd",
+    "bytes": 454,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 625.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 626.png",
+    "sha256": "64c5ebf53860a07e623fde23e7d85a412e3a6e2d50198166acecbb860383bcdd",
+    "bytes": 454,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 627.png",
+    "sha256": "64c5ebf53860a07e623fde23e7d85a412e3a6e2d50198166acecbb860383bcdd",
+    "bytes": 454,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 628.png",
+    "sha256": "64c5ebf53860a07e623fde23e7d85a412e3a6e2d50198166acecbb860383bcdd",
+    "bytes": 454,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 629.png",
+    "sha256": "64c5ebf53860a07e623fde23e7d85a412e3a6e2d50198166acecbb860383bcdd",
+    "bytes": 454,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 630.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 631.png",
+    "sha256": "64c5ebf53860a07e623fde23e7d85a412e3a6e2d50198166acecbb860383bcdd",
+    "bytes": 454,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 632.png",
+    "sha256": "64c5ebf53860a07e623fde23e7d85a412e3a6e2d50198166acecbb860383bcdd",
+    "bytes": 454,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 633.png",
+    "sha256": "64c5ebf53860a07e623fde23e7d85a412e3a6e2d50198166acecbb860383bcdd",
+    "bytes": 454,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 634.png",
+    "sha256": "64c5ebf53860a07e623fde23e7d85a412e3a6e2d50198166acecbb860383bcdd",
+    "bytes": 454,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 635.png",
+    "sha256": "64c5ebf53860a07e623fde23e7d85a412e3a6e2d50198166acecbb860383bcdd",
+    "bytes": 454,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 636.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 637.png",
+    "sha256": "64c5ebf53860a07e623fde23e7d85a412e3a6e2d50198166acecbb860383bcdd",
+    "bytes": 454,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 638.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 639.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 640.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 641.png",
+    "sha256": "509c0281cb615a9d6251678542708422f37ce061bf0269df48a1e079d8ea3fe7",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 642.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 643.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 644.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 645.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 646.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 647.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 648.png",
+    "sha256": "509c0281cb615a9d6251678542708422f37ce061bf0269df48a1e079d8ea3fe7",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 649.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 650.png",
+    "sha256": "509c0281cb615a9d6251678542708422f37ce061bf0269df48a1e079d8ea3fe7",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 651.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 652.png",
+    "sha256": "509c0281cb615a9d6251678542708422f37ce061bf0269df48a1e079d8ea3fe7",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 653.png",
+    "sha256": "509c0281cb615a9d6251678542708422f37ce061bf0269df48a1e079d8ea3fe7",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 654.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 655.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 656.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 657.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 658.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 659.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 660.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 661.png",
+    "sha256": "509c0281cb615a9d6251678542708422f37ce061bf0269df48a1e079d8ea3fe7",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 662.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 663.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 664.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 665.png",
+    "sha256": "509c0281cb615a9d6251678542708422f37ce061bf0269df48a1e079d8ea3fe7",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 666.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 667.png",
+    "sha256": "509c0281cb615a9d6251678542708422f37ce061bf0269df48a1e079d8ea3fe7",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 668.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 669.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 670.png",
+    "sha256": "509c0281cb615a9d6251678542708422f37ce061bf0269df48a1e079d8ea3fe7",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 671.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 672.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 673.png",
+    "sha256": "509c0281cb615a9d6251678542708422f37ce061bf0269df48a1e079d8ea3fe7",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 674.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 675.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 676.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 677.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 678.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 679.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 680.png",
+    "sha256": "509c0281cb615a9d6251678542708422f37ce061bf0269df48a1e079d8ea3fe7",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 681.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 682.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 683.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 684.png",
+    "sha256": "509c0281cb615a9d6251678542708422f37ce061bf0269df48a1e079d8ea3fe7",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 685.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 686.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 687.png",
+    "sha256": "509c0281cb615a9d6251678542708422f37ce061bf0269df48a1e079d8ea3fe7",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 688.png",
+    "sha256": "509c0281cb615a9d6251678542708422f37ce061bf0269df48a1e079d8ea3fe7",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 689.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 690.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 691.png",
+    "sha256": "509c0281cb615a9d6251678542708422f37ce061bf0269df48a1e079d8ea3fe7",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 692.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 693.png",
+    "sha256": "f59e96272cee5b2487ce4c1207524d51c58a55387c5dee9f945c60efc1ed2ece",
+    "bytes": 462,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 694.png",
+    "sha256": "f59e96272cee5b2487ce4c1207524d51c58a55387c5dee9f945c60efc1ed2ece",
+    "bytes": 462,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 695.png",
+    "sha256": "f59e96272cee5b2487ce4c1207524d51c58a55387c5dee9f945c60efc1ed2ece",
+    "bytes": 462,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 696.png",
+    "sha256": "f59e96272cee5b2487ce4c1207524d51c58a55387c5dee9f945c60efc1ed2ece",
+    "bytes": 462,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 697.png",
+    "sha256": "f59e96272cee5b2487ce4c1207524d51c58a55387c5dee9f945c60efc1ed2ece",
+    "bytes": 462,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 698.png",
+    "sha256": "f59e96272cee5b2487ce4c1207524d51c58a55387c5dee9f945c60efc1ed2ece",
+    "bytes": 462,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 699.png",
+    "sha256": "509c0281cb615a9d6251678542708422f37ce061bf0269df48a1e079d8ea3fe7",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 700.png",
+    "sha256": "509c0281cb615a9d6251678542708422f37ce061bf0269df48a1e079d8ea3fe7",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 701.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 702.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 703.png",
+    "sha256": "f59e96272cee5b2487ce4c1207524d51c58a55387c5dee9f945c60efc1ed2ece",
+    "bytes": 462,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 704.png",
+    "sha256": "f59e96272cee5b2487ce4c1207524d51c58a55387c5dee9f945c60efc1ed2ece",
+    "bytes": 462,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 705.png",
+    "sha256": "f59e96272cee5b2487ce4c1207524d51c58a55387c5dee9f945c60efc1ed2ece",
+    "bytes": 462,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 706.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 707.png",
+    "sha256": "f59e96272cee5b2487ce4c1207524d51c58a55387c5dee9f945c60efc1ed2ece",
+    "bytes": 462,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 708.png",
+    "sha256": "f59e96272cee5b2487ce4c1207524d51c58a55387c5dee9f945c60efc1ed2ece",
+    "bytes": 462,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 709.png",
+    "sha256": "f59e96272cee5b2487ce4c1207524d51c58a55387c5dee9f945c60efc1ed2ece",
+    "bytes": 462,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 710.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 711.png",
+    "sha256": "f59e96272cee5b2487ce4c1207524d51c58a55387c5dee9f945c60efc1ed2ece",
+    "bytes": 462,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 712.png",
+    "sha256": "f59e96272cee5b2487ce4c1207524d51c58a55387c5dee9f945c60efc1ed2ece",
+    "bytes": 462,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 713.png",
+    "sha256": "f59e96272cee5b2487ce4c1207524d51c58a55387c5dee9f945c60efc1ed2ece",
+    "bytes": 462,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 714.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 715.png",
+    "sha256": "f59e96272cee5b2487ce4c1207524d51c58a55387c5dee9f945c60efc1ed2ece",
+    "bytes": 462,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 716.png",
+    "sha256": "f59e96272cee5b2487ce4c1207524d51c58a55387c5dee9f945c60efc1ed2ece",
+    "bytes": 462,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 717.png",
+    "sha256": "f59e96272cee5b2487ce4c1207524d51c58a55387c5dee9f945c60efc1ed2ece",
+    "bytes": 462,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 718.png",
+    "sha256": "f59e96272cee5b2487ce4c1207524d51c58a55387c5dee9f945c60efc1ed2ece",
+    "bytes": 462,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 719.png",
+    "sha256": "f59e96272cee5b2487ce4c1207524d51c58a55387c5dee9f945c60efc1ed2ece",
+    "bytes": 462,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 720.png",
+    "sha256": "f59e96272cee5b2487ce4c1207524d51c58a55387c5dee9f945c60efc1ed2ece",
+    "bytes": 462,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 721.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 722.png",
+    "sha256": "f59e96272cee5b2487ce4c1207524d51c58a55387c5dee9f945c60efc1ed2ece",
+    "bytes": 462,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 723.png",
+    "sha256": "f59e96272cee5b2487ce4c1207524d51c58a55387c5dee9f945c60efc1ed2ece",
+    "bytes": 462,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 724.png",
+    "sha256": "f59e96272cee5b2487ce4c1207524d51c58a55387c5dee9f945c60efc1ed2ece",
+    "bytes": 462,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 725.png",
+    "sha256": "f59e96272cee5b2487ce4c1207524d51c58a55387c5dee9f945c60efc1ed2ece",
+    "bytes": 462,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 726.png",
+    "sha256": "3fae162714dba261ad6d647d5ae598a291678733d784a83de28bdb4509eaea7c",
+    "bytes": 454,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 727.png",
+    "sha256": "3fae162714dba261ad6d647d5ae598a291678733d784a83de28bdb4509eaea7c",
+    "bytes": 454,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 728.png",
+    "sha256": "f59e96272cee5b2487ce4c1207524d51c58a55387c5dee9f945c60efc1ed2ece",
+    "bytes": 462,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 729.png",
+    "sha256": "f59e96272cee5b2487ce4c1207524d51c58a55387c5dee9f945c60efc1ed2ece",
+    "bytes": 462,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 730.png",
+    "sha256": "f59e96272cee5b2487ce4c1207524d51c58a55387c5dee9f945c60efc1ed2ece",
+    "bytes": 462,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 731.png",
+    "sha256": "f59e96272cee5b2487ce4c1207524d51c58a55387c5dee9f945c60efc1ed2ece",
+    "bytes": 462,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 732.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 733.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 734.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 735.png",
+    "sha256": "f59e96272cee5b2487ce4c1207524d51c58a55387c5dee9f945c60efc1ed2ece",
+    "bytes": 462,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 736.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 737.png",
+    "sha256": "f59e96272cee5b2487ce4c1207524d51c58a55387c5dee9f945c60efc1ed2ece",
+    "bytes": 462,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 738.png",
+    "sha256": "f59e96272cee5b2487ce4c1207524d51c58a55387c5dee9f945c60efc1ed2ece",
+    "bytes": 462,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 739.png",
+    "sha256": "3fae162714dba261ad6d647d5ae598a291678733d784a83de28bdb4509eaea7c",
+    "bytes": 454,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 740.png",
+    "sha256": "f59e96272cee5b2487ce4c1207524d51c58a55387c5dee9f945c60efc1ed2ece",
+    "bytes": 462,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 741.png",
+    "sha256": "f59e96272cee5b2487ce4c1207524d51c58a55387c5dee9f945c60efc1ed2ece",
+    "bytes": 462,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 742.png",
+    "sha256": "f59e96272cee5b2487ce4c1207524d51c58a55387c5dee9f945c60efc1ed2ece",
+    "bytes": 462,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 743.png",
+    "sha256": "f59e96272cee5b2487ce4c1207524d51c58a55387c5dee9f945c60efc1ed2ece",
+    "bytes": 462,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 744.png",
+    "sha256": "f59e96272cee5b2487ce4c1207524d51c58a55387c5dee9f945c60efc1ed2ece",
+    "bytes": 462,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 745.png",
+    "sha256": "f59e96272cee5b2487ce4c1207524d51c58a55387c5dee9f945c60efc1ed2ece",
+    "bytes": 462,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 746.png",
+    "sha256": "f59e96272cee5b2487ce4c1207524d51c58a55387c5dee9f945c60efc1ed2ece",
+    "bytes": 462,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 747.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 748.png",
+    "sha256": "447b31c62b687f1e6d0f83465616543fe3793ff1e485a9028c9b17f8a6bffcde",
+    "bytes": 442,
+    "valid": true,
+    "width": 75,
+    "height": 130
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 749.png",
+    "sha256": "fae257c90ee96f736f12cd4f3db7c6255392f42d6d3e6a1c68c599bf2a870f3e",
+    "bytes": 736,
+    "valid": true,
+    "width": 75,
+    "height": 277
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 750.png",
+    "sha256": "bff8bb6c78708d5f2799c4b7584d06c0d6d30a4e6e56d872660e989d2c5c3b89",
+    "bytes": 684,
+    "valid": true,
+    "width": 75,
+    "height": 251
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 751.png",
+    "sha256": "f79d161aacdf31152663b7b1d4983192fffd5cec857bdbfb112cb600fa659c02",
+    "bytes": 558,
+    "valid": true,
+    "width": 75,
+    "height": 188
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 752.png",
+    "sha256": "82061d4134000b65953c0b3c0cf3464d2f79fb532f221699ec880b1c27f645a1",
+    "bytes": 458,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 753.png",
+    "sha256": "82061d4134000b65953c0b3c0cf3464d2f79fb532f221699ec880b1c27f645a1",
+    "bytes": 458,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 754.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 755.png",
+    "sha256": "82061d4134000b65953c0b3c0cf3464d2f79fb532f221699ec880b1c27f645a1",
+    "bytes": 458,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 756.png",
+    "sha256": "82061d4134000b65953c0b3c0cf3464d2f79fb532f221699ec880b1c27f645a1",
+    "bytes": 458,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 757.png",
+    "sha256": "82061d4134000b65953c0b3c0cf3464d2f79fb532f221699ec880b1c27f645a1",
+    "bytes": 458,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 758.png",
+    "sha256": "82061d4134000b65953c0b3c0cf3464d2f79fb532f221699ec880b1c27f645a1",
+    "bytes": 458,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 759.png",
+    "sha256": "82061d4134000b65953c0b3c0cf3464d2f79fb532f221699ec880b1c27f645a1",
+    "bytes": 458,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 760.png",
+    "sha256": "82061d4134000b65953c0b3c0cf3464d2f79fb532f221699ec880b1c27f645a1",
+    "bytes": 458,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 761.png",
+    "sha256": "82061d4134000b65953c0b3c0cf3464d2f79fb532f221699ec880b1c27f645a1",
+    "bytes": 458,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 762.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 763.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 764.png",
+    "sha256": "3fae162714dba261ad6d647d5ae598a291678733d784a83de28bdb4509eaea7c",
+    "bytes": 454,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 765.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 766.png",
+    "sha256": "82061d4134000b65953c0b3c0cf3464d2f79fb532f221699ec880b1c27f645a1",
+    "bytes": 458,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 767.png",
+    "sha256": "82061d4134000b65953c0b3c0cf3464d2f79fb532f221699ec880b1c27f645a1",
+    "bytes": 458,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 768.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 769.png",
+    "sha256": "82061d4134000b65953c0b3c0cf3464d2f79fb532f221699ec880b1c27f645a1",
+    "bytes": 458,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 770.png",
+    "sha256": "82061d4134000b65953c0b3c0cf3464d2f79fb532f221699ec880b1c27f645a1",
+    "bytes": 458,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 771.png",
+    "sha256": "82061d4134000b65953c0b3c0cf3464d2f79fb532f221699ec880b1c27f645a1",
+    "bytes": 458,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 772.png",
+    "sha256": "509c0281cb615a9d6251678542708422f37ce061bf0269df48a1e079d8ea3fe7",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 773.png",
+    "sha256": "82061d4134000b65953c0b3c0cf3464d2f79fb532f221699ec880b1c27f645a1",
+    "bytes": 458,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 774.png",
+    "sha256": "509c0281cb615a9d6251678542708422f37ce061bf0269df48a1e079d8ea3fe7",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 775.png",
+    "sha256": "509c0281cb615a9d6251678542708422f37ce061bf0269df48a1e079d8ea3fe7",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 776.png",
+    "sha256": "82061d4134000b65953c0b3c0cf3464d2f79fb532f221699ec880b1c27f645a1",
+    "bytes": 458,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 777.png",
+    "sha256": "82061d4134000b65953c0b3c0cf3464d2f79fb532f221699ec880b1c27f645a1",
+    "bytes": 458,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 778.png",
+    "sha256": "82061d4134000b65953c0b3c0cf3464d2f79fb532f221699ec880b1c27f645a1",
+    "bytes": 458,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 779.png",
+    "sha256": "82061d4134000b65953c0b3c0cf3464d2f79fb532f221699ec880b1c27f645a1",
+    "bytes": 458,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 780.png",
+    "sha256": "82061d4134000b65953c0b3c0cf3464d2f79fb532f221699ec880b1c27f645a1",
+    "bytes": 458,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 781.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 782.png",
+    "sha256": "82061d4134000b65953c0b3c0cf3464d2f79fb532f221699ec880b1c27f645a1",
+    "bytes": 458,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 783.png",
+    "sha256": "82061d4134000b65953c0b3c0cf3464d2f79fb532f221699ec880b1c27f645a1",
+    "bytes": 458,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 784.png",
+    "sha256": "82061d4134000b65953c0b3c0cf3464d2f79fb532f221699ec880b1c27f645a1",
+    "bytes": 458,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 785.png",
+    "sha256": "82061d4134000b65953c0b3c0cf3464d2f79fb532f221699ec880b1c27f645a1",
+    "bytes": 458,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 786.png",
+    "sha256": "82061d4134000b65953c0b3c0cf3464d2f79fb532f221699ec880b1c27f645a1",
+    "bytes": 458,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 787.png",
+    "sha256": "82061d4134000b65953c0b3c0cf3464d2f79fb532f221699ec880b1c27f645a1",
+    "bytes": 458,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 788.png",
+    "sha256": "82061d4134000b65953c0b3c0cf3464d2f79fb532f221699ec880b1c27f645a1",
+    "bytes": 458,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 789.png",
+    "sha256": "82061d4134000b65953c0b3c0cf3464d2f79fb532f221699ec880b1c27f645a1",
+    "bytes": 458,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 790.png",
+    "sha256": "82061d4134000b65953c0b3c0cf3464d2f79fb532f221699ec880b1c27f645a1",
+    "bytes": 458,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 791.png",
+    "sha256": "3fae162714dba261ad6d647d5ae598a291678733d784a83de28bdb4509eaea7c",
+    "bytes": 454,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 792.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 793.png",
+    "sha256": "3fae162714dba261ad6d647d5ae598a291678733d784a83de28bdb4509eaea7c",
+    "bytes": 454,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 794.png",
+    "sha256": "3fae162714dba261ad6d647d5ae598a291678733d784a83de28bdb4509eaea7c",
+    "bytes": 454,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 795.png",
+    "sha256": "82061d4134000b65953c0b3c0cf3464d2f79fb532f221699ec880b1c27f645a1",
+    "bytes": 458,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 796.png",
+    "sha256": "82061d4134000b65953c0b3c0cf3464d2f79fb532f221699ec880b1c27f645a1",
+    "bytes": 458,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 797.png",
+    "sha256": "d84eed120488704096b593c32d32dde2a63a48e3d2968962c568de7beb85c85a",
+    "bytes": 454,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 798.png",
+    "sha256": "d84eed120488704096b593c32d32dde2a63a48e3d2968962c568de7beb85c85a",
+    "bytes": 454,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 799.png",
+    "sha256": "82061d4134000b65953c0b3c0cf3464d2f79fb532f221699ec880b1c27f645a1",
+    "bytes": 458,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 800.png",
+    "sha256": "82061d4134000b65953c0b3c0cf3464d2f79fb532f221699ec880b1c27f645a1",
+    "bytes": 458,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 801.png",
+    "sha256": "d84eed120488704096b593c32d32dde2a63a48e3d2968962c568de7beb85c85a",
+    "bytes": 454,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 802.png",
+    "sha256": "82061d4134000b65953c0b3c0cf3464d2f79fb532f221699ec880b1c27f645a1",
+    "bytes": 458,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 803.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 804.png",
+    "sha256": "82061d4134000b65953c0b3c0cf3464d2f79fb532f221699ec880b1c27f645a1",
+    "bytes": 458,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 805.png",
+    "sha256": "82061d4134000b65953c0b3c0cf3464d2f79fb532f221699ec880b1c27f645a1",
+    "bytes": 458,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 806.png",
+    "sha256": "82061d4134000b65953c0b3c0cf3464d2f79fb532f221699ec880b1c27f645a1",
+    "bytes": 458,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 807.png",
+    "sha256": "2f315059ddad9b266016f0b56745d902089d9a21d13fad4eecb5250814ac725c",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 808.png",
+    "sha256": "2f315059ddad9b266016f0b56745d902089d9a21d13fad4eecb5250814ac725c",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 809.png",
+    "sha256": "509c0281cb615a9d6251678542708422f37ce061bf0269df48a1e079d8ea3fe7",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 810.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 811.png",
+    "sha256": "2f315059ddad9b266016f0b56745d902089d9a21d13fad4eecb5250814ac725c",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 812.png",
+    "sha256": "2f315059ddad9b266016f0b56745d902089d9a21d13fad4eecb5250814ac725c",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 813.png",
+    "sha256": "2f315059ddad9b266016f0b56745d902089d9a21d13fad4eecb5250814ac725c",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 814.png",
+    "sha256": "2f315059ddad9b266016f0b56745d902089d9a21d13fad4eecb5250814ac725c",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 815.png",
+    "sha256": "2f315059ddad9b266016f0b56745d902089d9a21d13fad4eecb5250814ac725c",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 816.png",
+    "sha256": "2f315059ddad9b266016f0b56745d902089d9a21d13fad4eecb5250814ac725c",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 817.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 818.png",
+    "sha256": "2f315059ddad9b266016f0b56745d902089d9a21d13fad4eecb5250814ac725c",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 819.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 820.png",
+    "sha256": "2f315059ddad9b266016f0b56745d902089d9a21d13fad4eecb5250814ac725c",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 821.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 822.png",
+    "sha256": "3fae162714dba261ad6d647d5ae598a291678733d784a83de28bdb4509eaea7c",
+    "bytes": 454,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 823.png",
+    "sha256": "2f315059ddad9b266016f0b56745d902089d9a21d13fad4eecb5250814ac725c",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 824.png",
+    "sha256": "2f315059ddad9b266016f0b56745d902089d9a21d13fad4eecb5250814ac725c",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 825.png",
+    "sha256": "2f315059ddad9b266016f0b56745d902089d9a21d13fad4eecb5250814ac725c",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 826.png",
+    "sha256": "2f315059ddad9b266016f0b56745d902089d9a21d13fad4eecb5250814ac725c",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 827.png",
+    "sha256": "509c0281cb615a9d6251678542708422f37ce061bf0269df48a1e079d8ea3fe7",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 828.png",
+    "sha256": "2f315059ddad9b266016f0b56745d902089d9a21d13fad4eecb5250814ac725c",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 829.png",
+    "sha256": "2f315059ddad9b266016f0b56745d902089d9a21d13fad4eecb5250814ac725c",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 830.png",
+    "sha256": "2f315059ddad9b266016f0b56745d902089d9a21d13fad4eecb5250814ac725c",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 831.png",
+    "sha256": "3fae162714dba261ad6d647d5ae598a291678733d784a83de28bdb4509eaea7c",
+    "bytes": 454,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 832.png",
+    "sha256": "3fae162714dba261ad6d647d5ae598a291678733d784a83de28bdb4509eaea7c",
+    "bytes": 454,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 833.png",
+    "sha256": "2f315059ddad9b266016f0b56745d902089d9a21d13fad4eecb5250814ac725c",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 834.png",
+    "sha256": "2f315059ddad9b266016f0b56745d902089d9a21d13fad4eecb5250814ac725c",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 835.png",
+    "sha256": "2f315059ddad9b266016f0b56745d902089d9a21d13fad4eecb5250814ac725c",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 836.png",
+    "sha256": "2f315059ddad9b266016f0b56745d902089d9a21d13fad4eecb5250814ac725c",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 837.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 838.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 839.png",
+    "sha256": "2f315059ddad9b266016f0b56745d902089d9a21d13fad4eecb5250814ac725c",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 840.png",
+    "sha256": "509c0281cb615a9d6251678542708422f37ce061bf0269df48a1e079d8ea3fe7",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 841.png",
+    "sha256": "2f315059ddad9b266016f0b56745d902089d9a21d13fad4eecb5250814ac725c",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 842.png",
+    "sha256": "2f315059ddad9b266016f0b56745d902089d9a21d13fad4eecb5250814ac725c",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 843.png",
+    "sha256": "2f315059ddad9b266016f0b56745d902089d9a21d13fad4eecb5250814ac725c",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 844.png",
+    "sha256": "2f315059ddad9b266016f0b56745d902089d9a21d13fad4eecb5250814ac725c",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 845.png",
+    "sha256": "2f315059ddad9b266016f0b56745d902089d9a21d13fad4eecb5250814ac725c",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 846.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 847.png",
+    "sha256": "2f315059ddad9b266016f0b56745d902089d9a21d13fad4eecb5250814ac725c",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 848.png",
+    "sha256": "2f315059ddad9b266016f0b56745d902089d9a21d13fad4eecb5250814ac725c",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 849.png",
+    "sha256": "2f315059ddad9b266016f0b56745d902089d9a21d13fad4eecb5250814ac725c",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 850.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 851.png",
+    "sha256": "2f315059ddad9b266016f0b56745d902089d9a21d13fad4eecb5250814ac725c",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 852.png",
+    "sha256": "2f315059ddad9b266016f0b56745d902089d9a21d13fad4eecb5250814ac725c",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 853.png",
+    "sha256": "2f315059ddad9b266016f0b56745d902089d9a21d13fad4eecb5250814ac725c",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 854.png",
+    "sha256": "2f315059ddad9b266016f0b56745d902089d9a21d13fad4eecb5250814ac725c",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 855.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 856.png",
+    "sha256": "2f315059ddad9b266016f0b56745d902089d9a21d13fad4eecb5250814ac725c",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 857.png",
+    "sha256": "2f315059ddad9b266016f0b56745d902089d9a21d13fad4eecb5250814ac725c",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 858.png",
+    "sha256": "2f315059ddad9b266016f0b56745d902089d9a21d13fad4eecb5250814ac725c",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 859.png",
+    "sha256": "2f315059ddad9b266016f0b56745d902089d9a21d13fad4eecb5250814ac725c",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 860.png",
+    "sha256": "2f315059ddad9b266016f0b56745d902089d9a21d13fad4eecb5250814ac725c",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 861.png",
+    "sha256": "2f315059ddad9b266016f0b56745d902089d9a21d13fad4eecb5250814ac725c",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 862.png",
+    "sha256": "375dacadb8c2215f99c513d2984a2a47c44d6825251486f1a29767be2882eb78",
+    "bytes": 149,
+    "valid": true,
+    "width": 1,
+    "height": 1
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 863.png",
+    "sha256": "f4ac95905afbccc685ebac95e1f33ebfdf11ea936d8d44e5a55d0a61490f03d2",
+    "bytes": 303,
+    "valid": true,
+    "width": 75,
+    "height": 75
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 864.png",
+    "sha256": "cf354466ef04808d5be337476a67ce57df31053e254c05361526dbdc9ad7f911",
+    "bytes": 305,
+    "valid": true,
+    "width": 75,
+    "height": 75
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 865.png",
+    "sha256": "0592bce58be2a12b3a67205b9688ed4628c796b816deb7782a823f0b5e4bcbdf",
+    "bytes": 303,
+    "valid": true,
+    "width": 75,
+    "height": 75
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 866.png",
+    "sha256": "c9357f1ed3083b4bc3c2f5171fc9e56c3985650660161170772d4d4b2375a107",
+    "bytes": 305,
+    "valid": true,
+    "width": 75,
+    "height": 75
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 898.png",
+    "sha256": "702da47935ed78065174aa5dc9777394636046fca93b59a577ed4ce7675243f6",
+    "bytes": 1831,
+    "valid": true,
+    "width": 2855,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 899.png",
+    "sha256": "5a0e40d39963fdb015ea75e29ff9bd6d012e565c79ec06d7c8449ad49b462ad4",
+    "bytes": 1412,
+    "valid": true,
+    "width": 2079,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 900.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 901.png",
+    "sha256": "527a4d901d761a33ab9f66bbd4fe78bd6d5c20ee6c3939c54fafacb96c990e34",
+    "bytes": 970,
+    "valid": true,
+    "width": 1138,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 902.png",
+    "sha256": "2d05a20492dce3361b1493ea41f2841e995bf54883c6f297e101b2ce2e4c2907",
+    "bytes": 513,
+    "valid": true,
+    "width": 273,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 903.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 904.png",
+    "sha256": "2d05a20492dce3361b1493ea41f2841e995bf54883c6f297e101b2ce2e4c2907",
+    "bytes": 513,
+    "valid": true,
+    "width": 273,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 905.png",
+    "sha256": "d625f9125d668dcf488ba51ce20604b148f18c57bcc69c461ad80f046a55c5e1",
+    "bytes": 1642,
+    "valid": true,
+    "width": 2586,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 906.png",
+    "sha256": "11af5c45bcd3c106910612ffb6ce72d1ae0501443a0c33fabcd1083749a4574a",
+    "bytes": 771,
+    "valid": true,
+    "width": 765,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 907.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 908.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 909.png",
+    "sha256": "062982893acd5139533d1e1df882d5defe429720c7bd0f3dc03ebc68b6790fe3",
+    "bytes": 456,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 910.png",
+    "sha256": "64c5ebf53860a07e623fde23e7d85a412e3a6e2d50198166acecbb860383bcdd",
+    "bytes": 454,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 911.png",
+    "sha256": "64c5ebf53860a07e623fde23e7d85a412e3a6e2d50198166acecbb860383bcdd",
+    "bytes": 454,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 912.png",
+    "sha256": "53539bb427d95fe42f61b9739e989d3a95fb059d2c5b5b770730c24c6b28be9e",
+    "bytes": 421,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 913.png",
+    "sha256": "f59e96272cee5b2487ce4c1207524d51c58a55387c5dee9f945c60efc1ed2ece",
+    "bytes": 462,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 914.png",
+    "sha256": "f59e96272cee5b2487ce4c1207524d51c58a55387c5dee9f945c60efc1ed2ece",
+    "bytes": 462,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 915.png",
+    "sha256": "6e4812398edabc31765d94e1787085969bd6978d6ba4cd881798797b9ed94462",
+    "bytes": 458,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 916.png",
+    "sha256": "82061d4134000b65953c0b3c0cf3464d2f79fb532f221699ec880b1c27f645a1",
+    "bytes": 458,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 917.png",
+    "sha256": "2f315059ddad9b266016f0b56745d902089d9a21d13fad4eecb5250814ac725c",
+    "bytes": 461,
+    "valid": true,
+    "width": 122,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 918.png",
+    "sha256": "9fda0edfe879d59802a6276600499a7be268950e85733d3478941d858ffab189",
+    "bytes": 1843,
+    "valid": true,
+    "width": 2888,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 919.png",
+    "sha256": "9fda0edfe879d59802a6276600499a7be268950e85733d3478941d858ffab189",
+    "bytes": 1843,
+    "valid": true,
+    "width": 2888,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 920.png",
+    "sha256": "b27c6cef047ab540c92ac128141474e49c4c2511e49c9a0570cc4b0bb5c0a31b",
+    "bytes": 1004,
+    "valid": true,
+    "width": 1133,
+    "height": 122
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 921.png",
+    "sha256": "375dacadb8c2215f99c513d2984a2a47c44d6825251486f1a29767be2882eb78",
+    "bytes": 149,
+    "valid": true,
+    "width": 1,
+    "height": 1
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 922.png",
+    "sha256": "375dacadb8c2215f99c513d2984a2a47c44d6825251486f1a29767be2882eb78",
+    "bytes": 149,
+    "valid": true,
+    "width": 1,
+    "height": 1
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 923.png",
+    "sha256": "f4ac95905afbccc685ebac95e1f33ebfdf11ea936d8d44e5a55d0a61490f03d2",
+    "bytes": 303,
+    "valid": true,
+    "width": 75,
+    "height": 75
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 924.png",
+    "sha256": "cc52ce763a2c1dd09fadfd365421984d2745f5cc6f8ac5de37f5b7abec01988c",
+    "bytes": 1139,
+    "valid": true,
+    "width": 387,
+    "height": 340
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 925.png",
+    "sha256": "cf354466ef04808d5be337476a67ce57df31053e254c05361526dbdc9ad7f911",
+    "bytes": 305,
+    "valid": true,
+    "width": 75,
+    "height": 75
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 926.png",
+    "sha256": "a6d0b61862e64ccc0cefbe7fc8babf775ddbc0acb7620b2ad063254c79880a08",
+    "bytes": 968,
+    "valid": true,
+    "width": 149,
+    "height": 340
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 927.png",
+    "sha256": "0592bce58be2a12b3a67205b9688ed4628c796b816deb7782a823f0b5e4bcbdf",
+    "bytes": 303,
+    "valid": true,
+    "width": 75,
+    "height": 75
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 928.png",
+    "sha256": "ced14c423c47c742365c41e6a4919c7b99cb309eb64f597ae0cd2133367d68a1",
+    "bytes": 731,
+    "valid": true,
+    "width": 387,
+    "height": 198
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 929.png",
+    "sha256": "c9357f1ed3083b4bc3c2f5171fc9e56c3985650660161170772d4d4b2375a107",
+    "bytes": 305,
+    "valid": true,
+    "width": 75,
+    "height": 75
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Rectangle 930.png",
+    "sha256": "167cabd8f659fe29530fee3670e56903a725d7c4e494fe62e6740091ec33c4d2",
+    "bytes": 633,
+    "valid": true,
+    "width": 149,
+    "height": 198
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\REM.png",
+    "sha256": "b721b0f2c6e79f8a04c12bc38c3e3a03b7cf0c034a8b2e0ccb42d876fb0a1b45",
+    "bytes": 3023,
+    "valid": true,
+    "width": 161,
+    "height": 50
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Resting HR.png",
+    "sha256": "1c488901f187227311176d5b1bfce7f031c9e28631235d199d5966ad227cd335",
+    "bytes": 6040,
+    "valid": true,
+    "width": 392,
+    "height": 73
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Sleep Score.png",
+    "sha256": "6e7651a334690888b437aa21ff12a0ee0347cee03bf4eee771f72c4bd09faffc",
+    "bytes": 6514,
+    "valid": true,
+    "width": 390,
+    "height": 73
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Sleep.png",
+    "sha256": "22396df542c0acb96a5c2cad44dffbf169d11b7e0468162d57109ab290c4e0b4",
+    "bytes": 3595,
+    "valid": true,
+    "width": 181,
+    "height": 73
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Start-1.png",
+    "sha256": "f3e717c27c8c66d8b8cad62ca78e430008cbe9a3679c745356c04a60a7927dc8",
+    "bytes": 2912,
+    "valid": true,
+    "width": 162,
+    "height": 57
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Start.png",
+    "sha256": "f3e717c27c8c66d8b8cad62ca78e430008cbe9a3679c745356c04a60a7927dc8",
+    "bytes": 2912,
+    "valid": true,
+    "width": 162,
+    "height": 57
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Steps.png",
+    "sha256": "c8fc9963071c1c4280aff35334cec1f818432f6cf3e75d13b1f132de475e083a",
+    "bytes": 3830,
+    "valid": true,
+    "width": 182,
+    "height": 73
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Total Hours Learned.png",
+    "sha256": "3f391768d2f7593221e49a39cd283c5232ca7d3a60087f3d24a5115385d6b715",
+    "bytes": 8834,
+    "valid": true,
+    "width": 714,
+    "height": 59
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Tuesday, 22 September.png",
+    "sha256": "2a809eb601b404c95c665df5499a8ae0d721785617e666107bef0fc06980f8ab",
+    "bytes": 11488,
+    "valid": true,
+    "width": 784,
+    "height": 74
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Vector 2.png",
+    "sha256": "b5870670fbeb80c954e114cda64dd567ce6263cdec0db0b2404cf71e1c5cb4e3",
+    "bytes": 1056,
+    "valid": true,
+    "width": 74,
+    "height": 57
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Vector-1.png",
+    "sha256": "439c201a4b3b4fe6de1b15c6f9924a35770518552efe8337536e9dadd2e7a0fb",
+    "bytes": 2336,
+    "valid": true,
+    "width": 102,
+    "height": 111
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Vector-2.png",
+    "sha256": "ec4557cf63c96ea86280dc952354790ff33b996c7e96247b24749bd52097fba0",
+    "bytes": 1385,
+    "valid": true,
+    "width": 45,
+    "height": 57
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Vector.png",
+    "sha256": "d060f2e6622df41baeea31cd9b3ad206d59f03a9d599c170fe8c9c4638927b5b",
+    "bytes": 4117,
+    "valid": true,
+    "width": 113,
+    "height": 131
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Weekly Data.png",
+    "sha256": "96ca966eeea52b1c5a220094154a3070da7edebe79c3a24ac5c594b1e5159fff",
+    "bytes": 7847,
+    "valid": true,
+    "width": 500,
+    "height": 83
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Work.png",
+    "sha256": "7971547cbbe8acb52c377951d3b18f6596dd99f102ba9f6f940cc20b9daee76c",
+    "bytes": 4537,
+    "valid": true,
+    "width": 261,
+    "height": 76
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\Year Progress.png",
+    "sha256": "78f5cb6ef6bb65269ac19399757027cbe96d7d47481b4c85938c5a2316371ec9",
+    "bytes": 7544,
+    "valid": true,
+    "width": 464,
+    "height": 72
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\_ 0.5hr.png",
+    "sha256": "4fb4b7bcfb4229bb56f9eaddb465f5eb88ccca962af1e6774311d78c932445e3",
+    "bytes": 3643,
+    "valid": true,
+    "width": 210,
+    "height": 49
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\\u2264 1.5hr.png",
+    "sha256": "70add94534c5dbae1879d614176d2b45c59172910e2f9e24ba600dad368e4cef",
+    "bytes": 3344,
+    "valid": true,
+    "width": 215,
+    "height": 49
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\\u2264 1hr.png",
+    "sha256": "39a658108de80c00723fa69c16dcf884db3608c00d21f421fea88253063b6b00",
+    "bytes": 2531,
+    "valid": true,
+    "width": 160,
+    "height": 49
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\\u2265 2hr.png",
+    "sha256": "213bb26ed60cbf247e9e8d7d54c757efdcf5efd7d572b17df25b8f70ad8b90a6",
+    "bytes": 2650,
+    "valid": true,
+    "width": 160,
+    "height": 49
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\1.5h\\day.png",
+    "sha256": "7ab68a441bce0087ec57dd4e81feb0f5c3182be990aa4fa5b86625fcc60223b2",
+    "bytes": 4562,
+    "valid": true,
+    "width": 292,
+    "height": 74
+  },
+  {
+    "path": "Layout Assets - Learning Tab\\4\\12.png",
+    "sha256": "60a50c27d22781f00d1db9fb7e34f07d3b658b2312ec6f8ade53febf0b7a8b5c",
+    "bytes": 2361,
+    "valid": true,
+    "width": 171,
+    "height": 57
+  }
+]

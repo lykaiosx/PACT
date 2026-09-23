@@ -1,0 +1,12 @@
+# PACT v1
+
+First feature-complete release, version 1.0.0. Earlier 1.1–1.3 labels were development builds; this release adopts the requested public v1 naming.
+
+- Design-derived Work and Learning dashboards with separate goals and sliding navigation.
+- Timers, daily creatives, meals, annual totals, year progress and detailed chart hover information.
+- Garmin sleep, stages/score, steps, resting heart rate, body battery, calories and hydration/goal; five-minute cloud refresh and freshness reporting.
+- Automatic persistent settings, Light/Dark/High Contrast/Custom appearance and ordered intensity colors.
+- Daily CSV and complete data archive export.
+- Right-docked Windows app, hide/corner reveal, Start Menu registration, single-instance handling and data-preserving updates.
+
+The v1 release preserves the application identity, database location and Garmin token location used by development builds. Existing 1.3 users can install it directly. Watch uploads still depend on Garmin Connect; PACT reads cloud data.
