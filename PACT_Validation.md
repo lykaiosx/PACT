@@ -1,4 +1,6 @@
-# PACT v1.3.0 validation
+# PACT v1.3.1 validation
+
+Patch verification: all 58 tests, five installer path cases and the 90-day restoration check passed again. Inspected the outlined toggle in light/on and dark/off states, including a 320-pixel sidebar. The packaged startup self-test passed. The installer behavior is unchanged; the upgrade integration results below are from v1.3.0.
 
 Windows x64, 25 September 2026.
 

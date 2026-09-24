@@ -99,7 +99,7 @@ class Settings(QWidget):
   self.csv_note=QLabel('Import a PACT daily totals CSV, including daily.csv extracted from an exported ZIP.');self.csv_note.setWordWrap(True);form.addRow(self.csv_note)
   self.csv_confirm=QPushButton('Import new dates');self.csv_confirm.hide();self.csv_confirm.clicked.connect(self.import_csv);form.addRow(self.csv_confirm);self.csv_path=None
   reset=QPushButton('Reset progress…');reset.clicked.connect(self.reset_progress);form.addRow(reset)
-  section('About');form.addRow(QLabel('PACT 1.3.0'))
+  section('About');form.addRow(QLabel('PACT 1.3.1'))
   self.theme.currentIndexChanged.connect(self.save);self.use_custom.currentIndexChanged.connect(self.save)
   self.auto_adjust.toggled.connect(self.change_display)
   self.apply_display_font()
@@ -110,6 +110,9 @@ class Settings(QWidget):
   self.window.storage.set_setting('display_auto_adjust',bool(enabled));self.apply_display_font();self.window.refit_current_screen();self.saved_note.setText('Display adjustment saved automatically.')
  def apply_display_font(self):
   self.setStyleSheet('QWidget{font-size:'+('16' if self.window.storage.get_setting('display_auto_adjust',False) else '14')+'px;}')
+  bg,fg=colors(self.window)
+  self.auto_adjust.setCursor(Qt.PointingHandCursor)
+  self.auto_adjust.setStyleSheet(f'QCheckBox{{border:1px solid {fg};padding:10px;spacing:10px;}} QCheckBox::indicator{{width:18px;height:18px;border:2px solid {fg};background:{bg};}} QCheckBox::indicator:checked{{background:{fg};}} QCheckBox:focus{{border:2px solid {fg};padding:9px;}}')
  def backup(self):
   from backup import create_backup
   self.flush();path,_=QFileDialog.getSaveFileName(self,'Create PACT backup',str(Path.home()/'Documents'/f'PACT_{date.today().isoformat()}.pact'),'PACT backup (*.pact)')
@@ -181,7 +184,7 @@ class Settings(QWidget):
   s.set_setting('theme',self.theme.currentText().lower())
   for key in ('custom_background','custom_ink'):s.set_setting(key,self.color_values[key])
   s.set_setting('intensity_colors',ordered_colors([self.color_values[f'level{i}'] for i in range(4)]) if self.use_custom.currentIndex() else None)
-  self.window.apply_theme();self.window.refresh();self.saved_note.setText('All changes saved automatically.')
+  self.window.apply_theme();self.apply_display_font();self.window.refresh();self.saved_note.setText('All changes saved automatically.')
  def flush(self):
   if self.skip_save:return
   for field in self.fields.values():field.interpretText()
