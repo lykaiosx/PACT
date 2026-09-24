@@ -32,6 +32,8 @@ if ($LASTEXITCODE -ne 0) { throw 'PACT v1.1 tests failed' }
 if ($LASTEXITCODE -ne 0) { throw 'PACT v1.2.0 visual regression tests failed' }
 & package\runtime\python.exe tests\test_v12.py
 if ($LASTEXITCODE -ne 0) { throw 'PACT reset and CSV tests failed' }
+& package\runtime\python.exe tests\test_history_restore.py
+if ($LASTEXITCODE -ne 0) { throw 'PACT 90-day history restore check failed' }
 & $InnoCompiler /Q PACT.iss
 if ($LASTEXITCODE -ne 0) { throw 'Installer build failed' }
 Write-Output 'Built dist\PACT_v1.2.0_Setup.exe'
