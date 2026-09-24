@@ -1,29 +1,19 @@
-# PACT v1.0.0 validation
+# PACT v1.1.0 validation
 
-Windows x64 · 23 September 2026.
+Windows x64, 24 September 2026.
 
-## Automated checks
+37 Python automated tests passed, including 11 new v1.1 tests. Five installer path cases passed separately.
 
-All 26 checks passed: the existing 20 regression/export/UI checks (updated for autosave and meaningful bar targets), plus six targeted checks for this revision:
+- Add, deduct, edit, remove and undo Work/Learning sessions; totals, annual/weekly history and CSV data agree after changes. Cross-midnight sessions split correctly. Overlaps, future/invalid times and active-session edits are rejected. Undo persists across restart and refuses conflicting changes.
+- Backup/restore preserves sessions, daily entries, health observations, goals and themes. Credentials are excluded. Timers continue on the original device but are stopped at capture time in the restored copy. Restorable safety backups are created before replacement. Invalid formats, versions, timestamps, goals and sleep stages are rejected before data replacement. Settings UI does not overwrite restored goals.
+- Latest sleep retains its original date after midnight and switches when a new valid sleep record arrives. Historical data remains attributed to its actual day.
+- Freshness states distinguish fresh, stale, overdue, missing, failed and in-progress checks. Future Garmin day-end boundaries do not imply fresh watch data. Indicator uses theme ink and avoids native tooltips.
+- Existing 26 timer, health mapping, UI, export, docking, animation, autosave and hover tests pass. The sleep-gap fixture now supplies a dated sleep duration as well as stages.
 
-- Repeated pointer movement retains the same detail panel and position; short gaps do not hide it, leaving dismisses it, and the child panel is mouse-transparent and themed.
-- Blank monthly columns and sleep legends have no hover details; unrecorded heatmap dates show Not available; ordinary controls have no native tooltips.
-- Hover is restricted to the painted portion of a monthly bar.
-- Theme/target edits persist without closing Settings, there is no Save button, pending numeric text commits on exit, and values survive reopening storage.
-- Garmin hydration intake/goal mapping, exact US-cup conversion, zero intake and export fields.
-- Hydration endpoint failure preserves other metrics and reports the partial failure; the app refresh timer is exactly 300,000 ms (five minutes).
+Visual inspection: Light dashboard, Dark time editor and Settings; editor and backup controls checked at 320-pixel width. Sleep date and theme-matched dot preserve dashboard geometry. The indicator was rendered across all four themes in automated UI tests.
 
-## Visual checks
+Installer testing found that a Windows process with an invalid path could block the old installer. Maintenance now ignores invalid unrelated process paths and retains exact installation-folder matching. Five cases cover installation executable/runtime, a similarly named sibling folder, null and malformed paths.
 
-Rendered and inspected Learning/light, Settings and the themed hover panel. Verified left-facing Learning arrow, aligned italic hour legends, bold Health data, opaque Settings and automatic-save wording. Static design geometry is unchanged.
+The v1.1.0 installer successfully updates a running isolated v1.0.0 app package, shuts down the correct instance, preserves database/targets/token sentinel, supports single-instance reveal, and uninstalls without removing data. The baseline app files were extracted from the released v1.0.0 package because the original v1.0.0 installer encountered the process-path bug on this machine. A separate fresh v1.1.0 install, installed startup self-test and uninstall all passed.
 
-## Garmin check
-
-Hydration mapping was verified against the Garmin response and synthetic test cases. Tests do not claim to trigger a watch upload. Watch-to-Connect latency remains outside PACT's control. New-password login/MFA was not retested.
-
-## Windows installation
-
-The build script compiled the launcher and installer and ran all 26 checks. Isolated upgrade tests cover hidden launch, second-launch reveal, graceful shutdown, updating a running development PACT 1.3 instance to release v1.0.0, database/target/token-sentinel preservation, and uninstall while running. A separate clean-install check runs the installed startup self-test.
-
-Tests use a separate installation identity and synthetic data. They do not replace the user's installed app. Exports and preview tests use synthetic values. The source/runnable ZIP archives are checked for integrity. The installer is unsigned. Physical mouse/DPI combinations were not exhaustively tested; pointer-state stability was tested in Qt's event loop.
-
+Tests used isolated synthetic data and did not replace the user's installed app. No new live watch upload or Garmin login/MFA test was performed for this release. Watch/phone cloud-upload latency remains outside PACT's control. Installer is unsigned. Migration backups replace local data rather than merge; old spreadsheet CSV/ZIP exports are not migration backups. Undo history remains local and resets on restore.

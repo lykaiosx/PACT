@@ -48,3 +48,20 @@ def freshness_text(checked_at,data_through,now=None):
         if now-through>timedelta(hours=1):text+='\nWatch data is stale. Sync your watch in Garmin Connect, then click Sync now.'
         return text
     except (TypeError,ValueError):return text+' · watch data freshness unavailable'
+
+def sync_state(checked_at,data_through,now=None,error=None,busy=False):
+    now=now or datetime.now()
+    if busy:return False,'Checking Garmin cloud…'
+    text=freshness_text(checked_at,data_through,now)
+    if error:return True,error+'\n'+text
+    try:
+        checked=datetime.fromisoformat(checked_at)
+        if checked.tzinfo:checked=checked.astimezone().replace(tzinfo=None)
+        if now-checked>timedelta(minutes=10):return True,text+'\nCloud check overdue. Select Sync now.'
+    except (TypeError,ValueError):return True,'Not checked yet. Connect Garmin or select Sync now.'
+    try:
+        through=datetime.fromisoformat(data_through)
+        if through.tzinfo:through=through.astimezone().replace(tzinfo=None)
+        if through<=now and now-through>timedelta(hours=1):return True,text
+    except (TypeError,ValueError):pass
+    return False,text

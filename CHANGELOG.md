@@ -1,3 +1,6 @@
+# PACT v1.1.0
+
+Time corrections and undo; portable backup/restore with preview, safety copy and validation; latest dated sleep retained across midnight; a theme-matched sync status indicator; resilient installer process checks. All existing docking, themes, auto-save, timers, exports and Garmin integration remain available.
 # PACT v1
 
 First feature-complete release, version 1.0.0. Earlier 1.1–1.3 labels were development builds; this release adopts the requested public v1 naming.

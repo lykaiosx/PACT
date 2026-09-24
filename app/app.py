@@ -16,7 +16,7 @@ if '--self-test' in sys.argv:
  os.environ['PACT_TOKEN_DIR']=str(Path(_test_dir.name)/'tokens')
  atexit.register(_test_dir.cleanup)
 from storage import Storage,APP_DIR
-from garmin_client import GarminBridge,TOKENSTORE,freshness_text
+from garmin_client import GarminBridge,TOKENSTORE,freshness_text,sync_state
 BASE=Path(__file__).resolve().parent
 ASSETS=BASE/'assets'
 LIGHT='#FAFAFA'; DARK='#100404'
@@ -54,7 +54,7 @@ class GarminJob(QThread):
 from panels import Canvas,Settings,colors
 class PACT(QWidget):
  def __init__(self,testing=False):
-  super().__init__();self.testing=testing;self.storage=Storage();self.garmin=GarminBridge();self.job=None;self.garmin_status='Not synced';self.corner_since=None;self.corner_latched=False
+  super().__init__();self.testing=testing;self.storage=Storage();self.garmin=GarminBridge();self.job=None;self.sync_error=None;self.sync_busy=False;self.garmin_status='Not synced';self.corner_since=None;self.corner_latched=False
   self.dark=self.storage.get_setting('theme','light')=='dark';self.setWindowTitle('PACT');self.setWindowFlags(Qt.Window|Qt.FramelessWindowHint)
   self.settings_panel=None;self.panel_animation=None;self.last_backfill=0;self.setWindowIcon(QIcon(str(ASSETS/'pact.ico')));self.canvas=Canvas(self)
   root=QVBoxLayout(self);root.setContentsMargins(0,0,0,0);self.scroll=QScrollArea();self.scroll.setFrameShape(QScrollArea.NoFrame);self.scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff);self.scroll.setWidget(self.canvas);root.addWidget(self.scroll)
@@ -112,23 +112,31 @@ class PACT(QWidget):
   self.settings_panel.flush()
   panel=self.settings_panel;self.settings_panel=None
   self.panel_animation=QPropertyAnimation(panel,b'pos',self);self.panel_animation.setDuration(240);self.panel_animation.setStartValue(panel.pos());self.panel_animation.setEndValue(QPoint(self.width(),0));self.panel_animation.finished.connect(panel.deleteLater);self.panel_animation.start()
+ def edit_time(self,kind):
+  if self.settings_panel:return
+  from time_editor import TimeEditor
+  self.canvas.details.clear_details();self.settings_panel=TimeEditor(self,kind);self.settings_panel.setGeometry(self.rect());self.settings_panel.show();self.settings_panel.raise_()
  def toggle_timer(self,kind):
   (self.storage.stop_session if self.storage.active_session(kind) else self.storage.start_session)(kind);self.history_at=0;self.refresh()
  def refresh(self):
-  self.day=self.storage.get_day();self.seconds={k:self.storage.seconds_for_day(k) for k in ('work','learning')}
+  self.day=self.storage.get_day();self.sleep=self.storage.latest_sleep();self.seconds={k:self.storage.seconds_for_day(k) for k in ('work','learning')}
+  self.sync_attention,self.garmin_status=sync_state(self.storage.get_setting('last_sync'),self.storage.get_setting('last_data_through',self.storage.day_extra('garmin_data_through')),error=self.sync_error,busy=self.sync_busy)
+  self.canvas.sync_indicator.set_attention(self.sync_attention)
   # Queries for history are bounded and need not run on every timer tick.
   if not hasattr(self,'history') or time.monotonic()-getattr(self,'history_at',0)>30:
    self.histories={k:self.storage.history(k,366) for k in ('work','learning')};self.history=self.histories['work'];self.annual={k:sum(v for d,v in hist if d.year==date.today().year) for k,hist in self.histories.items()};self.history_at=time.monotonic()
   for i,k in enumerate(('work','learning')):self.canvas.controls[i][0].setText('Stop' if self.storage.active_session(k) else 'Start')
   self.canvas.update()
-  if self.settings_panel:self.settings_panel.state.setText(self.garmin_status)
+  if self.settings_panel and hasattr(self.settings_panel,'state'):self.settings_panel.state.setText(self.garmin_status)
  def connect_garmin(self):self.settings()
  def sync(self,email=None,password=None):
   if self.testing or (self.job and self.job.isRunning()):return
-  self.garmin_status='Checking Garmin cloud…';backfill=time.monotonic()-self.last_backfill>3600;self.job=GarminJob(self.garmin,email if isinstance(email,str) else None,password,backfill);self.job.result.connect(self.synced);self.job.failed.connect(self.sync_failed);self.job.mfa.connect(self.ask_mfa);self.job.start();self.refresh()
+  self.sync_busy=True;self.garmin_status='Checking Garmin cloud…';backfill=time.monotonic()-self.last_backfill>3600;self.job=GarminJob(self.garmin,email if isinstance(email,str) else None,password,backfill);self.job.result.connect(self.synced);self.job.failed.connect(self.sync_failed);self.job.mfa.connect(self.ask_mfa);self.job.start();self.refresh()
  def ask_mfa(self):
+  if self.settings_panel and not isinstance(self.settings_panel,Settings):self.close_settings()
   self.settings();self.settings_panel.code.show();self.settings_panel.verify.show();self.settings_panel.code.setFocus()
  def synced(self,data):
+  self.sync_busy=False;self.sync_error='Hydration could not be refreshed. Select Sync now.' if data.get('_hydration_error') else None
   checked=datetime.now().isoformat(timespec='seconds')
   for record in [data]+data.get('_history',[]):
    day=record.get('_day',date.today().isoformat())
@@ -141,8 +149,9 @@ class PACT(QWidget):
   if data.get('_history'):self.last_backfill=time.monotonic()
   self.garmin_status=freshness_text(checked,data.get('_data_through'))
   if data.get('_hydration_error'):self.garmin_status+='\nHydration could not be refreshed. Retry Sync now.'
-  self.storage.set_setting('last_sync',checked);self.history_at=0;self.refresh()
+  self.storage.set_setting('last_sync',checked);self.storage.set_setting('last_data_through',data.get('_data_through'));self.history_at=0;self.refresh()
  def sync_failed(self,message):
+  self.sync_busy=False;self.sync_error=message
   self.garmin.client=None
   self.garmin_status=message
   self.refresh()

@@ -50,6 +50,7 @@ class Revision(unittest.TestCase):
    if height>=994:self.assertLessEqual(self.w.canvas.height(),self.w.scroll.viewport().height());self.assertEqual(self.w.scroll.verticalScrollBarPolicy(),Qt.ScrollBarAlwaysOff)
    else:self.assertGreater(self.w.canvas.height(),height);self.assertEqual(self.w.scroll.verticalScrollBarPolicy(),Qt.ScrollBarAsNeeded)
  def test_sleep_mosaic_visible_gap(self):
+  self.s.set_day_field('sleep_minutes',420)
   self.s.set_day_extra('sleep_stages',{'light':4,'deep':2,'rem':3,'awake':1});self.w.refresh();self.w.canvas.setFixedSize(3000,9314);im=self.w.canvas.grab().toImage();bg=QColor(colors(self.w)[0]);x=1928+round(547*.6)
   self.assertEqual(im.pixelColor(x,2700),bg);self.assertNotEqual(im.pixelColor(x-20,2700),bg);self.assertNotEqual(im.pixelColor(x+20,2700),bg)
 if __name__=='__main__':unittest.main(verbosity=2)

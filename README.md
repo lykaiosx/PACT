@@ -1,8 +1,15 @@
-# PACT v1
+# PACT v1.1.0
 
-Run PACT_v1_Setup.exe to install or update on Windows 10/11 x64. The private runtime is included. Start Menu, Installed Apps, optional desktop/startup shortcuts and updater process management are preserved.
+Run PACT_v1.1.0_Setup.exe to install or update on Windows 10/11 x64. The private runtime is included. Start Menu, Installed Apps, optional desktop/startup shortcuts and updater process management are preserved.
 
-## This update
+## New in v1.1.0
+
+- Click the Work or Learning time to add missed sessions, correct dates/start/end times, deduct hours from a selected session, or remove it. Stop a running timer before editing that session. Corrections update all charts, totals and exports. Overlapping sessions of the same activity and future times are rejected. Undo last correction is available in the panel and survives restarting PACT.
+- Settings → Backup and restore creates a `.pact` file for migration, including sessions, daily entries, Garmin history, goals and appearance. Choose a backup to preview counts, then explicitly replace local data. A restorable safety backup is written beside the database first. Replacement is transactional. Timers in a backup end at capture time, and restoring never starts them automatically. Credentials are excluded; reconnect Garmin on another device. Undo history is local to the installation and resets on restore. CSV/ZIP spreadsheet exports remain separate from migration backups.
+- The most recent completed sleep remains visible after midnight, dated by its original Garmin record. Other daily values still belong to today, and historical charts/exports retain their actual dates.
+- A small indicator beside the gear uses the active theme's ink color. It gently pulses when no cloud check is available, a check is over ten minutes old, watch data is over an hour old, or a sync fails. Click it for connection status and Sync now. Five-minute background checks continue. Unknown/future Garmin day-end timestamps are described as unavailable, not treated as proof of fresh data. Stale watch data requires the watch/phone to upload to Garmin Connect first.
+- Installer maintenance ignores invalid paths reported for unrelated Windows processes, preserving safe shutdown of the installation being updated.
+## Existing features
 
 - Hover details use one flat, themed Newsreader panel inside PACT. It does not intercept mouse events, remains anchored while moving within a target, waits briefly before appearing and tolerates short gaps between targets. Native tooltips on ordinary controls are removed.
 - Monthly details appear only over an actual nonzero bar. Unrecorded heatmap dates say Not available, rather than inventing zero-hour records. Sleep legends are labels only; stage details are available on the mosaic. Recorded data details retain dates, durations and creatives.
@@ -25,12 +32,10 @@ The panel fits the complete dashboard on available heights of at least 994 logic
 
 ## Build
 
-Extract PACT_v1_Package.zip for its runtime. In the source folder run:
+Extract PACT_v1.1.0_Package.zip for its runtime. In the source folder run:
 
 ```powershell
 .\build.ps1 -RuntimeDirectory 'C:\path\to\runtime' -InnoCompiler 'C:\path\to\ISCC.exe'
 ```
 
-Output is `dist\PACT_v1_Setup.exe`. Build tools: Inno Setup 6.7.3, the Windows .NET Framework compiler and bundled Python 3.12.10. Pinned dependencies and licenses are included. compile_designs.py regenerates current geometry; compile_assets.py is retained for the old design only. See PACT_Validation.md. The installer remains unsigned.
-
-
+Output is `dist\PACT_v1.1.0_Setup.exe`. Build tools: Inno Setup 6.7.3, the Windows .NET Framework compiler and bundled Python 3.12.10. Pinned dependencies and licenses are included. compile_designs.py regenerates current geometry; compile_assets.py is retained for the old design only. See PACT_Validation.md. The installer remains unsigned.

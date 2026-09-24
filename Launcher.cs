@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 [assembly:AssemblyTitle("PACT")]
 [assembly:AssemblyProduct("PACT")]
-[assembly:AssemblyVersion("1.0.0.0")]
+[assembly:AssemblyVersion("1.1.0.0")]
 class Launcher {
  [DllImport("kernel32.dll",CharSet=CharSet.Unicode)]static extern IntPtr CreateJobObject(IntPtr attr,string name);
  [DllImport("kernel32.dll")]static extern bool SetInformationJobObject(IntPtr job,int type,IntPtr data,uint size);

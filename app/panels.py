@@ -1,5 +1,5 @@
 """Design-derived dashboard and in-panel settings."""
-import json, math
+import json, math, time, sqlite3
 from pathlib import Path
 from datetime import date,datetime,timedelta
 from PySide6.QtCore import Qt,QRectF,QPoint,QPropertyAnimation,QEasingCurve,QParallelAnimationGroup,QSize,QTimer
@@ -87,10 +87,38 @@ class Settings(QWidget):
    f=QDoubleSpinBox();f.setRange(.25 if key.startswith('target') else 1,maximum);f.setSingleStep(.25 if key.startswith('target') else 1);f.setDecimals(2 if key.startswith('target') else 0);f.setSuffix(suffix);f.setValue(window.storage.get_setting(key,default));self.fields[key.replace('target_','')]=f;form.addRow(label,f)
   section('Data export');export=QPushButton('Export daily totals (.csv)');export.clicked.connect(lambda:self.export(False));form.addRow(export);all_data=QPushButton('Export all records (.zip)');all_data.clicked.connect(lambda:self.export(True));form.addRow(all_data)
   description=QLabel('CSV opens in Excel or Google Sheets. Daily totals cover midnight to midnight. All records also includes hourly timers, sessions and Garmin observations.');description.setWordWrap(True);form.addRow(description);self.export_status=QLabel('');self.export_status.setWordWrap(True);form.addRow(self.export_status)
+  section('Backup and restore')
+  backup=QPushButton('Create backup');backup.clicked.connect(self.backup);form.addRow(backup)
+  restore=QPushButton('Choose backup to restore');restore.clicked.connect(self.preview_restore);form.addRow(restore)
+  self.backup_note=QLabel('Move your history, goals and appearance to another computer. Garmin sign-in is not included. Restored timers are stopped at the backup time.');self.backup_note.setWordWrap(True);form.addRow(self.backup_note)
+  self.restore_button=QPushButton('Replace local data with this backup');self.restore_button.hide();self.restore_button.clicked.connect(self.restore);form.addRow(self.restore_button);self.restore_path=None;self.skip_save=False
+  section('About');form.addRow(QLabel('PACT 1.1.0'))
   self.theme.currentIndexChanged.connect(self.save);self.use_custom.currentIndexChanged.connect(self.save)
   for field in self.fields.values():field.setKeyboardTracking(False);field.valueChanged.connect(self.save);field.editingFinished.connect(self.save)
  def paintEvent(self,event):
   p=QPainter(self);p.fillRect(self.rect(),QColor(colors(self.window)[0]));p.end()
+ def backup(self):
+  from backup import create_backup
+  self.flush();path,_=QFileDialog.getSaveFileName(self,'Create PACT backup',str(Path.home()/'Documents'/f'PACT_{date.today().isoformat()}.pact'),'PACT backup (*.pact)')
+  if not path:return
+  if not path.lower().endswith('.pact'):path+='.pact'
+  try:create_backup(self.window.storage,path);self.backup_note.setText('Backup created. Your running timers continue here; they will be stopped in the restored copy.')
+  except (OSError,ValueError,sqlite3.Error):self.backup_note.setText('Could not create the backup. Choose a writable folder and retry.')
+ def preview_restore(self):
+  from backup import load_backup
+  self.restore_path=None;self.restore_button.hide();path,_=QFileDialog.getOpenFileName(self,'Choose PACT backup','','PACT backup (*.pact)')
+  if not path:return
+  try:
+   data=load_backup(path);tables=data['tables'];self.restore_path=path
+   self.backup_note.setText(f'Backup from {data["created_at"].replace("T"," ")}: {len(tables["sessions"])} sessions, {len(tables["daily"])} daily records and {len(tables["health_log"])} health observations. This replaces local history and settings. A safety backup is created first. Garmin credentials on this computer stay unchanged; on a new computer, reconnect Garmin.');self.restore_button.show()
+  except (OSError,ValueError):self.backup_note.setText('This file is not a valid supported PACT backup. Nothing has changed.')
+ def restore(self):
+  from backup import restore_backup
+  if not self.restore_path:return
+  if self.window.job and self.window.job.isRunning():self.backup_note.setText('Wait for the current Garmin check to finish, then restore.');return
+  try:
+   self.flush();safety=restore_backup(self.window.storage,self.restore_path);self.skip_save=True;self.window.history_at=0;self.window.sync_error=None;self.window.apply_theme();self.window.refresh();self.window.close_settings();self.window.settings();self.window.settings_panel.backup_note.setText('Backup restored. Safety copy: '+str(safety));self.window.settings_panel.saved_note.setText('Backup restored. All timers are stopped.')
+  except (OSError,ValueError,sqlite3.Error):self.backup_note.setText('Restore failed. Your existing data has been kept. Check the file and retry.')
  def export(self,full):
   from data_export import export_data
   suffix='zip' if full else 'csv';path,_=QFileDialog.getSaveFileName(self,'Export PACT data',str(Path.home()/'Documents'/f'PACT_{date.today().isoformat()}.{suffix}'),'ZIP archive (*.zip)' if full else 'CSV spreadsheet (*.csv)')
@@ -116,8 +144,25 @@ class Settings(QWidget):
   s.set_setting('intensity_colors',ordered_colors([self.color_values[f'level{i}'] for i in range(4)]) if self.use_custom.currentIndex() else None)
   self.window.apply_theme();self.window.refresh();self.saved_note.setText('All changes saved automatically.')
  def flush(self):
+  if self.skip_save:return
   for field in self.fields.values():field.interpretText()
   self.save()
+class SyncIndicator(QPushButton):
+ def __init__(self,window,parent):
+  super().__init__('',parent);self.window=window;self.attention=False;self.setCursor(Qt.PointingHandCursor);self.clicked.connect(window.settings);self.pulse=QTimer(self);self.pulse.setInterval(80);self.pulse.timeout.connect(self.update);self.setStyleSheet('border:0;background:transparent;')
+ def set_attention(self,value):
+  self.attention=value;self.setAccessibleName('Garmin status: '+self.window.garmin_status)
+  if value and self.isVisible():self.pulse.start() if not self.pulse.isActive() else None
+  else:self.pulse.stop()
+  self.update()
+ def showEvent(self,event):
+  super().showEvent(event)
+  if self.attention:self.pulse.start()
+ def hideEvent(self,event):self.pulse.stop();super().hideEvent(event)
+ def paintEvent(self,event):
+  p=QPainter(self);p.setRenderHint(QPainter.Antialiasing);c=QColor(colors(self.window)[1]);c.setAlphaF((.4+.6*(.5+.5*math.sin(time.monotonic()*math.pi))) if self.attention else .3);p.setPen(Qt.NoPen);p.setBrush(c);r=max(2,min(self.width(),self.height())*.19);p.drawEllipse(self.rect().center(),r,r);p.end()
+ def enterEvent(self,event):self.window.canvas.details.offer(self.window.garmin_status,self.mapToGlobal(self.rect().bottomLeft()));super().enterEvent(event)
+ def leaveEvent(self,event):self.window.canvas.details.offer('',QPoint());super().leaveEvent(event)
 class Canvas(QWidget):
  def __init__(self,window):
   super().__init__();self.window=window;self.kind='work';self.setMouseTracking(True);self.renderer=QSvgRenderer();self.controls=[];self.anim=None;self.slide_image=None;self.load_design()
@@ -126,7 +171,10 @@ class Canvas(QWidget):
   self.controls[5][0].hide();self.controls[5][0].setEnabled(False)
   for i,box in enumerate(self.geo['meals']):
    b=QPushButton('',self);b.setAccessibleName(['Breakfast','Lunch','Dinner'][i]);b.clicked.connect(lambda checked=False,n=i:self.meal(n));self.controls.append((b,box))
-  self.details=HoverDetails(window);self.retheme()
+  self.details=HoverDetails(window);self.sync_indicator=SyncIndicator(window,self);self.time_buttons=[]
+  for kind in ('work','learning'):
+   b=QPushButton('',self);b.setAccessibleName('Correct '+kind+' time');b.setCursor(Qt.PointingHandCursor);b.clicked.connect(lambda checked=False,k=kind:window.edit_time(k));self.time_buttons.append(b)
+  self.retheme()
  def box(self,i):return self.geo['boxes'][str(i)]
  def load_design(self):
   self.geo=json.loads((ASSETS/f'{self.kind}-geometry.json').read_text());self.raw=(ASSETS/f'{self.kind}-static.svg').read_text()
@@ -148,6 +196,9 @@ class Canvas(QWidget):
   if hasattr(self,'details'):self.details.clear_details()
  def resize_controls(self):
   scale=self.width()/self.geo['width'];bg,fg=colors(self.window)
+  if hasattr(self,'sync_indicator'):self.sync_indicator.setGeometry(round(2685*scale),round(132*scale),max(14,round(120*scale)),max(14,round(110*scale)))
+  for b,i in zip(getattr(self,'time_buttons',[]),(31,32)):
+   x,y,_,_=self.box(i);b.setGeometry(round(x*scale),round((y-26)*scale),round(1400*scale),round(132*scale));b.setStyleSheet('background:transparent;border:0;')
   for i,(b,box) in enumerate(self.controls):
    if i in (0,1,2,4,6):box=self.box({0:53,1:56,2:54,4:401,6:55}[i])
    elif i>=7:box=self.geo['meals'][i-7]
@@ -165,7 +216,7 @@ class Canvas(QWidget):
  def meal(self,n):
   s=self.window.storage;k=('breakfast','lunch','dinner')[n];s.set_day_field(k,not s.get_day()[k]);self.window.refresh()
  def stage_regions(self):
-  stages=self.window.storage.day_extra('sleep_stages',{}) or {};total=sum(stages.values());x,y,_,_=self.box(547);size=547;gap=12;regions=[]
+  stages=self.window.storage.latest_sleep()['sleep_stages'] or {};total=sum(stages.values());x,y,_,_=self.box(547);size=547;gap=12;regions=[]
   if not total:return regions
   left=stages.get('light',0)+stages.get('deep',0);split=size*left/total
   for cx,cw,a,b,la,lb in [(x,split,'light','deep',2,3),(x+split,size-split,'rem','awake',1,0)]:
@@ -196,9 +247,9 @@ class Canvas(QWidget):
    if QRectF(*box).contains(pos):
     d=date.today()-timedelta(days=6-i);mins=s.existing_day(d.isoformat()).get('sleep_minutes');return f'{d.day} {d:%B %Y}\nNot available' if mins is None else self.day_tip(d,'sleep',mins/60)
   for box,stage,seconds,level in self.stage_regions():
-   if QRectF(*box).contains(pos):return self.day_tip(date.today(),{'light':'Light sleep','deep':'Deep sleep','rem':'REM sleep','awake':'Awake'}[stage],seconds/3600)
+   if QRectF(*box).contains(pos):return self.day_tip(date.fromisoformat(s.latest_sleep()['day']),{'light':'Light sleep','deep':'Deep sleep','rem':'REM sleep','awake':'Awake'}[stage],seconds/3600)
   if QRectF(1928,2455,1000,125).contains(pos):
-   score=s.day_extra('sleep_score');mins=self.window.day.get('sleep_minutes');return '' if score is None and mins is None else self.day_tip(date.today(),'sleep',None if mins is None else mins/60)+f'\nSleep score: {score if score is not None else "Not available"}'
+   sleep=s.latest_sleep();score=sleep['sleep_score'];mins=sleep['sleep_minutes'];return '' if score is None and mins is None else self.day_tip(date.fromisoformat(sleep['day']),'sleep',None if mins is None else mins/60)+f'\nSleep score: {score if score is not None else "Not available"}'
   return ''
  def paintEvent(self,event):
   p=QPainter(self);p.setRenderHint(QPainter.Antialiasing);p.scale(self.width()/self.geo['width'],self.width()/self.geo['width']);p.fillRect(QRectF(0,0,self.geo['width'],9314),QColor(colors(self.window)[0]));self.renderer.render(p,QRectF(0,0,self.geo['width'],9314));s=self.window.storage;day=self.window.day;bg,fg=colors(self.window);inks=intensity_colors(self.window)
@@ -216,8 +267,10 @@ class Canvas(QWidget):
   now=datetime.now();text(52,339,1900,120,now.strftime('%A, %d %B'));text(2300,339,640,120,now.strftime('%I:%M %p').lstrip('0'),right=True)
   for kind,i,j in [('work',31,527),('learning',32,528)]:
    seconds=self.window.seconds[kind];h,r=divmod(max(0,int(seconds)),3600);m,sec=divmod(r,60);x,y,_,_=self.box(i);text(x,y-26,1400,132,f'{h:02}:{m:02}:{sec:02}',100,True);text(1700,y-10,890,100,f'{seconds/3600:.1f} / {s.target(kind):g}h',65,right=True);bar(self.box(j),seconds/3600/s.target(kind))
-  mins=day.get('sleep_minutes');text(54,1910,600,132,'—' if mins is None else f'{mins//60:02}:{mins%60:02}',100,True);text(650,1920,540,100,f'/ {s.target("sleep"):g}h',65,right=True);bar(self.box(529),(mins or 0)/60/s.target('sleep'))
-  for i,value in [(34,'—' if day.get('resting_hr') is None else f'{day["resting_hr"]}BPM'),(35,'—' if day.get('steps') is None else f'{day["steps"]:,}'),(45,self.hydration_text()),(46,s.day_extra('body_battery')),(47,None if s.day_extra('calories') is None else f'{s.day_extra("calories"):,.0f}'),(36,s.day_extra('sleep_score'))]:field(i,'—' if value is None else value,75,True,width=425 if i!=36 else 235)
+  sleep=s.latest_sleep();mins=sleep['sleep_minutes'];text(54,1910,600,132,'—' if mins is None else f'{mins//60:02}:{mins%60:02}',100,True);text(650,1920,540,100,f'/ {s.target("sleep"):g}h',65,right=True);bar(self.box(529),(mins or 0)/60/s.target('sleep'))
+  if mins is not None:
+   p.fillRect(QRectF(1900,2240,1060,175),QColor(bg));text(1928,2255,1020,135,'Sleep · '+date.fromisoformat(sleep['day']).strftime('%d %b %Y'),75)
+  for i,value in [(34,'—' if day.get('resting_hr') is None else f'{day["resting_hr"]}BPM'),(35,'—' if day.get('steps') is None else f'{day["steps"]:,}'),(45,self.hydration_text()),(46,s.day_extra('body_battery')),(47,None if s.day_extra('calories') is None else f'{s.day_extra("calories"):,.0f}'),(36,sleep['sleep_score'])]:field(i,'—' if value is None else value,75,True,width=425 if i!=36 else 235)
   x,y,w,h=self.box(401);text(x,y,w,h,day['creatives'],75,center=True)
   for i,box in enumerate(self.geo['meals']):fill(box,3 if day[('breakfast','lunch','dinner')[i]] else -1)
   vals=self.window.histories[self.kind];week=[v for _,v in vals[-7:]];target=s.target(self.kind)
