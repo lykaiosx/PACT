@@ -5,7 +5,7 @@ from datetime import date,datetime,timedelta
 from PySide6.QtCore import Qt,QRectF,QPoint,QPointF,QPropertyAnimation,QEasingCurve,QParallelAnimationGroup,QSize,QTimer
 from PySide6.QtGui import QColor,QPainter,QPen,QFont,QIcon,QPixmap
 from PySide6.QtSvg import QSvgRenderer
-from PySide6.QtWidgets import (QWidget,QPushButton,QInputDialog,QToolTip,QVBoxLayout,QFormLayout,QLabel,QComboBox,QDoubleSpinBox,QLineEdit,QScrollArea,QColorDialog,QHBoxLayout,QFileDialog,QMessageBox)
+from PySide6.QtWidgets import (QWidget,QPushButton,QInputDialog,QToolTip,QVBoxLayout,QFormLayout,QLabel,QComboBox,QDoubleSpinBox,QLineEdit,QScrollArea,QColorDialog,QHBoxLayout,QFileDialog,QMessageBox,QCheckBox)
 ASSETS=Path(__file__).resolve().parent/'assets'
 LIGHT='#FAFAFA';DARK='#100404'
 SOFT_DARK='#24191D'
@@ -77,6 +77,8 @@ class Settings(QWidget):
   schedule=QLabel('Checks Garmin every 5 minutes. Hydration and its goal come from Garmin; update them on your watch or in Garmin Connect.');schedule.setWordWrap(True);form.addRow(schedule)
   self.code=QLineEdit();self.code.setPlaceholderText('Verification code');self.code.hide();self.verify=QPushButton('Verify');self.verify.clicked.connect(self.submit_code);self.verify.hide();form.addRow(self.code,self.verify)
   section('Appearance');self.theme=QComboBox();self.theme.addItems(['Light','Dark','High Contrast','Custom']);self.theme.setCurrentText(window.storage.get_setting('theme','light').title());form.addRow('Theme',self.theme)
+  self.auto_adjust=QCheckBox('Auto-adjust for readability');self.auto_adjust.setChecked(bool(window.storage.get_setting('display_auto_adjust',False)));form.addRow(self.auto_adjust)
+  display_note=QLabel('Off keeps the original layout. On detects your monitor and enlarges text and the dashboard together, with scrolling when needed.');display_note.setWordWrap(True);form.addRow(display_note)
   self.color_values={};self.color_buttons={}
   for key,label,default in [('custom_background','Background',LIGHT),('custom_ink','Text and lines',DARK)]:
    self.add_color(form,key,label,window.storage.get_setting(key,default))
@@ -97,11 +99,17 @@ class Settings(QWidget):
   self.csv_note=QLabel('Import a PACT daily totals CSV, including daily.csv extracted from an exported ZIP.');self.csv_note.setWordWrap(True);form.addRow(self.csv_note)
   self.csv_confirm=QPushButton('Import new dates');self.csv_confirm.hide();self.csv_confirm.clicked.connect(self.import_csv);form.addRow(self.csv_confirm);self.csv_path=None
   reset=QPushButton('Reset progress…');reset.clicked.connect(self.reset_progress);form.addRow(reset)
-  section('About');form.addRow(QLabel('PACT 1.2.0'))
+  section('About');form.addRow(QLabel('PACT 1.3.0'))
   self.theme.currentIndexChanged.connect(self.save);self.use_custom.currentIndexChanged.connect(self.save)
+  self.auto_adjust.toggled.connect(self.change_display)
+  self.apply_display_font()
   for field in self.fields.values():field.setKeyboardTracking(False);field.valueChanged.connect(self.save);field.editingFinished.connect(self.save)
  def paintEvent(self,event):
   p=QPainter(self);p.fillRect(self.rect(),QColor(colors(self.window)[0]));p.end()
+ def change_display(self,enabled):
+  self.window.storage.set_setting('display_auto_adjust',bool(enabled));self.apply_display_font();self.window.refit_current_screen();self.saved_note.setText('Display adjustment saved automatically.')
+ def apply_display_font(self):
+  self.setStyleSheet('QWidget{font-size:'+('16' if self.window.storage.get_setting('display_auto_adjust',False) else '14')+'px;}')
  def backup(self):
   from backup import create_backup
   self.flush();path,_=QFileDialog.getSaveFileName(self,'Create PACT backup',str(Path.home()/'Documents'/f'PACT_{date.today().isoformat()}.pact'),'PACT backup (*.pact)')
@@ -122,7 +130,9 @@ class Settings(QWidget):
   if not self.restore_path:return
   if self.window.job and self.window.job.isRunning():self.backup_note.setText('Wait for the current Garmin check to finish, then restore.');return
   try:
-   self.flush();safety=restore_backup(self.window.storage,self.restore_path);self.skip_save=True;self.window.history_at=0;self.window.sync_error=None;self.window.apply_theme();self.window.refresh();self.window.close_settings();self.window.settings();self.window.settings_panel.backup_note.setText('Backup restored. Safety copy: '+str(safety));self.window.settings_panel.saved_note.setText('Backup restored. All timers are stopped.')
+   self.flush();previous_display=self.window.storage.get_setting('display_auto_adjust',False);safety=restore_backup(self.window.storage,self.restore_path);self.skip_save=True;self.window.history_at=0;self.window.sync_error=None;self.window.apply_theme();self.window.refresh();
+   if previous_display!=self.window.storage.get_setting('display_auto_adjust',False):self.window.refit_current_screen()
+   self.window.close_settings();self.window.settings();self.window.settings_panel.backup_note.setText('Backup restored. Safety copy: '+str(safety));self.window.settings_panel.saved_note.setText('Backup restored. All timers are stopped.')
   except (OSError,ValueError,sqlite3.Error):self.backup_note.setText('Restore failed. Your existing data has been kept. Check the file and retry.')
  def export(self,full):
   from data_export import export_data

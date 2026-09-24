@@ -4,7 +4,7 @@ from pathlib import Path
 from datetime import datetime,date
 
 TABLES={'sessions':['id','kind','started_at','ended_at'], 'daily':['day','creatives','breakfast','lunch','dinner','sleep_minutes','steps','resting_hr'], 'kv':['key','value'], 'health_log':['id','observed_at','day','data_through','payload'], 'imported_totals':['day','kind','seconds']}
-SETTINGS={'theme','custom_background','custom_ink','intensity_colors','target_work','target_learning','target_sleep','annual_work_goal','annual_learning_goal','water_goal','last_sync','last_data_through','progress_reset_at'}
+SETTINGS={'theme','custom_background','custom_ink','intensity_colors','target_work','target_learning','target_sleep','annual_work_goal','annual_learning_goal','water_goal','last_sync','last_data_through','progress_reset_at','display_auto_adjust','display_hint_seen'}
 EXTRAS={'sleep_score','sleep_stages','body_battery','calories','hydration_ml','hydration_goal_ml','water','garmin_data_through','garmin_checked_at'}
 LIMIT=100*1024*1024
 
@@ -21,7 +21,7 @@ def create_backup(storage,path):
     running=sum(r['ended_at'] is None for r in data['sessions'])
     for r in data['sessions']:
         if r['ended_at'] is None:r['ended_at']=now
-    raw=json.dumps({'format':'PACT backup','version':1,'app_version':'1.2.0','created_at':now,'running_timers_stopped':running,'tables':data},allow_nan=False).encode()
+    raw=json.dumps({'format':'PACT backup','version':1,'app_version':'1.3.0','created_at':now,'running_timers_stopped':running,'tables':data},allow_nan=False).encode()
     path=Path(path);fd,tmp=tempfile.mkstemp(prefix='.pact-backup-',dir=path.parent);os.close(fd)
     try:
         with zipfile.ZipFile(tmp,'w',zipfile.ZIP_DEFLATED) as z:
@@ -69,6 +69,7 @@ def load_backup(path):
                 if table=='kv':
                     if not allowed_key(r['key']):raise ValueError('Unsupported setting in backup.')
                     v=json.loads(r['value']);key=r['key']
+                    if key in ('display_auto_adjust','display_hint_seen') and type(v)!=bool:raise ValueError('Invalid display preference.')
                     if key=='progress_reset_at':datetime.fromisoformat(v)
                     if key.startswith(('target_','annual_')) and (not isinstance(v,(int,float)) or not math.isfinite(v) or v<=0 or v>(24 if key.startswith('target_') else 8784)):raise ValueError('Invalid goal.')
                     if key=='theme' and v not in ('light','dark','high contrast','custom'):raise ValueError('Invalid theme.')

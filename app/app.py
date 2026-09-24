@@ -56,7 +56,7 @@ class PACT(QWidget):
  def __init__(self,testing=False):
   super().__init__();self.testing=testing;self.storage=Storage();self.garmin=GarminBridge();self.job=None;self.sync_error=None;self.sync_busy=False;self.garmin_status='Not synced';self.corner_since=None;self.corner_latched=False
   self.dark=self.storage.get_setting('theme','light')=='dark';self.setWindowTitle('PACT');self.setWindowFlags(Qt.Window|Qt.FramelessWindowHint)
-  self.settings_panel=None;self.panel_animation=None;self.last_backfill=0;self.setWindowIcon(QIcon(str(ASSETS/'pact.ico')));self.canvas=Canvas(self)
+  self.settings_panel=None;self.panel_animation=None;self.display_hint=None;self.quitting=False;self.last_backfill=0;self.setWindowIcon(QIcon(str(ASSETS/'pact.ico')));self.canvas=Canvas(self)
   root=QVBoxLayout(self);root.setContentsMargins(0,0,0,0);self.scroll=QScrollArea();self.scroll.setFrameShape(QScrollArea.NoFrame);self.scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff);self.scroll.setWidget(self.canvas);root.addWidget(self.scroll)
   self.scroll.verticalScrollBar().valueChanged.connect(self.canvas.details.clear_details)
   self.apply_theme();self.refresh();self.fit_screen();self.timer=QTimer(self);self.timer.timeout.connect(self.refresh);self.timer.start(1000)
@@ -64,6 +64,8 @@ class PACT(QWidget):
   self.sync_timer=QTimer(self);self.sync_timer.setInterval(300000);self.sync_timer.timeout.connect(self.auto_sync)
   self.tray=None
   self.garmin_status=freshness_text(self.storage.day_extra('garmin_checked_at'),self.storage.day_extra('garmin_data_through'))
+  for screen in QApplication.screens():self.watch_screen(screen)
+  QApplication.instance().screenAdded.connect(self.watch_screen);QApplication.instance().screenRemoved.connect(self.on_display_changed)
   if not testing:
    self.tray=QSystemTrayIcon(self.windowIcon(),self);self.tray.setToolTip('PACT');menu=QMenu(self)
    for title,fn in [('Show / hide',self.toggle_visible),('Settings',self.settings),('Sync Garmin',self.sync),('Quit PACT',self.quit)]:
@@ -84,8 +86,32 @@ class PACT(QWidget):
   if self.settings_panel:self.settings_panel.setGeometry(self.rect())
   if self.canvas.details.isVisible():self.canvas.details.present()
  def fit_screen(self,screen=None):
-  screen=screen or QApplication.screenAt(QCursor.pos()) or QApplication.primaryScreen();g=screen.availableGeometry();h=g.height();w=min(520,g.width(),max(320,int(h*3000/9314)));self.scroll.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded if h<994 else Qt.ScrollBarAlwaysOff);self.setGeometry(g.right()-w+1,g.bottom()-h+1,w,h);self.size_canvas()
- def reveal(self):self.fit_screen();self.show();self.raise_();self.activateWindow()
+  screen=screen or QApplication.screenAt(QCursor.pos()) or QApplication.primaryScreen();g=screen.availableGeometry();h=g.height()
+  if self.storage.get_setting('display_auto_adjust',False):
+   # Qt supplies logical pixels: Windows DPI scaling is already accounted for.
+   # Enlarge the complete design together rather than shrinking text to fit.
+   w=min(g.width(),max(320,g.width()//2),max(480,min(600,int(h*3000/9314))))
+   scrolling=Qt.ScrollBarAsNeeded
+  else:w=min(520,g.width(),max(320,int(h*3000/9314)));scrolling=Qt.ScrollBarAsNeeded if h<994 else Qt.ScrollBarAlwaysOff
+  self.scroll.setVerticalScrollBarPolicy(scrolling);self.setGeometry(g.right()-w+1,g.bottom()-h+1,w,h);self.size_canvas()
+ def watch_screen(self,screen):
+  screen.availableGeometryChanged.connect(self.on_display_changed);screen.logicalDotsPerInchChanged.connect(self.on_display_changed)
+ def on_display_changed(self,*args):
+  QTimer.singleShot(0,self.refit_current_screen)
+ def refit_current_screen(self):
+  self.fit_screen(QApplication.screenAt(self.geometry().center()) or QApplication.primaryScreen())
+ def reveal(self):
+  self.fit_screen();self.show();self.raise_();self.activateWindow()
+  if not self.testing:QTimer.singleShot(350,self.show_display_hint)
+ def show_display_hint(self):
+  if self.quitting or not self.isVisible() or self.display_hint or self.storage.get_setting('display_hint_seen',False):return
+  box=QMessageBox(self);box.setWindowTitle('PACT display options');box.setText('This is PACT’s default layout. For larger text and controls, turn on Auto-adjust for readability in the Appearance section of Settings. It adapts to your monitor and allows scrolling when needed. You can turn it off at any time.')
+  settings_button=box.addButton('Open Settings',QMessageBox.ActionRole);done=box.addButton('Got it',QMessageBox.AcceptRole);box.setDefaultButton(done);box.setEscapeButton(done);self.display_hint=box
+  def finished(*args):
+   self.storage.set_setting('display_hint_seen',True);self.display_hint=None
+   if not self.quitting and box.clickedButton()==settings_button:self.settings()
+   box.deleteLater()
+  box.finished.connect(finished);box.open()
  def toggle_visible(self):self.hide() if self.isVisible() else self.reveal()
  def check_corner(self):
   pos=QCursor.pos();screen=QApplication.screenAt(pos)
@@ -160,6 +186,8 @@ class PACT(QWidget):
   self.refresh()
   if self.tray:self.tray.showMessage('PACT · Garmin',message,QSystemTrayIcon.Information,5000)
  def quit(self):
+  self.quitting=True
+  if self.display_hint:self.display_hint.reject()
   if self.settings_panel:self.settings_panel.flush()
   self.sync_timer.stop()
   if self.job and self.job.isRunning():
