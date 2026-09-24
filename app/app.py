@@ -82,6 +82,7 @@ class PACT(QWidget):
  def size_canvas(self):
   w=self.scroll.viewport().width();self.canvas.setFixedSize(w,round(w*9314/self.canvas.geo['width']))
   if self.settings_panel:self.settings_panel.setGeometry(self.rect())
+  if self.canvas.details.isVisible():self.canvas.details.present()
  def fit_screen(self,screen=None):
   screen=screen or QApplication.screenAt(QCursor.pos()) or QApplication.primaryScreen();g=screen.availableGeometry();h=g.height();w=min(520,g.width(),max(320,int(h*3000/9314)));self.scroll.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded if h<994 else Qt.ScrollBarAlwaysOff);self.setGeometry(g.right()-w+1,g.bottom()-h+1,w,h);self.size_canvas()
  def reveal(self):self.fit_screen();self.show();self.raise_();self.activateWindow()

@@ -1,8 +1,8 @@
 """Design-derived dashboard and in-panel settings."""
-import json, math, time, sqlite3
+import json, math, time, sqlite3, re
 from pathlib import Path
 from datetime import date,datetime,timedelta
-from PySide6.QtCore import Qt,QRectF,QPoint,QPropertyAnimation,QEasingCurve,QParallelAnimationGroup,QSize,QTimer
+from PySide6.QtCore import Qt,QRectF,QPoint,QPointF,QPropertyAnimation,QEasingCurve,QParallelAnimationGroup,QSize,QTimer
 from PySide6.QtGui import QColor,QPainter,QPen,QFont,QIcon,QPixmap
 from PySide6.QtSvg import QSvgRenderer
 from PySide6.QtWidgets import (QWidget,QPushButton,QInputDialog,QToolTip,QVBoxLayout,QFormLayout,QLabel,QComboBox,QDoubleSpinBox,QLineEdit,QScrollArea,QColorDialog,QHBoxLayout,QFileDialog)
@@ -44,7 +44,7 @@ def gear_icon(ink):
 class HoverDetails(QLabel):
  """One non-activating, mouse-transparent child; no native tooltip windows."""
  def __init__(self,window):
-  super().__init__(window);self.window=window;self.setAttribute(Qt.WA_TransparentForMouseEvents);self.setTextFormat(Qt.PlainText);self.setWordWrap(False);self.hide();self.pending='';self.anchor=QPoint();self.delay=QTimer(self);self.delay.setSingleShot(True);self.delay.timeout.connect(self.present);self.dismiss=QTimer(self);self.dismiss.setSingleShot(True);self.dismiss.timeout.connect(self.clear_details)
+  super().__init__(window);self.window=window;self.setAttribute(Qt.WA_TransparentForMouseEvents);self.setTextFormat(Qt.PlainText);self.setWordWrap(True);self.hide();self.pending='';self.anchor=QPoint();self.delay=QTimer(self);self.delay.setSingleShot(True);self.delay.timeout.connect(self.present);self.dismiss=QTimer(self);self.dismiss.setSingleShot(True);self.dismiss.timeout.connect(self.clear_details)
  def offer(self,text,global_pos):
   if not text:
    self.delay.stop();self.pending=''
@@ -57,7 +57,8 @@ class HoverDetails(QLabel):
   else:self.delay.start(110)
  def present(self):
   if not self.pending or self.window.settings_panel or not self.window.isVisible():return
-  bg,fg=colors(self.window);self.setStyleSheet(f'QLabel{{background:{bg};color:{fg};border:1px solid {fg};border-radius:0;padding:9px 12px;font-family:Newsreader;font-size:14px;}}');self.setText(self.pending);self.adjustSize()
+  bg,fg=colors(self.window);self.setStyleSheet(f'QLabel{{background:{bg};color:{fg};border:1px solid {fg};border-radius:0;padding:9px 12px;font-family:Newsreader;font-size:14px;}}');self.setText(self.pending)
+  self.ensurePolished();width=min(max(1,self.window.width()-16),self.sizeHint().width());self.resize(width,max(self.sizeHint().height(),self.heightForWidth(width)))
   x=max(8,min(self.anchor.x()+14,self.window.width()-self.width()-8));y=self.anchor.y()+20
   if y+self.height()>self.window.height()-8:y=self.anchor.y()-self.height()-16
   self.move(x,max(8,y));self.raise_();self.show()
@@ -92,7 +93,7 @@ class Settings(QWidget):
   restore=QPushButton('Choose backup to restore');restore.clicked.connect(self.preview_restore);form.addRow(restore)
   self.backup_note=QLabel('Move your history, goals and appearance to another computer. Garmin sign-in is not included. Restored timers are stopped at the backup time.');self.backup_note.setWordWrap(True);form.addRow(self.backup_note)
   self.restore_button=QPushButton('Replace local data with this backup');self.restore_button.hide();self.restore_button.clicked.connect(self.restore);form.addRow(self.restore_button);self.restore_path=None;self.skip_save=False
-  section('About');form.addRow(QLabel('PACT 1.1.0'))
+  section('About');form.addRow(QLabel('PACT 1.1.1'))
   self.theme.currentIndexChanged.connect(self.save);self.use_custom.currentIndexChanged.connect(self.save)
   for field in self.fields.values():field.setKeyboardTracking(False);field.valueChanged.connect(self.save);field.editingFinished.connect(self.save)
  def paintEvent(self,event):
@@ -178,10 +179,13 @@ class Canvas(QWidget):
  def box(self,i):return self.geo['boxes'][str(i)]
  def load_design(self):
   self.geo=json.loads((ASSETS/f'{self.kind}-geometry.json').read_text());self.raw=(ASSETS/f'{self.kind}-static.svg').read_text()
+  # The source designs place this shared divider three units apart. Keep it
+  # stationary above the sliding content instead of showing both positions.
+  self.raw=re.sub(r'<[^>]*\bid="e532"[^>]*/>', '',self.raw)
  def toggle_analytics(self):
   if self.anim and self.anim.state()==QPropertyAnimation.Running:return
   self.details.clear_details()
-  top=round(3739*self.width()/self.geo['width']);old=self.grab();self.kind='learning' if self.kind=='work' else 'work';self.load_design();self.retheme();self.window.refresh();new=self.grab()
+  top=math.ceil(3748*self.width()/3000);old=self.grab();self.kind='learning' if self.kind=='work' else 'work';self.load_design();self.retheme();self.window.refresh();new=self.grab()
   self.controls[6][0].setAccessibleName('Show Work Analytics' if self.kind=='learning' else 'Show Learning Analytics')
   direction=1 if self.kind=='learning' else -1;self.anim=QParallelAnimationGroup(self);self.slide_layers=[]
   for pix,start,end in [(old,0,-direction*self.width()),(new,direction*self.width(),0)]:
@@ -253,6 +257,7 @@ class Canvas(QWidget):
   return ''
  def paintEvent(self,event):
   p=QPainter(self);p.setRenderHint(QPainter.Antialiasing);p.scale(self.width()/self.geo['width'],self.width()/self.geo['width']);p.fillRect(QRectF(0,0,self.geo['width'],9314),QColor(colors(self.window)[0]));self.renderer.render(p,QRectF(0,0,self.geo['width'],9314));s=self.window.storage;day=self.window.day;bg,fg=colors(self.window);inks=intensity_colors(self.window)
+  ratio=self.geo['width']/3000;p.setPen(QPen(QColor(fg),4*ratio));p.drawLine(QPointF(0,3744*ratio),QPointF(self.geo['width'],3744*ratio))
   def text(x,y,w,h,value,size=75,bold=False,right=False,center=False,italic=False):
    p.setPen(QColor(fg));f=QFont('Newsreader');f.setPixelSize(round(size));f.setBold(bold);f.setItalic(italic);p.setFont(f);p.drawText(QRectF(x,y,w,h),Qt.AlignVCenter|(Qt.AlignHCenter if center else Qt.AlignRight if right else Qt.AlignLeft),str(value))
   def field(i,value,size=75,bold=False,width=None):

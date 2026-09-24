@@ -21,7 +21,7 @@ def create_backup(storage,path):
     running=sum(r['ended_at'] is None for r in data['sessions'])
     for r in data['sessions']:
         if r['ended_at'] is None:r['ended_at']=now
-    raw=json.dumps({'format':'PACT backup','version':1,'app_version':'1.1.0','created_at':now,'running_timers_stopped':running,'tables':data},allow_nan=False).encode()
+    raw=json.dumps({'format':'PACT backup','version':1,'app_version':'1.1.1','created_at':now,'running_timers_stopped':running,'tables':data},allow_nan=False).encode()
     path=Path(path);fd,tmp=tempfile.mkstemp(prefix='.pact-backup-',dir=path.parent);os.close(fd)
     try:
         with zipfile.ZipFile(tmp,'w',zipfile.ZIP_DEFLATED) as z:

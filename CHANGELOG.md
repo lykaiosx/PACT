@@ -1,3 +1,7 @@
+# PACT v1.1.1
+
+Fix wrapped hover messages clipping at the sidebar edge and the doubled analytics divider during Work/Learning transitions. Preserve the existing theme styling.
+
 # PACT v1.1.0
 
 Time corrections and undo; portable backup/restore with preview, safety copy and validation; latest dated sleep retained across midnight; a theme-matched sync status indicator; resilient installer process checks. All existing docking, themes, auto-save, timers, exports and Garmin integration remain available.

@@ -1,6 +1,11 @@
-# PACT v1.1.0
+# PACT v1.1.1
 
-Run PACT_v1.1.0_Setup.exe to install or update on Windows 10/11 x64. The private runtime is included. Start Menu, Installed Apps, optional desktop/startup shortcuts and updater process management are preserved.
+Run PACT_v1.1.1_Setup.exe to install or update on Windows 10/11 x64. The private runtime is included. Start Menu, Installed Apps, optional desktop/startup shortcuts and updater process management are preserved.
+
+## Fixed in v1.1.1
+
+- Sync and chart hover messages wrap within the sidebar, including after resizing.
+- The analytics divider remains stationary and single during both slide directions, including high-DPI displays.
 
 ## New in v1.1.0
 
@@ -32,10 +37,10 @@ The panel fits the complete dashboard on available heights of at least 994 logic
 
 ## Build
 
-Extract PACT_v1.1.0_Package.zip for its runtime. In the source folder run:
+Extract PACT_v1.1.1_Package.zip for its runtime. In the source folder run:
 
 ```powershell
 .\build.ps1 -RuntimeDirectory 'C:\path\to\runtime' -InnoCompiler 'C:\path\to\ISCC.exe'
 ```
 
-Output is `dist\PACT_v1.1.0_Setup.exe`. Build tools: Inno Setup 6.7.3, the Windows .NET Framework compiler and bundled Python 3.12.10. Pinned dependencies and licenses are included. compile_designs.py regenerates current geometry; compile_assets.py is retained for the old design only. See PACT_Validation.md. The installer remains unsigned.
+Output is `dist\PACT_v1.1.1_Setup.exe`. Build tools: Inno Setup 6.7.3, the Windows .NET Framework compiler and bundled Python 3.12.10. Pinned dependencies and licenses are included. compile_designs.py regenerates current geometry; compile_assets.py is retained for the old design only. See PACT_Validation.md. The installer remains unsigned.
