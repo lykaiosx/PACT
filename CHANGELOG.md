@@ -1,3 +1,7 @@
+# PACT v1.2.0
+
+Add Reset Progress with explicit confirmation, automatic recovery backup and preserved settings/connection. Add validated daily CSV import with preview, duplicate-date protection, separately stored daily totals and backward-compatible .pact backups.
+
 # PACT v1.1.1
 
 Fix wrapped hover messages clipping at the sidebar edge and the doubled analytics divider during Work/Learning transitions. Preserve the existing theme styling.

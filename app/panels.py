@@ -5,7 +5,7 @@ from datetime import date,datetime,timedelta
 from PySide6.QtCore import Qt,QRectF,QPoint,QPointF,QPropertyAnimation,QEasingCurve,QParallelAnimationGroup,QSize,QTimer
 from PySide6.QtGui import QColor,QPainter,QPen,QFont,QIcon,QPixmap
 from PySide6.QtSvg import QSvgRenderer
-from PySide6.QtWidgets import (QWidget,QPushButton,QInputDialog,QToolTip,QVBoxLayout,QFormLayout,QLabel,QComboBox,QDoubleSpinBox,QLineEdit,QScrollArea,QColorDialog,QHBoxLayout,QFileDialog)
+from PySide6.QtWidgets import (QWidget,QPushButton,QInputDialog,QToolTip,QVBoxLayout,QFormLayout,QLabel,QComboBox,QDoubleSpinBox,QLineEdit,QScrollArea,QColorDialog,QHBoxLayout,QFileDialog,QMessageBox)
 ASSETS=Path(__file__).resolve().parent/'assets'
 LIGHT='#FAFAFA';DARK='#100404'
 SOFT_DARK='#24191D'
@@ -93,7 +93,11 @@ class Settings(QWidget):
   restore=QPushButton('Choose backup to restore');restore.clicked.connect(self.preview_restore);form.addRow(restore)
   self.backup_note=QLabel('Move your history, goals and appearance to another computer. Garmin sign-in is not included. Restored timers are stopped at the backup time.');self.backup_note.setWordWrap(True);form.addRow(self.backup_note)
   self.restore_button=QPushButton('Replace local data with this backup');self.restore_button.hide();self.restore_button.clicked.connect(self.restore);form.addRow(self.restore_button);self.restore_path=None;self.skip_save=False
-  section('About');form.addRow(QLabel('PACT 1.1.1'))
+  csv_import=QPushButton('Import daily totals (.csv)');csv_import.clicked.connect(self.preview_csv);form.addRow(csv_import)
+  self.csv_note=QLabel('Import a PACT daily totals CSV, including daily.csv extracted from an exported ZIP.');self.csv_note.setWordWrap(True);form.addRow(self.csv_note)
+  self.csv_confirm=QPushButton('Import new dates');self.csv_confirm.hide();self.csv_confirm.clicked.connect(self.import_csv);form.addRow(self.csv_confirm);self.csv_path=None
+  reset=QPushButton('Reset progress…');reset.clicked.connect(self.reset_progress);form.addRow(reset)
+  section('About');form.addRow(QLabel('PACT 1.2.0'))
   self.theme.currentIndexChanged.connect(self.save);self.use_custom.currentIndexChanged.connect(self.save)
   for field in self.fields.values():field.setKeyboardTracking(False);field.valueChanged.connect(self.save);field.editingFinished.connect(self.save)
  def paintEvent(self,event):
@@ -128,6 +132,30 @@ class Settings(QWidget):
   try:
    count=export_data(self.window.storage,path,full);self.export_status.setText(f'Exported {count} days to {Path(path).name}.')
   except (OSError,ValueError):self.export_status.setText('Could not save this file. Choose a writable folder and close the file in Excel, then retry.')
+ def preview_csv(self):
+  from progress import load_csv,existing_dates
+  self.csv_path=None;self.csv_confirm.hide();path,_=QFileDialog.getOpenFileName(self,'Import PACT daily totals','','CSV spreadsheet (*.csv)')
+  if not path:return
+  try:
+   rows=load_csv(path);existing=existing_dates(self.window.storage);new=sum(r['day'] not in existing for r in rows);self.csv_path=path
+   self.csv_note.setText(f'{len(rows)} dates: {rows[0]["day"]} to {rows[-1]["day"]}. {new} new dates; {len(rows)-new} existing dates will be skipped to avoid overwriting or doubling your progress. CSV restores daily totals and available health/daily values, not session times, hourly history or settings. A safety backup is created first.');self.csv_confirm.setVisible(new>0)
+  except (OSError,ValueError,UnicodeError) as e:self.csv_note.setText('Cannot import: '+str(e))
+ def import_csv(self):
+  from progress import import_csv
+  if not self.csv_path:return
+  if self.window.job and self.window.job.isRunning():self.csv_note.setText('Wait for the Garmin check to finish, then import.');return
+  try:
+   count,skipped,safety=import_csv(self.window.storage,self.csv_path);self.csv_confirm.hide();self.csv_path=None;self.window.history_at=0;self.window.refresh();self.csv_note.setText(f'Imported {count} dates; skipped {skipped} existing dates.'+(' Safety backup: '+str(safety) if safety else ''))
+  except (OSError,ValueError,UnicodeError,sqlite3.Error) as e:self.csv_note.setText('Import failed. Existing data is unchanged. '+str(e))
+ def reset_progress(self):
+  from progress import reset_progress
+  if self.window.job and self.window.job.isRunning():self.backup_note.setText('Wait for the Garmin check to finish before resetting progress.');return
+  answer=QMessageBox.warning(self,'Reset progress?','Are you sure? This deletes all stored Work and Learning time, daily entries, imported totals, health history and time corrections, and stops running timers.\n\nYour goals, theme and Garmin connection stay. A recovery backup is saved first. Garmin may refill today’s health readings, but older dates will not be downloaded again automatically.',QMessageBox.Yes|QMessageBox.Cancel,QMessageBox.Cancel)
+  if answer!=QMessageBox.Yes:return
+  if self.window.job and self.window.job.isRunning():self.backup_note.setText('A Garmin check started. Wait for it to finish, then reset.');return
+  try:
+   self.flush();safety=reset_progress(self.window.storage);self.csv_path=None;self.csv_confirm.hide();self.restore_path=None;self.restore_button.hide();self.window.sync_error=None;self.window.history_at=0;self.window.refresh();self.backup_note.setText('Progress reset. Recovery backup: '+str(safety))
+  except (OSError,ValueError,sqlite3.Error):self.backup_note.setText('Could not reset progress safely. Nothing was deleted.')
  def add_color(self,form,key,label,value):
   self.color_values[key]=value;b=QPushButton(value);self.color_buttons[key]=b;b.clicked.connect(lambda:self.choose(key));form.addRow(label,b)
  def choose(self,key):

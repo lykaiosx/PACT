@@ -3,8 +3,8 @@ import hashlib,json,math,os,tempfile,zipfile,sqlite3
 from pathlib import Path
 from datetime import datetime,date
 
-TABLES={'sessions':['id','kind','started_at','ended_at'], 'daily':['day','creatives','breakfast','lunch','dinner','sleep_minutes','steps','resting_hr'], 'kv':['key','value'], 'health_log':['id','observed_at','day','data_through','payload']}
-SETTINGS={'theme','custom_background','custom_ink','intensity_colors','target_work','target_learning','target_sleep','annual_work_goal','annual_learning_goal','water_goal','last_sync','last_data_through'}
+TABLES={'sessions':['id','kind','started_at','ended_at'], 'daily':['day','creatives','breakfast','lunch','dinner','sleep_minutes','steps','resting_hr'], 'kv':['key','value'], 'health_log':['id','observed_at','day','data_through','payload'], 'imported_totals':['day','kind','seconds']}
+SETTINGS={'theme','custom_background','custom_ink','intensity_colors','target_work','target_learning','target_sleep','annual_work_goal','annual_learning_goal','water_goal','last_sync','last_data_through','progress_reset_at'}
 EXTRAS={'sleep_score','sleep_stages','body_battery','calories','hydration_ml','hydration_goal_ml','water','garmin_data_through','garmin_checked_at'}
 LIMIT=100*1024*1024
 
@@ -21,7 +21,7 @@ def create_backup(storage,path):
     running=sum(r['ended_at'] is None for r in data['sessions'])
     for r in data['sessions']:
         if r['ended_at'] is None:r['ended_at']=now
-    raw=json.dumps({'format':'PACT backup','version':1,'app_version':'1.1.1','created_at':now,'running_timers_stopped':running,'tables':data},allow_nan=False).encode()
+    raw=json.dumps({'format':'PACT backup','version':1,'app_version':'1.2.0','created_at':now,'running_timers_stopped':running,'tables':data},allow_nan=False).encode()
     path=Path(path);fd,tmp=tempfile.mkstemp(prefix='.pact-backup-',dir=path.parent);os.close(fd)
     try:
         with zipfile.ZipFile(tmp,'w',zipfile.ZIP_DEFLATED) as z:
@@ -41,15 +41,19 @@ def load_backup(path):
         if data.get('format')!='PACT backup' or data.get('version')!=1:raise ValueError('Unsupported backup version.')
         datetime.fromisoformat(data['created_at'])
         tables=data['tables']
+        tables.setdefault('imported_totals',[]) # Backups made before CSV import remain supported.
         if set(tables)!=set(TABLES):raise ValueError('Backup is missing required data.')
         for table,cols in TABLES.items():
             if not isinstance(tables[table],list):raise ValueError('Invalid backup table.')
             keys=set()
             for r in tables[table]:
                 if set(r)!=set(cols):raise ValueError('Invalid backup columns.')
-                key=r[cols[0]]
+                key=(r['day'],r['kind']) if table=='imported_totals' else r[cols[0]]
                 if key in keys:raise ValueError('Duplicate backup records.')
                 keys.add(key)
+                if table=='imported_totals':
+                    d=date.fromisoformat(r['day'])
+                    if d>date.today() or d.year<2000 or r['kind'] not in ('work','learning') or type(r['seconds'])!=int or not 0<=r['seconds']<=86400:raise ValueError('Invalid imported total.')
                 if table in ('sessions','health_log') and (type(key)!=int or not 1<=key<2**63):raise ValueError('Invalid record identifier.')
                 if table=='sessions':
                     a=datetime.fromisoformat(r['started_at']);b=datetime.fromisoformat(r['ended_at'])
@@ -65,6 +69,7 @@ def load_backup(path):
                 if table=='kv':
                     if not allowed_key(r['key']):raise ValueError('Unsupported setting in backup.')
                     v=json.loads(r['value']);key=r['key']
+                    if key=='progress_reset_at':datetime.fromisoformat(v)
                     if key.startswith(('target_','annual_')) and (not isinstance(v,(int,float)) or not math.isfinite(v) or v<=0 or v>(24 if key.startswith('target_') else 8784)):raise ValueError('Invalid goal.')
                     if key=='theme' and v not in ('light','dark','high contrast','custom'):raise ValueError('Invalid theme.')
                     if key in ('custom_background','custom_ink'):

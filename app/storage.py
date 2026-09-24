@@ -26,6 +26,7 @@ class Storage:
         CREATE TABLE IF NOT EXISTS kv (key TEXT PRIMARY KEY, value TEXT);
         CREATE TABLE IF NOT EXISTS health_log (id INTEGER PRIMARY KEY AUTOINCREMENT, observed_at TEXT NOT NULL, day TEXT NOT NULL, data_through TEXT, payload TEXT NOT NULL);
         CREATE TABLE IF NOT EXISTS time_edits (id INTEGER PRIMARY KEY AUTOINCREMENT, edited_at TEXT NOT NULL, before_json TEXT, after_json TEXT, undone INTEGER NOT NULL DEFAULT 0);
+        CREATE TABLE IF NOT EXISTS imported_totals (day TEXT NOT NULL, kind TEXT NOT NULL, seconds INTEGER NOT NULL, PRIMARY KEY(day,kind));
         ''')
         self.conn.commit()
     def _ensure_day(self, day: str):
@@ -52,10 +53,12 @@ class Storage:
         for row in rows:
             s=max(datetime.fromisoformat(row['started_at']),start); e=min(datetime.fromisoformat(row['ended_at']) if row['ended_at'] else now,end)
             if e>s: total+=(e-s).total_seconds()
-        return int(total)
+        imported=self.conn.execute('SELECT seconds FROM imported_totals WHERE day=? AND kind=?',(target.isoformat(),kind)).fetchone()
+        return int(total)+(imported['seconds'] if imported else 0)
     def history(self, kind, days=366):
         return [(d:=date.today()-timedelta(days=i), self.seconds_for_day(kind,d.isoformat())/3600) for i in range(days-1,-1,-1)]
     def has_activity_record(self, kind, day):
+        if self.conn.execute('SELECT 1 FROM imported_totals WHERE day=? AND kind=?',(day,kind)).fetchone():return True
         start=datetime.combine(date.fromisoformat(day),datetime.min.time());end=start+timedelta(days=1)
         return self.conn.execute('SELECT 1 FROM sessions WHERE kind=? AND started_at<? AND (started_at>=? OR COALESCE(ended_at,?)>?) LIMIT 1',(kind,end.isoformat(),start.isoformat(),datetime.now().isoformat(),start.isoformat())).fetchone() is not None
     def work_history(self, days: int = 84):

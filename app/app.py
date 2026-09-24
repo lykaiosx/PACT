@@ -141,6 +141,8 @@ class PACT(QWidget):
   checked=datetime.now().isoformat(timespec='seconds')
   for record in [data]+data.get('_history',[]):
    day=record.get('_day',date.today().isoformat())
+   cutoff=self.storage.get_setting('progress_reset_at')
+   if cutoff and day<cutoff[:10]:continue
    for k in ('sleep_minutes','steps','resting_hr','sleep_score','sleep_stages','body_battery','calories','hydration_ml','hydration_goal_ml'):
     v=record.get(k)
     if v is None:continue

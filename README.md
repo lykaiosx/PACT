@@ -1,7 +1,12 @@
-# PACT v1.1.1
+# PACT v1.2.0
 
-Run PACT_v1.1.1_Setup.exe to install or update on Windows 10/11 x64. The private runtime is included. Start Menu, Installed Apps, optional desktop/startup shortcuts and updater process management are preserved.
+Run PACT_v1.2.0_Setup.exe to install or update on Windows 10/11 x64. The private runtime is included. Start Menu, Installed Apps, optional desktop/startup shortcuts and updater process management are preserved.
 
+## New in v1.2.0
+
+- Settings → Backup and restore → Reset progress asks for explicit confirmation, defaulting to Cancel. It clears timers, daily entries, imported totals, health history and correction history while preserving goals, theme and Garmin connection. A `.pact` recovery backup is created first; if that fails, reset is cancelled. Running timers stop. Automatic Garmin backfill excludes dates before the reset day; today's readings may return on sync. Existing backup/export files are not deleted.
+- Import daily totals (.csv) accepts PACT's exported daily CSV, including `daily.csv` extracted from an all-records ZIP. A preview shows date range and new/skipped counts. Existing dates with progress are skipped, so repeated imports do not double totals or overwrite records. A safety backup precedes the transactional import.
+- CSV restores the daily Work/Learning totals, creatives, meals and health values present in the file. It cannot restore original session times, hourly distribution, observation history or appearance/goals that were not exported. Imported time is stored as daily totals, not fabricated sessions. It appears in analytics and daily exports, survives `.pact` backups, and is listed separately as `imported_daily_totals.csv` in full ZIP exports; unknown hourly values remain blank. Use `.pact` for complete migration. Older `.pact` backups remain supported.
 ## Fixed in v1.1.1
 
 - Sync and chart hover messages wrap within the sidebar, including after resizing.
@@ -37,10 +42,10 @@ The panel fits the complete dashboard on available heights of at least 994 logic
 
 ## Build
 
-Extract PACT_v1.1.1_Package.zip for its runtime. In the source folder run:
+Extract PACT_v1.2.0_Package.zip for its runtime. In the source folder run:
 
 ```powershell
 .\build.ps1 -RuntimeDirectory 'C:\path\to\runtime' -InnoCompiler 'C:\path\to\ISCC.exe'
 ```
 
-Output is `dist\PACT_v1.1.1_Setup.exe`. Build tools: Inno Setup 6.7.3, the Windows .NET Framework compiler and bundled Python 3.12.10. Pinned dependencies and licenses are included. compile_designs.py regenerates current geometry; compile_assets.py is retained for the old design only. See PACT_Validation.md. The installer remains unsigned.
+Output is `dist\PACT_v1.2.0_Setup.exe`. Build tools: Inno Setup 6.7.3, the Windows .NET Framework compiler and bundled Python 3.12.10. Pinned dependencies and licenses are included. compile_designs.py regenerates current geometry; compile_assets.py is retained for the old design only. See PACT_Validation.md. The installer remains unsigned.
