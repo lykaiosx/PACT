@@ -5,11 +5,12 @@ from PySide6.QtGui import QPainter,QColor
 from PySide6.QtWidgets import QWidget,QVBoxLayout,QHBoxLayout,QLabel,QPushButton,QComboBox,QDateEdit,QDateTimeEdit,QFormLayout,QScrollArea,QDoubleSpinBox,QSpinBox,QTimeEdit
 
 class TimeEditor(QWidget):
-    def __init__(self,window,kind):
+    def __init__(self,window,kind,embedded=False):
         super().__init__(window);self.window=window;self.setAutoFillBackground(True)
         if window.storage.get_setting('display_auto_adjust',False):self.setStyleSheet('QWidget{font-size:18px;}')
         root=QVBoxLayout(self);root.setContentsMargins(16,18,16,36)
         head=QHBoxLayout();back=QPushButton('‹');back.clicked.connect(window.close_settings);head.addWidget(back);head.addWidget(QLabel('Correct time'),1);root.addLayout(head)
+        if embedded:back.hide();root.setContentsMargins(0,0,0,0)
         scroll=QScrollArea();scroll.setWidgetResizable(True);scroll.setFrameShape(QScrollArea.NoFrame);body=QWidget();form=QFormLayout(body);form.setRowWrapPolicy(QFormLayout.WrapLongRows);scroll.setWidget(body);root.addWidget(scroll)
         self.kind=QComboBox();self.kind.addItems(['Work','Learning']);self.kind.setCurrentText(kind.title());form.addRow('Activity',self.kind)
         self.day=QDateEdit(QDate.currentDate());self.day.setCalendarPopup(True);self.day.setDisplayFormat('dd MMM yyyy');self.day.setMaximumDate(QDate.currentDate());form.addRow('Date',self.day)

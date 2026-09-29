@@ -6,6 +6,8 @@ from datetime import datetime,date
 TABLES={'sessions':['id','kind','started_at','ended_at'], 'daily':['day','creatives','breakfast','lunch','dinner','sleep_minutes','steps','resting_hr'], 'kv':['key','value'], 'health_log':['id','observed_at','day','data_through','payload'], 'imported_totals':['day','kind','seconds']}
 SETTINGS={'theme','custom_background','custom_ink','intensity_colors','target_work','target_learning','target_sleep','annual_work_goal','annual_learning_goal','water_goal','last_sync','last_data_through','progress_reset_at','display_auto_adjust','display_hint_seen'}
 EXTRAS={'sleep_score','sleep_stages','body_battery','calories','hydration_ml','hydration_goal_ml','water','garmin_data_through','garmin_checked_at'}
+TABLES['edit_history']=['id','edited_at','day','field','action','before_json','after_json']
+EXTRAS.add('manual_fields')
 LIMIT=100*1024*1024
 
 def allowed_key(key):
@@ -21,7 +23,7 @@ def create_backup(storage,path):
     running=sum(r['ended_at'] is None for r in data['sessions'])
     for r in data['sessions']:
         if r['ended_at'] is None:r['ended_at']=now
-    raw=json.dumps({'format':'PACT backup','version':1,'app_version':'1.4.0','created_at':now,'running_timers_stopped':running,'tables':data},allow_nan=False).encode()
+    raw=json.dumps({'format':'PACT backup','version':1,'app_version':'1.5.0','created_at':now,'running_timers_stopped':running,'tables':data},allow_nan=False).encode()
     path=Path(path);fd,tmp=tempfile.mkstemp(prefix='.pact-backup-',dir=path.parent);os.close(fd)
     try:
         with zipfile.ZipFile(tmp,'w',zipfile.ZIP_DEFLATED) as z:
@@ -42,6 +44,7 @@ def load_backup(path):
         datetime.fromisoformat(data['created_at'])
         tables=data['tables']
         tables.setdefault('imported_totals',[]) # Backups made before CSV import remain supported.
+        tables.setdefault('edit_history',[])
         if set(tables)!=set(TABLES):raise ValueError('Backup is missing required data.')
         for table,cols in TABLES.items():
             if not isinstance(tables[table],list):raise ValueError('Invalid backup table.')
@@ -66,6 +69,9 @@ def load_backup(path):
                 if table=='health_log':
                     date.fromisoformat(r['day']);datetime.fromisoformat(r['observed_at']);payload=json.loads(r['payload'])
                     if not isinstance(payload,dict):raise ValueError('Invalid health record.')
+                if table=='edit_history':
+                    if type(r['id'])!=int or r['id']<=0 or r['field'] not in ('work','learning','creatives','breakfast','lunch','dinner','data') or not isinstance(r['action'],str) or len(r['action'])>100:raise ValueError('Invalid edit history.')
+                    date.fromisoformat(r['day']);datetime.fromisoformat(r['edited_at']);json.loads(r['before_json']);json.loads(r['after_json'])
                 if table=='kv':
                     if not allowed_key(r['key']):raise ValueError('Unsupported setting in backup.')
                     v=json.loads(r['value']);key=r['key']
@@ -83,7 +89,9 @@ def load_backup(path):
         for r in tables['kv']:
             if ':' not in r['key']:continue
             key=r['key'][11:];v=json.loads(r['value'])
-            if key=='sleep_stages':
+            if key=='manual_fields':
+                if not isinstance(v,dict) or not set(v)<= {'creatives','breakfast','lunch','dinner'} or any(type(x)!=bool for x in v.values()):raise ValueError('Invalid daily entry status.')
+            elif key=='sleep_stages':
                 if v is not None and (not isinstance(v,dict) or not set(v)<= {'deep','light','rem','awake'} or not all(isinstance(n,(int,float)) and math.isfinite(n) and n>=0 for n in v.values())):raise ValueError('Invalid sleep stages.')
             elif key not in ('garmin_data_through','garmin_checked_at') and v is not None and (not isinstance(v,(int,float)) or not math.isfinite(v) or v<0):raise ValueError('Invalid health value.')
         return data

@@ -11,7 +11,7 @@ def safety_backup(storage,reason):
 def reset_progress(storage):
     safety=safety_backup(storage,'reset')
     with storage.conn:
-        for table in ('sessions','daily','health_log','time_edits','imported_totals'):storage.conn.execute('DELETE FROM '+table)
+        for table in ('sessions','daily','health_log','time_edits','imported_totals','edit_history'):storage.conn.execute('DELETE FROM '+table)
         keep=SETTINGS-{'last_sync','last_data_through','progress_reset_at'}
         storage.conn.execute('DELETE FROM kv WHERE key NOT IN ('+','.join('?' for _ in keep)+')',tuple(keep))
         storage.conn.execute('INSERT INTO kv(key,value) VALUES(?,?)',('progress_reset_at',json.dumps(datetime.now().isoformat())))
@@ -73,6 +73,8 @@ def import_csv(storage,path):
     with storage.conn:
         for r in selected:
             day=r['day'];base=r['daily']
+            storage.audit(day,'data','CSV import',None,'Imported daily totals; original edit history unavailable')
+            storage.conn.execute('INSERT OR REPLACE INTO kv(key,value) VALUES(?,?)',(day+':manual_fields',json.dumps({k:base[k] is not None for k in ('creatives','breakfast','lunch','dinner')})))
             storage.conn.execute('INSERT OR REPLACE INTO daily(day,creatives,breakfast,lunch,dinner,sleep_minutes,steps,resting_hr) VALUES(?,?,?,?,?,?,?,?)',(day,base['creatives'] or 0,base['breakfast'] or 0,base['lunch'] or 0,base['dinner'] or 0,base['sleep_minutes'],base['steps'],base['resting_hr']))
             for kind,seconds in r['totals'].items():storage.conn.execute('INSERT INTO imported_totals(day,kind,seconds) VALUES(?,?,?)',(day,kind,seconds))
             for key,value in r['extras'].items():

@@ -77,7 +77,7 @@ class PACT(QWidget):
   if self.garmin.client is not None or Path(TOKENSTORE).exists():self.sync()
  def apply_theme(self):
   self.dark=self.storage.get_setting('theme','light')=='dark';bg,fg=colors(self)
-  QApplication.instance().setStyleSheet(f'QWidget{{background:{bg};color:{fg};font-family:Newsreader;font-size:16px;}} QPushButton,QLineEdit,QDoubleSpinBox,QSpinBox,QDateEdit,QDateTimeEdit,QTimeEdit,QComboBox{{border:1px solid {fg};padding:5px;border-radius:0;}} QScrollBar:vertical{{width:6px;background:{bg};}} QScrollBar::handle:vertical{{background:{fg};min-height:20px;}} QScrollBar::add-line:vertical,QScrollBar::sub-line:vertical{{height:0;}}')
+  QApplication.instance().setStyleSheet(f'QWidget{{background:{bg};color:{fg};font-family:Newsreader;font-size:16px;}} QPushButton,QLineEdit,QDoubleSpinBox,QSpinBox,QDateEdit,QDateTimeEdit,QTimeEdit,QComboBox{{border:1px solid {fg};padding:5px;border-radius:0;}} QTabWidget::pane{{border:1px solid {fg};}} QTabBar::tab{{background:{bg};color:{fg};border:1px solid {fg};padding:6px;}} QTabBar::tab:selected{{font-weight:bold;border-bottom:2px solid {fg};}} QScrollBar:vertical{{width:6px;background:{bg};}} QScrollBar::handle:vertical{{background:{fg};min-height:20px;}} QScrollBar::add-line:vertical,QScrollBar::sub-line:vertical{{height:0;}}')
   self.canvas.retheme()
  def resizeEvent(self,e):
   super().resizeEvent(e);QTimer.singleShot(0,self.size_canvas)

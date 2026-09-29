@@ -28,7 +28,7 @@ class Polish(unittest.TestCase):
   data=capture(self.s,datetime(2026,1,2,2));first,second=data['daily'];self.assertEqual(first['work_seconds'],1800);self.assertEqual(second['work_seconds'],4500);self.assertEqual(first['creatives'],3);self.assertEqual(first['light_sleep_seconds'],18000);self.assertEqual(sum(r['work_seconds'] for r in data['hourly']),6300);self.assertIsNone(second['sleep_minutes'])
   path=Path(temp.name)/'daily.csv';export_data(self.s,path);rows=list(csv.DictReader(io.StringIO(path.read_text(encoding='utf-8-sig'))));self.assertEqual(rows[0]['work_seconds'],'1800');self.assertNotIn('DO_NOT_EXPORT',path.read_text())
   zpath=Path(temp.name)/'all.zip';export_data(self.s,zpath,True)
-  with zipfile.ZipFile(zpath) as z:self.assertEqual(set(z.namelist()),{'daily.csv','hourly.csv','sessions.csv','garmin_observations.csv','README.txt'});self.assertIsNone(z.testzip())
+  with zipfile.ZipFile(zpath) as z:self.assertEqual(set(z.namelist()),{'daily.csv','hourly.csv','sessions.csv','garmin_observations.csv','edit_history.csv','README.txt'});self.assertIsNone(z.testzip())
  def test_live_session_export_stops_at_capture(self):
   self.s.conn.execute('INSERT INTO sessions(kind,started_at) VALUES(?,?)',('learning','2026-01-01T23:45:00'));self.s.conn.commit();data=capture(self.s,datetime(2026,1,2,0,15));self.assertEqual([r['learning_seconds'] for r in data['daily']],[900,900]);self.assertIsNone(data['sessions'][0]['ended_at'])
  def test_tooltips_all_views_and_creatives(self):

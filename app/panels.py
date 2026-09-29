@@ -5,7 +5,7 @@ from datetime import date,datetime,timedelta
 from PySide6.QtCore import Qt,QRectF,QPoint,QPointF,QPropertyAnimation,QEasingCurve,QParallelAnimationGroup,QSize,QTimer
 from PySide6.QtGui import QColor,QPainter,QPen,QFont,QIcon,QPixmap
 from PySide6.QtSvg import QSvgRenderer
-from PySide6.QtWidgets import (QWidget,QPushButton,QInputDialog,QToolTip,QVBoxLayout,QFormLayout,QLabel,QComboBox,QDoubleSpinBox,QLineEdit,QScrollArea,QColorDialog,QHBoxLayout,QFileDialog,QMessageBox,QCheckBox)
+from PySide6.QtWidgets import (QWidget,QPushButton,QInputDialog,QToolTip,QVBoxLayout,QFormLayout,QLabel,QComboBox,QDoubleSpinBox,QLineEdit,QScrollArea,QColorDialog,QHBoxLayout,QFileDialog,QMessageBox,QCheckBox,QTabWidget)
 ASSETS=Path(__file__).resolve().parent/'assets'
 LIGHT='#FAFAFA';DARK='#100404'
 SOFT_DARK='#24191D'
@@ -68,7 +68,7 @@ class Settings(QWidget):
   super().__init__(window);self.window=window;self.fields={};self.setAttribute(Qt.WA_OpaquePaintEvent);self.setAutoFillBackground(True);root=QVBoxLayout(self);root.setContentsMargins(16,18,16,36);self.setStyleSheet('QWidget{font-size:14px;}')
   head=QHBoxLayout();back=QPushButton('‹');back.setAccessibleName('Back to dashboard');back.clicked.connect(window.close_settings);head.addWidget(back);head.addWidget(QLabel('Settings'),1);root.addLayout(head)
   self.saved_note=QLabel('Changes save automatically.');self.saved_note.setWordWrap(True);root.addWidget(self.saved_note)
-  scroll=QScrollArea();scroll.setWidgetResizable(True);scroll.setFrameShape(QScrollArea.NoFrame);body=QWidget();form=QFormLayout(body);form.setVerticalSpacing(8);scroll.setWidget(body);root.addWidget(scroll)
+  scroll=QScrollArea();scroll.setWidgetResizable(True);scroll.setFrameShape(QScrollArea.NoFrame);body=QWidget();form=QFormLayout(body);form.setVerticalSpacing(8);scroll.setWidget(body);self.tabs=QTabWidget();self.tabs.addTab(scroll,"Settings");root.addWidget(self.tabs)
   def section(title):
    label=QLabel(title);label.setStyleSheet('font-weight:bold;font-size:20px;padding-top:10px;');form.addRow(label)
   section('Garmin connection');self.state=QLabel(window.garmin_status);self.state.setWordWrap(True);form.addRow(self.state)
@@ -99,10 +99,12 @@ class Settings(QWidget):
   self.csv_note=QLabel('Import a PACT daily totals CSV, including daily.csv extracted from an exported ZIP.');self.csv_note.setWordWrap(True);form.addRow(self.csv_note)
   self.csv_confirm=QPushButton('Import new dates');self.csv_confirm.hide();self.csv_confirm.clicked.connect(self.import_csv);form.addRow(self.csv_confirm);self.csv_path=None
   reset=QPushButton('Reset progress…');reset.clicked.connect(self.reset_progress);form.addRow(reset)
-  section('About');form.addRow(QLabel('PACT 1.4.0'))
+  section('About');form.addRow(QLabel('PACT 1.5.0'))
   self.theme.currentIndexChanged.connect(self.save);self.use_custom.currentIndexChanged.connect(self.save)
   self.auto_adjust.toggled.connect(self.change_display)
   self.apply_display_font()
+  from edit_data import EditData,EditHistory
+  self.edit_data=EditData(window);self.edit_history=EditHistory(window);self.tabs.addTab(self.edit_data,"Edit data");self.tabs.addTab(self.edit_history,"Edit history");self.tabs.currentChanged.connect(lambda _:self.edit_history.reload())
   for field in self.fields.values():field.setKeyboardTracking(False);field.valueChanged.connect(self.save);field.editingFinished.connect(self.save)
  def paintEvent(self,event):
   p=QPainter(self);p.fillRect(self.rect(),QColor(colors(self.window)[0]));p.end()
@@ -187,6 +189,7 @@ class Settings(QWidget):
   self.window.apply_theme();self.apply_display_font();self.window.refresh();self.saved_note.setText('All changes saved automatically.')
  def flush(self):
   if self.skip_save:return
+  self.edit_data.flush()
   for field in self.fields.values():field.interpretText()
   self.save()
 class SyncIndicator(QPushButton):
@@ -277,7 +280,8 @@ class Canvas(QWidget):
   h,r=divmod(max(0,int(seconds)),3600);m,s=divmod(r,60);return f'{h}h {m:02}m {s:02}s'
  def day_tip(self,d,kind,value):
   s=self.window.storage;creatives=s.existing_day(d.isoformat()).get('creatives',0);duration='Not available' if value is None else self.duration(value*3600)
-  return f'{d.day} {d:%B %Y}\n{kind.title()}: {duration}\nCreatives: {creatives}'
+  edited=s.conn.execute('SELECT 1 FROM edit_history WHERE day=? LIMIT 1',(d.isoformat(),)).fetchone()
+  return f'{d.day} {d:%B %Y}\n{kind.title()}: {duration}\nCreatives: {creatives}'+('\nEdited / imported · see Edit history' if edited else '')
  def tooltip_at(self,pos):
   s=self.window.storage;vals=self.window.histories[self.kind]
   for key,count in [('annual',360),('workweek',7),('monthly',30)]:

@@ -4,6 +4,8 @@ from pathlib import Path
 from datetime import date,datetime,timedelta
 
 DAILY_FIELDS=['date','work_seconds','work_hours','learning_seconds','learning_hours','creatives','breakfast','lunch','dinner','water_cups','hydration_ml','hydration_goal_ml','legacy_manual_water_cups','sleep_minutes','sleep_score','deep_sleep_seconds','light_sleep_seconds','rem_sleep_seconds','awake_seconds','steps','resting_hr_bpm','body_battery','calories_kcal','garmin_data_through','garmin_checked_at']
+DAILY_FIELDS += ['edited','edit_count']
+
 def capture(storage,now=None):
  now=now or datetime.now();sessions=[dict(r) for r in storage.conn.execute('SELECT * FROM sessions ORDER BY started_at,id')]
  daily={r['day']:dict(r) for r in storage.conn.execute('SELECT * FROM daily')};extras={}
@@ -24,6 +26,8 @@ def capture(storage,now=None):
   key=d.isoformat();base=daily.get(key,{});extra=extras.get(key,{});stages=extra.get('sleep_stages') or {};totals={k:sum(hours.get((key,h,k),0) for h in range(24))+imported_map.get((key,k),0) for k in ('work','learning')}
   row={'date':key,'work_seconds':int(totals['work']),'work_hours':round(totals['work']/3600,6),'learning_seconds':int(totals['learning']),'learning_hours':round(totals['learning']/3600,6),'creatives':base.get('creatives',0),'breakfast':base.get('breakfast'),'lunch':base.get('lunch'),'dinner':base.get('dinner'),'water_cups':round(extra['hydration_ml']/236.588,6) if extra.get('hydration_ml') is not None else None,'hydration_ml':extra.get('hydration_ml'),'hydration_goal_ml':extra.get('hydration_goal_ml'),'legacy_manual_water_cups':extra.get('water'),'sleep_minutes':base.get('sleep_minutes'),'sleep_score':extra.get('sleep_score'),'steps':base.get('steps'),'resting_hr_bpm':base.get('resting_hr'),'body_battery':extra.get('body_battery'),'calories_kcal':extra.get('calories'),'garmin_data_through':extra.get('garmin_data_through'),'garmin_checked_at':extra.get('garmin_checked_at')}
   for field,stage in [('deep_sleep_seconds','deep'),('light_sleep_seconds','light'),('rem_sleep_seconds','rem'),('awake_seconds','awake')]:row[field]=stages.get(stage)
+  for field in ('creatives','breakfast','lunch','dinner'):row[field]=storage.manual_value(field,key)
+  count=storage.conn.execute('SELECT COUNT(*) FROM edit_history WHERE day=?',(key,)).fetchone()[0];row['edited']=int(count>0);row['edit_count']=count
   rows.append(row)
   for h in range(24):
    if d==now.date() and h>now.hour:break
@@ -49,6 +53,8 @@ def export_data(storage,path,full=False):
     if snapshot['imported_totals']:z.writestr('imported_daily_totals.csv',csv_bytes(snapshot['imported_totals'],['day','kind','seconds']))
     z.writestr('daily.csv',csv_bytes(snapshot['daily'],DAILY_FIELDS));z.writestr('hourly.csv',csv_bytes(snapshot['hourly'],['date','hour_start_local','work_seconds','learning_seconds']));z.writestr('sessions.csv',csv_bytes(snapshot['sessions'],['id','kind','started_at','ended_at']))
     z.writestr('garmin_observations.csv',csv_bytes(snapshot['health'],['observed_at','day','data_through','sleep_minutes','sleep_score','steps','resting_hr','body_battery','calories','hydration_ml','hydration_goal_ml','deep_seconds','light_seconds','rem_seconds','awake_seconds']))
+    audit=[dict(r) for r in storage.conn.execute('SELECT * FROM edit_history ORDER BY id')]
+    z.writestr('edit_history.csv',csv_bytes(audit,['id','edited_at','day','field','action','before_json','after_json']))
     z.writestr('README.txt','PACT export captured at '+snapshot['captured_at']+' local time.\nCSV files open in Excel and import into Google Sheets.\nDaily rows use local calendar days (midnight to midnight). Hourly timer rows split sessions at each hour and midnight. Health values are daily Garmin totals, not hourly measurements. Blank health fields mean unavailable. Observations are logged starting with PACT 1.2; earlier snapshots cannot be reconstructed. Open sessions have a blank end, and totals stop at the export time. Today is partial. Historical gaps are retained; missing daily checkboxes/water remain blank. Hydration is stored in Garmin milliliters and converted to US cups (236.588 mL per cup). Older manual water entries are preserved separately in legacy_manual_water_cups. Imported daily totals have no known hourly distribution; affected hourly values are blank, and imported_daily_totals.csv preserves these totals separately. Daily CSV totals include both imported totals and any timed sessions. No credentials or Garmin tokens are exported.\n')
   else:Path(tmp).write_bytes(csv_bytes(snapshot['daily'],DAILY_FIELDS))
   os.replace(tmp,path)

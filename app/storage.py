@@ -27,14 +27,52 @@ class Storage:
         CREATE TABLE IF NOT EXISTS health_log (id INTEGER PRIMARY KEY AUTOINCREMENT, observed_at TEXT NOT NULL, day TEXT NOT NULL, data_through TEXT, payload TEXT NOT NULL);
         CREATE TABLE IF NOT EXISTS time_edits (id INTEGER PRIMARY KEY AUTOINCREMENT, edited_at TEXT NOT NULL, before_json TEXT, after_json TEXT, undone INTEGER NOT NULL DEFAULT 0);
         CREATE TABLE IF NOT EXISTS imported_totals (day TEXT NOT NULL, kind TEXT NOT NULL, seconds INTEGER NOT NULL, PRIMARY KEY(day,kind));
+        CREATE TABLE IF NOT EXISTS edit_history (id INTEGER PRIMARY KEY AUTOINCREMENT, edited_at TEXT NOT NULL, day TEXT NOT NULL, field TEXT NOT NULL, action TEXT NOT NULL, before_json TEXT NOT NULL, after_json TEXT NOT NULL);
         ''')
         self.conn.commit()
+        if not self.conn.execute('SELECT 1 FROM edit_history').fetchone():
+            with self.conn:
+                for r in self.conn.execute('SELECT * FROM time_edits ORDER BY id').fetchall():self.audit_time(json.loads(r['before_json']),json.loads(r['after_json']),'Earlier correction'+(' (undone)' if r['undone'] else ''),r['edited_at'])
+    def audit(self,day,field,action,before,after,when=None):
+        self.conn.execute('INSERT INTO edit_history(edited_at,day,field,action,before_json,after_json) VALUES(?,?,?,?,?,?)',(when or datetime.now().isoformat(timespec='seconds'),day,field,action,json.dumps(before),json.dumps(after)))
+    def audit_time(self,before,after,action,when=None):
+        value=after or before
+        if not value:return
+        if value.get('type')=='daily':days={value['day']};kind=value['kind']
+        else:
+            kind=value['kind'];days=set()
+            for r in (before,after):
+                if not r:continue
+                d=date.fromisoformat(r['started_at'][:10]);last=(datetime.fromisoformat(r['ended_at'])-timedelta(microseconds=1)).date()
+                while d<=last:days.add(d.isoformat());d+=timedelta(days=1)
+        for day in sorted(days):self.audit(day,kind,action,before,after,when)
+    def manual_value(self,field,day):
+        value=self.existing_day(day).get(field,0);known=self.day_extra('manual_fields',{},day)
+        return value if known.get(field,value!=0) else None
+    def edit_manual(self,field,value,day=None,action='Edit'):
+        day=day or date.today().isoformat();d=date.fromisoformat(day)
+        if field not in ('creatives','breakfast','lunch','dinner') or d>date.today() or d.year<2000:raise ValueError('Choose a valid past or current date and editable field.')
+        if value is not None and (type(value) not in (int,bool) or not 0<=value<=(999999 if field=='creatives' else 1)):raise ValueError('Enter a valid daily value.')
+        before=self.manual_value(field,day)
+        if before==value:return
+        with self.conn:
+            self.conn.execute('INSERT OR IGNORE INTO daily(day) VALUES(?)',(day,))
+            self.conn.execute('UPDATE daily SET '+field+'=? WHERE day=?',(value or 0,day))
+            known=self.day_extra('manual_fields',{},day);known[field]=value is not None
+            self.conn.execute('INSERT OR REPLACE INTO kv(key,value) VALUES(?,?)',(day+':manual_fields',json.dumps(known)))
+            self.audit(day,field,action,before,value)
+    def undo_manual(self):
+        r=self.conn.execute("SELECT * FROM edit_history WHERE field IN ('creatives','breakfast','lunch','dinner') ORDER BY id DESC LIMIT 1").fetchone()
+        if not r or r['action']=='Undo':raise ValueError('There is no daily edit to undo.')
+        if self.manual_value(r['field'],r['day'])!=json.loads(r['after_json']):raise ValueError('This entry changed again; it cannot be undone.')
+        self.edit_manual(r['field'],json.loads(r['before_json']),r['day'],'Undo')
     def _ensure_day(self, day: str):
         self.conn.execute("INSERT OR IGNORE INTO daily(day) VALUES(?)", (day,)); self.conn.commit()
     def get_day(self, day: str | None = None):
         day = day or date.today().isoformat(); self._ensure_day(day)
         return dict(self.conn.execute("SELECT * FROM daily WHERE day=?", (day,)).fetchone())
     def set_day_field(self, field: str, value, day: str | None = None):
+        if field in {'creatives','breakfast','lunch','dinner'}:return self.edit_manual(field,value,day)
         if field not in {"creatives","breakfast","lunch","dinner","sleep_minutes","steps","resting_hr"}: raise ValueError(field)
         day = day or date.today().isoformat(); self._ensure_day(day)
         self.conn.execute(f"UPDATE daily SET {field}=? WHERE day=?", (value, day)); self.conn.commit()
@@ -116,6 +154,7 @@ class Storage:
             else:
                 session_id=self.conn.execute('INSERT INTO sessions(kind,started_at,ended_at) VALUES(?,?,?)',(kind,start,end)).lastrowid;after={'id':session_id,'kind':kind,'started_at':start,'ended_at':end}
             self.conn.execute('INSERT INTO time_edits(edited_at,before_json,after_json) VALUES(?,?,?)',(datetime.now().isoformat(),json.dumps(before),json.dumps(after)))
+            self.audit_time(before,after,'Remove time' if remove else 'Edit time' if before else 'Add time')
         return session_id
 
     def deduct_day(self,kind,day,seconds):
@@ -143,6 +182,7 @@ class Storage:
                 after['imported']={**imported,'seconds':imported['seconds']-remaining}
                 self.conn.execute('UPDATE imported_totals SET seconds=? WHERE day=? AND kind=?',(after['imported']['seconds'],day,kind))
             self.conn.execute('INSERT INTO time_edits(edited_at,before_json,after_json) VALUES(?,?,?)',(datetime.now().isoformat(),json.dumps(before),json.dumps(after)))
+            self.audit_time(before,after,'Deduct time')
 
     def undo_daily_edit(self,row,before,after):
         ids={r['id'] for r in before['sessions']+after['sessions']}
@@ -157,6 +197,7 @@ class Storage:
             self.conn.executemany('INSERT INTO sessions(id,kind,started_at,ended_at) VALUES(:id,:kind,:started_at,:ended_at)',before['sessions'])
             if before['imported']:self.conn.execute('UPDATE imported_totals SET seconds=? WHERE day=? AND kind=?',(before['imported']['seconds'],before['day'],before['kind']))
             self.conn.execute('UPDATE time_edits SET undone=1 WHERE id=?',(row['id'],))
+            self.audit_time(after,before,'Undo time correction')
 
     def undo_time_edit(self):
         row=self.conn.execute('SELECT * FROM time_edits WHERE undone=0 ORDER BY id DESC LIMIT 1').fetchone()
@@ -173,6 +214,7 @@ class Storage:
             self.conn.execute('DELETE FROM sessions WHERE id=?',(sid,))
             if before:self.conn.execute('INSERT INTO sessions(id,kind,started_at,ended_at) VALUES(:id,:kind,:started_at,:ended_at)',before)
             self.conn.execute('UPDATE time_edits SET undone=1 WHERE id=?',(row['id'],))
+            self.audit_time(after,before,'Undo time correction')
 
     def latest_sleep(self):
         row=self.conn.execute('SELECT day,sleep_minutes FROM daily WHERE day<=? AND sleep_minutes>0 ORDER BY day DESC LIMIT 1',(date.today().isoformat(),)).fetchone()
