@@ -57,7 +57,7 @@ class HoverDetails(QLabel):
   else:self.delay.start(110)
  def present(self):
   if not self.pending or self.window.settings_panel or not self.window.isVisible():return
-  bg,fg=colors(self.window);self.setStyleSheet(f'QLabel{{background:{bg};color:{fg};border:1px solid {fg};border-radius:0;padding:9px 12px;font-family:Newsreader;font-size:14px;}}');self.setText(self.pending)
+  bg,fg=colors(self.window);size=18 if self.window.storage.get_setting('display_auto_adjust',False) else 14;self.setStyleSheet(f'QLabel{{background:{bg};color:{fg};border:1px solid {fg};border-radius:0;padding:9px 12px;font-family:Newsreader;font-size:{size}px;}}');self.setText(self.pending)
   self.ensurePolished();width=min(max(1,self.window.width()-16),self.sizeHint().width());self.resize(width,max(self.sizeHint().height(),self.heightForWidth(width)))
   x=max(8,min(self.anchor.x()+14,self.window.width()-self.width()-8));y=self.anchor.y()+20
   if y+self.height()>self.window.height()-8:y=self.anchor.y()-self.height()-16
@@ -78,7 +78,7 @@ class Settings(QWidget):
   self.code=QLineEdit();self.code.setPlaceholderText('Verification code');self.code.hide();self.verify=QPushButton('Verify');self.verify.clicked.connect(self.submit_code);self.verify.hide();form.addRow(self.code,self.verify)
   section('Appearance');self.theme=QComboBox();self.theme.addItems(['Light','Dark','High Contrast','Custom']);self.theme.setCurrentText(window.storage.get_setting('theme','light').title());form.addRow('Theme',self.theme)
   self.auto_adjust=QCheckBox('Auto-adjust for readability');self.auto_adjust.setChecked(bool(window.storage.get_setting('display_auto_adjust',False)));form.addRow(self.auto_adjust)
-  display_note=QLabel('Off keeps the original layout. On detects your monitor and enlarges text and the dashboard together, with scrolling when needed.');display_note.setWordWrap(True);form.addRow(display_note)
+  display_note=QLabel('On makes the dashboard about 60% larger, with stronger text and vertical scrolling. Off restores the original layout.');display_note.setWordWrap(True);form.addRow(display_note)
   self.color_values={};self.color_buttons={}
   for key,label,default in [('custom_background','Background',LIGHT),('custom_ink','Text and lines',DARK)]:
    self.add_color(form,key,label,window.storage.get_setting(key,default))
@@ -99,7 +99,7 @@ class Settings(QWidget):
   self.csv_note=QLabel('Import a PACT daily totals CSV, including daily.csv extracted from an exported ZIP.');self.csv_note.setWordWrap(True);form.addRow(self.csv_note)
   self.csv_confirm=QPushButton('Import new dates');self.csv_confirm.hide();self.csv_confirm.clicked.connect(self.import_csv);form.addRow(self.csv_confirm);self.csv_path=None
   reset=QPushButton('Reset progress…');reset.clicked.connect(self.reset_progress);form.addRow(reset)
-  section('About');form.addRow(QLabel('PACT 1.3.1'))
+  section('About');form.addRow(QLabel('PACT 1.4.0'))
   self.theme.currentIndexChanged.connect(self.save);self.use_custom.currentIndexChanged.connect(self.save)
   self.auto_adjust.toggled.connect(self.change_display)
   self.apply_display_font()
@@ -107,9 +107,9 @@ class Settings(QWidget):
  def paintEvent(self,event):
   p=QPainter(self);p.fillRect(self.rect(),QColor(colors(self.window)[0]));p.end()
  def change_display(self,enabled):
-  self.window.storage.set_setting('display_auto_adjust',bool(enabled));self.apply_display_font();self.window.refit_current_screen();self.saved_note.setText('Display adjustment saved automatically.')
+  self.window.storage.set_setting('display_auto_adjust',bool(enabled));self.apply_display_font();self.window.refit_current_screen();self.window.canvas.retheme();self.saved_note.setText('Display adjustment saved automatically.')
  def apply_display_font(self):
-  self.setStyleSheet('QWidget{font-size:'+('16' if self.window.storage.get_setting('display_auto_adjust',False) else '14')+'px;}')
+  self.setStyleSheet('QWidget{'+('font-size:18px;font-weight:500;' if self.window.storage.get_setting('display_auto_adjust',False) else 'font-size:14px;')+'}')
   bg,fg=colors(self.window)
   self.auto_adjust.setCursor(Qt.PointingHandCursor)
   self.auto_adjust.setStyleSheet(f'QCheckBox{{border:1px solid {fg};padding:10px;spacing:10px;}} QCheckBox::indicator{{width:18px;height:18px;border:2px solid {fg};background:{bg};}} QCheckBox::indicator:checked{{background:{fg};}} QCheckBox:focus{{border:2px solid {fg};padding:9px;}}')
@@ -247,7 +247,8 @@ class Canvas(QWidget):
   for i,(b,box) in enumerate(self.controls):
    if i in (0,1,2,4,6):box=self.box({0:53,1:56,2:54,4:401,6:55}[i])
    elif i>=7:box=self.geo['meals'][i-7]
-   b.setGeometry(*(round(v*scale) for v in box));b.setStyleSheet(f'background:{fg if i<2 else "transparent"};color:{bg if i<2 else fg};border:0;padding:0;font-family:Newsreader;font-size:{max(9,round(75*scale))}px;')
+   weight=600 if self.window.storage.get_setting('display_auto_adjust',False) else 400
+   b.setGeometry(*(round(v*scale) for v in box));b.setStyleSheet(f'background:{fg if i<2 else "transparent"};color:{bg if i<2 else fg};border:0;padding:0;font-family:Newsreader;font-size:{max(9,round(75*scale))}px;font-weight:{weight};')
    if i==3:b.setIcon(gear_icon(fg));b.setIconSize(b.size())
    if i==6:
     # Cover the original right arrow and draw the actual navigation direction.
@@ -300,7 +301,7 @@ class Canvas(QWidget):
   p=QPainter(self);p.setRenderHint(QPainter.Antialiasing);p.scale(self.width()/self.geo['width'],self.width()/self.geo['width']);p.fillRect(QRectF(0,0,self.geo['width'],9314),QColor(colors(self.window)[0]));self.renderer.render(p,QRectF(0,0,self.geo['width'],9314));s=self.window.storage;day=self.window.day;bg,fg=colors(self.window);inks=intensity_colors(self.window)
   ratio=self.geo['width']/3000;p.setPen(QPen(QColor(fg),4*ratio));p.drawLine(QPointF(0,3744*ratio),QPointF(self.geo['width'],3744*ratio))
   def text(x,y,w,h,value,size=75,bold=False,right=False,center=False,italic=False):
-   p.setPen(QColor(fg));f=QFont('Newsreader');f.setPixelSize(round(size));f.setBold(bold);f.setItalic(italic);p.setFont(f);p.drawText(QRectF(x,y,w,h),Qt.AlignVCenter|(Qt.AlignHCenter if center else Qt.AlignRight if right else Qt.AlignLeft),str(value))
+   p.setPen(QColor(fg));f=QFont('Newsreader');f.setPixelSize(round(size));f.setWeight(QFont.Bold if bold else QFont.Medium if s.get_setting('display_auto_adjust',False) else QFont.Normal);f.setItalic(italic);p.setFont(f);p.drawText(QRectF(x,y,w,h),Qt.AlignVCenter|(Qt.AlignHCenter if center else Qt.AlignRight if right else Qt.AlignLeft),str(value))
   def field(i,value,size=75,bold=False,width=None):
    x,y,w,h=self.box(i)
    if width:x=x+w-width;w=width

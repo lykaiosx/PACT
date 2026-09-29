@@ -77,7 +77,7 @@ class PACT(QWidget):
   if self.garmin.client is not None or Path(TOKENSTORE).exists():self.sync()
  def apply_theme(self):
   self.dark=self.storage.get_setting('theme','light')=='dark';bg,fg=colors(self)
-  QApplication.instance().setStyleSheet(f'QWidget{{background:{bg};color:{fg};font-family:Newsreader;font-size:16px;}} QPushButton,QLineEdit,QDoubleSpinBox,QComboBox{{border:1px solid {fg};padding:5px;border-radius:0;}} QScrollBar:vertical{{width:6px;background:{bg};}} QScrollBar::handle:vertical{{background:{fg};min-height:20px;}} QScrollBar::add-line:vertical,QScrollBar::sub-line:vertical{{height:0;}}')
+  QApplication.instance().setStyleSheet(f'QWidget{{background:{bg};color:{fg};font-family:Newsreader;font-size:16px;}} QPushButton,QLineEdit,QDoubleSpinBox,QSpinBox,QDateEdit,QDateTimeEdit,QTimeEdit,QComboBox{{border:1px solid {fg};padding:5px;border-radius:0;}} QScrollBar:vertical{{width:6px;background:{bg};}} QScrollBar::handle:vertical{{background:{fg};min-height:20px;}} QScrollBar::add-line:vertical,QScrollBar::sub-line:vertical{{height:0;}}')
   self.canvas.retheme()
  def resizeEvent(self,e):
   super().resizeEvent(e);QTimer.singleShot(0,self.size_canvas)
@@ -90,7 +90,8 @@ class PACT(QWidget):
   if self.storage.get_setting('display_auto_adjust',False):
    # Qt supplies logical pixels: Windows DPI scaling is already accounted for.
    # Enlarge the complete design together rather than shrinking text to fit.
-   w=min(g.width(),max(320,g.width()//2),max(480,min(600,int(h*3000/9314))))
+   default_width=min(520,g.width(),max(320,int(h*3000/9314)))
+   w=min(g.width(),max(560,round(default_width*1.6)))
    scrolling=Qt.ScrollBarAsNeeded
   else:w=min(520,g.width(),max(320,int(h*3000/9314)));scrolling=Qt.ScrollBarAsNeeded if h<994 else Qt.ScrollBarAlwaysOff
   self.scroll.setVerticalScrollBarPolicy(scrolling);self.setGeometry(g.right()-w+1,g.bottom()-h+1,w,h);self.size_canvas()

@@ -36,13 +36,22 @@ class DisplayTests(unittest.TestCase):
  def test_toggle_persists_and_reverts(self):
   self.w.show();p=Settings(self.w)
   with patch.object(self.w,'refit_current_screen',side_effect=lambda:self.w.fit_screen(Screen(1920,1040))):
-   p.auto_adjust.setChecked(True);self.assertTrue(self.s.get_setting('display_auto_adjust'));self.assertEqual(self.w.width(),480)
-   reopened=Settings(self.w);self.assertTrue(reopened.auto_adjust.isChecked());self.assertIn('16px',reopened.styleSheet());reopened.deleteLater()
+   p.auto_adjust.setChecked(True);self.assertTrue(self.s.get_setting('display_auto_adjust'));self.assertEqual(self.w.width(),560)
+   reopened=Settings(self.w);self.assertTrue(reopened.auto_adjust.isChecked());self.assertIn('18px',reopened.styleSheet());reopened.deleteLater()
    p.auto_adjust.setChecked(False);self.assertEqual(self.w.width(),334);self.assertIn('14px',p.styleSheet())
   p.deleteLater()
  def test_monitor_change_refits(self):
   with patch.object(self.w,'refit_current_screen') as refit:
    self.w.on_display_changed();app.processEvents();refit.assert_called_once()
+ def test_large_display_gets_larger_content_and_real_scrolling(self):
+  self.w.show();screen=Screen(3840,2120);self.w.fit_screen(screen);app.processEvents();self.w.size_canvas();original=self.w.canvas.width()
+  self.s.set_setting('display_auto_adjust',True);self.w.fit_screen(screen);app.processEvents();self.w.size_canvas();app.processEvents()
+  self.assertGreater(self.w.canvas.width()/original,1.55)
+  self.assertGreater(self.w.scroll.verticalScrollBar().maximum(),0)
+  self.w.scroll.verticalScrollBar().setValue(self.w.scroll.verticalScrollBar().maximum())
+  self.assertGreater(self.w.scroll.verticalScrollBar().value(),0)
+  self.s.set_setting('display_auto_adjust',False);self.w.fit_screen(screen);app.processEvents();self.w.size_canvas()
+  self.assertEqual(self.w.canvas.width(),original)
  def test_backup_and_reset_preserve_preference(self):
   self.s.set_setting('display_auto_adjust',True);self.s.set_setting('display_hint_seen',True)
   path=Path(temp.name)/'display.pact';create_backup(self.s,path);reset_progress(self.s)

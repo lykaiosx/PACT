@@ -118,10 +118,52 @@ class Storage:
             self.conn.execute('INSERT INTO time_edits(edited_at,before_json,after_json) VALUES(?,?,?)',(datetime.now().isoformat(),json.dumps(before),json.dumps(after)))
         return session_id
 
+    def deduct_day(self,kind,day,seconds):
+        if kind not in ('work','learning') or type(seconds)!=int or seconds<=0:raise ValueError('Enter an amount greater than zero.')
+        start=datetime.combine(date.fromisoformat(day),datetime.min.time());end=start+timedelta(days=1)
+        rows=self.sessions_for_day(kind,day)
+        if any(r['ended_at'] is None for r in rows):raise ValueError('Stop the running timer before deducting time from this day.')
+        imported=self.conn.execute('SELECT * FROM imported_totals WHERE day=? AND kind=?',(day,kind)).fetchone();imported=dict(imported) if imported else None
+        if seconds>self.seconds_for_day(kind,day):raise ValueError('The deduction is larger than this day’s recorded time. Enter a smaller amount.')
+        before={'type':'daily','day':day,'kind':kind,'sessions':[],'imported':imported};after={**before,'sessions':[]};remaining=seconds
+        with self.conn:
+            for r in reversed(rows):
+                if not remaining:break
+                a=datetime.fromisoformat(r['started_at']);b=datetime.fromisoformat(r['ended_at']);cut_end=min(b,end);amount=min(remaining,int((cut_end-max(a,start)).total_seconds()));cut_start=cut_end-timedelta(seconds=amount)
+                if not amount:continue
+                before['sessions'].append(r);remaining-=amount
+                pieces=[(x,y) for x,y in ((a,cut_start),(cut_end,b)) if x<y]
+                self.conn.execute('DELETE FROM sessions WHERE id=?',(r['id'],))
+                for i,(x,y) in enumerate(pieces):
+                    values=(kind,x.isoformat(timespec='seconds'),y.isoformat(timespec='seconds'))
+                    if i==0:self.conn.execute('INSERT INTO sessions(id,kind,started_at,ended_at) VALUES(?,?,?,?)',(r['id'],*values));sid=r['id']
+                    else:sid=self.conn.execute('INSERT INTO sessions(kind,started_at,ended_at) VALUES(?,?,?)',values).lastrowid
+                    after['sessions'].append({'id':sid,'kind':kind,'started_at':values[1],'ended_at':values[2]})
+            if remaining:
+                after['imported']={**imported,'seconds':imported['seconds']-remaining}
+                self.conn.execute('UPDATE imported_totals SET seconds=? WHERE day=? AND kind=?',(after['imported']['seconds'],day,kind))
+            self.conn.execute('INSERT INTO time_edits(edited_at,before_json,after_json) VALUES(?,?,?)',(datetime.now().isoformat(),json.dumps(before),json.dumps(after)))
+
+    def undo_daily_edit(self,row,before,after):
+        ids={r['id'] for r in before['sessions']+after['sessions']}
+        current=[dict(r) for r in self.conn.execute('SELECT * FROM sessions') if r['id'] in ids]
+        imported=self.conn.execute('SELECT * FROM imported_totals WHERE day=? AND kind=?',(before['day'],before['kind'])).fetchone()
+        if sorted(current,key=lambda r:r['id'])!=sorted(after['sessions'],key=lambda r:r['id']) or (dict(imported) if imported else None)!=after['imported']:raise ValueError('This time changed again; it cannot be safely undone.')
+        for r in before['sessions']:
+            overlaps=self.conn.execute('SELECT id FROM sessions WHERE kind=? AND started_at<? AND COALESCE(ended_at,?)>?',(r['kind'],r['ended_at'],datetime.now().isoformat(),r['started_at']))
+            if any(v['id'] not in ids for v in overlaps):raise ValueError('Undo would overlap another session. Correct that session first.')
+        with self.conn:
+            self.conn.executemany('DELETE FROM sessions WHERE id=?',[(i,) for i in ids])
+            self.conn.executemany('INSERT INTO sessions(id,kind,started_at,ended_at) VALUES(:id,:kind,:started_at,:ended_at)',before['sessions'])
+            if before['imported']:self.conn.execute('UPDATE imported_totals SET seconds=? WHERE day=? AND kind=?',(before['imported']['seconds'],before['day'],before['kind']))
+            self.conn.execute('UPDATE time_edits SET undone=1 WHERE id=?',(row['id'],))
+
     def undo_time_edit(self):
         row=self.conn.execute('SELECT * FROM time_edits WHERE undone=0 ORDER BY id DESC LIMIT 1').fetchone()
         if row is None:raise ValueError('There are no corrections to undo.')
-        before=json.loads(row['before_json']);after=json.loads(row['after_json']);sid=(after or before)['id']
+        before=json.loads(row['before_json']);after=json.loads(row['after_json'])
+        if before and before.get('type')=='daily':return self.undo_daily_edit(row,before,after)
+        sid=(after or before)['id']
         current=self.conn.execute('SELECT * FROM sessions WHERE id=?',(sid,)).fetchone()
         if (dict(current) if current else None)!=after:raise ValueError('This session changed again; it cannot be safely undone.')
         if before:

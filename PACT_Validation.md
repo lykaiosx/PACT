@@ -1,15 +1,15 @@
-# PACT v1.3.1 validation
+# PACT v1.4.0 validation
 
-Patch verification: all 58 tests, five installer path cases and the 90-day restoration check passed again. Inspected the outlined toggle in light/on and dark/off states, including a 320-pixel sidebar. The packaged startup self-test passed. The installer behavior is unchanged; the upgrade integration results below are from v1.3.0.
+Windows x64, 29 September 2026.
 
-Windows x64, 25 September 2026.
+67 Python tests and five installer path cases passed. The nine display tests include a large-screen check that the canvas grows more than 55%, actually scrolls, and returns to its original size when disabled. This suite also passed at 2x scaling. The eight new correction tests cover the simple Add/Deduct UI, calculated end time, multi-session and full deductions, imported and mixed totals, corrected backup restoration, cross-midnight isolation, active-timer protection, Undo collision protection and advanced full-session deduction.
 
-All 58 Python tests and five installer path cases passed during the build. Eight new display tests cover unchanged default geometry, proportional adjustment and screen bounds, persistent toggling and reversal, display-change refitting, backup/reset preservation, one-time welcome dismissal, its Settings shortcut, and hidden/testing suppression. The display suite also passed at 2x Qt scaling.
+The 90-day export/reset/CSV import and full-backup restoration check passed, including Work/Learning totals, rendered graphs, heatmaps, sleep and hover values. Previous correction, undo, theme, docking, autosave and Garmin mapping tests remain passing.
 
-Rendered and inspected the adjusted dashboard and Settings at a simulated 1280x720 work area, plus the welcome message. Newsreader and the existing theme/layout remain in use. Default sizing remains unchanged; adjusted sizing uses available logical monitor dimensions, widens the dashboard up to 600 logical pixels and scrolls vertically when needed. Real monitor hot-plugging was not exercised; signal-driven refitting is covered by an automated check.
+Visually inspected the enlarged dashboard/Settings and the simple Add/Deduct panels, including a 320-pixel sidebar. Default layout remains unchanged. Readability mode uses about 1.6 times the default width with a 560-logical-pixel minimum, bounded by the monitor width. Settings and hover text enlarge, live text uses stronger weights, and excess dashboard height scrolls. Actual monitor hot-plugging was not tested; signal-driven refitting has automated coverage.
 
-The repeatable 90-day round-trip check passed: exported synthetic history was reset and reimported from daily CSV, restored from the original .pact backup, and restored from a backup made after CSV import. Work and Learning histories, annual totals, latest sleep, rendered charts/heatmaps and hover details matched before and after each path. All existing timer, export, Garmin mapping, autosave, theme, tooltip, undo and slide tests passed.
+The packaged startup check and an isolated upgrade from v1.3.1 to v1.4.0 passed: hidden startup, single-instance reveal, graceful shutdown, closing the running app for upgrade, database/target/token-sentinel preservation and uninstall. Testing did not touch real user progress or Garmin credentials.
 
-An isolated v1.2.0 installation was upgraded to v1.3.0 while running. Hidden launch, second-launch reveal, single-instance behavior, graceful shutdown, upgrade shutdown, database/target/token-sentinel preservation, updated startup and uninstall passed. The packaged application self-test passed. Testing used isolated data; no real user progress or Garmin credentials were modified.
+Deductions operate on a day's latest recorded sessions first, followed by imported totals. They preserve adjacent dates and reject amounts greater than the recorded total. A running timer overlapping that date must be stopped. Each deduction is transactional and can be undone as one correction, including after restart. Imported data has no original session timestamps, so no hourly distribution is invented. Exact start/end editing remains available.
 
-Source/package ZIP integrity and release SHA-256 checksums are verified during packaging. Installer remains unsigned. Garmin checks still depend on data uploaded by the watch/phone to Garmin Connect. Display adjustment is off by default and saves automatically when toggled. Existing users see the display-options message once on their next visible launch, as do new users; hidden startup does not show it.
+Release archives and SHA-256 checksums are verified during packaging. The Windows installer remains unsigned.
