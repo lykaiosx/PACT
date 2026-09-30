@@ -1,15 +1,11 @@
-# PACT v1.6.0 validation
+# PACT v1.7.0 validation
 
-Windows x64, 30 September 2026.
+85 Python tests and five installer path cases passed. New tests cover eight distinct story graphics, leap-month totals, partial-month labels, missing data, animation progress, pause-on-hide, weekly/monthly navigation and notification opening of the completed month. The new suite also passed at 2x Qt scaling. Existing 90-day CSV/full-backup restoration and all earlier tests remain passing.
 
-80 Python tests and five installer path cases passed. Six new tests cover live width endpoints/midpoint and backup preservation; completed-week/year boundaries and empty data; totals, goals, streaks, busiest days and comparisons; missing manual/health data and recalculation after edits; notification once-per-week and opt-out; and review navigation back to Settings. The new suite also passed with Qt 2x scaling.
+Rendered and inspected all eight slides using synthetic data. Fixed graphic clipping in the consistency grid and improved footer wrapping before building. The attached contact sheet contains sample data, not real user records. Slide transitions interpolate position over 650 ms; optional playback advances every 5.5 seconds and stops at the end or when hidden.
 
-The 90-day CSV/full-backup restoration check passed, including charts, heatmaps, totals, sleep and hover details. All previous display, edit-history, correction, timer, theme, hydration and export checks passed. The packaged startup self-test passed.
+Packaged startup self-test and isolated upgrade from v1.6.0 passed, including hidden launch, single-instance reveal, shutdown, update preservation and uninstall. Real user data and Garmin credentials were not modified.
 
-Rendered and inspected the live slider at its midpoint and a weekly review with synthetic activity, habits and sleep. The slider spans the original monitor-relative width to the existing enlarged width, not a percentage of screen area. Moving it updates the actual sidebar and persists the preference; the Settings font scales gradually. Full backups retain width and notification preferences.
+Monthly is the default; current-month data is marked so far on every slide. Weekly mode uses completed Monday-Sunday weeks. No all-time records are claimed. Goal streaks use current targets. Missing measurements remain unavailable. Creatives graphics show at most 64 tiles and explicitly label that cap when needed. Edits/imports are disclosed in the overview. Monthly/weekly notification triggering is tested with a mock tray; OS delivery depends on Windows settings.
 
-An isolated v1.5.1 installation was upgraded to v1.6.0. Hidden launch, single-instance reveal, graceful shutdown, update shutdown, database/target/token-sentinel preservation and uninstall passed. Tests used synthetic data; real user data and Garmin credentials were not modified.
-
-Weekly reviews cover completed Monday-Sunday weeks. Coverage counts accompany comparisons and habits; missing records are not invented. Goal streaks use current targets and cover the selected week. Prior corrections/imports are reflected in current totals and flagged. Notifications are requested once per latest completed week with recorded data while PACT is running, including a delayed check on startup and hourly checks. Native Windows notification delivery depends on user/OS settings; the trigger and opt-out were verified with a mock tray, not a live notification delivery test. Older weeks remain available through the review date selector.
-
-Release archives and checksums are verified during packaging. Installer remains unsigned.
+Source/package archive integrity and SHA-256 checksums are verified during packaging. Installer remains unsigned.

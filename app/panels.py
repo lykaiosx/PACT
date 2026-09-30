@@ -71,7 +71,8 @@ class Settings(QWidget):
   scroll=QScrollArea();scroll.setWidgetResizable(True);scroll.setFrameShape(QScrollArea.NoFrame);body=QWidget();form=QFormLayout(body);form.setVerticalSpacing(8);scroll.setWidget(body);self.tabs=QTabWidget();self.tabs.addTab(scroll,"Settings");root.addWidget(self.tabs)
   def section(title):
    label=QLabel(title);label.setStyleSheet('font-weight:bold;font-size:20px;padding-top:10px;');form.addRow(label)
-  review=QPushButton('Open weekly review');review.clicked.connect(window.open_weekly_review);form.addRow(review)
+  review=QPushButton('Open PACT Wrapped');review.clicked.connect(window.open_weekly_review);form.addRow(review)
+  self.monthly_notify=QCheckBox('Monthly Wrapped notifications');self.monthly_notify.setChecked(window.storage.get_setting('monthly_notifications',True));self.monthly_notify.toggled.connect(lambda enabled:window.storage.set_setting('monthly_notifications',bool(enabled)));form.addRow(self.monthly_notify)
   self.weekly_notify=QCheckBox('Weekly review notifications');self.weekly_notify.setChecked(window.storage.get_setting('weekly_notifications',True));self.weekly_notify.toggled.connect(lambda enabled:window.storage.set_setting('weekly_notifications',bool(enabled)));form.addRow(self.weekly_notify)
   section('Garmin connection');self.state=QLabel(window.garmin_status);self.state.setWordWrap(True);form.addRow(self.state)
   self.email=QLineEdit();self.email.setPlaceholderText('Email');self.password=QLineEdit();self.password.setPlaceholderText('Password');self.password.setEchoMode(QLineEdit.Password);form.addRow(self.email);form.addRow(self.password)
@@ -103,7 +104,7 @@ class Settings(QWidget):
   self.csv_note=QLabel('Import a PACT daily totals CSV, including daily.csv extracted from an exported ZIP.');self.csv_note.setWordWrap(True);form.addRow(self.csv_note)
   self.csv_confirm=QPushButton('Import new dates');self.csv_confirm.hide();self.csv_confirm.clicked.connect(self.import_csv);form.addRow(self.csv_confirm);self.csv_path=None
   reset=QPushButton('Reset progress…');reset.clicked.connect(self.reset_progress);form.addRow(reset)
-  section('About');form.addRow(QLabel('PACT 1.6.0'))
+  section('About');form.addRow(QLabel('PACT 1.7.0'))
   self.theme.currentIndexChanged.connect(self.save);self.use_custom.currentIndexChanged.connect(self.save)
   self.auto_adjust.toggled.connect(self.change_display)
   self.width_slider.valueChanged.connect(self.change_width)
@@ -130,6 +131,7 @@ class Settings(QWidget):
   self.auto_adjust.setCursor(Qt.PointingHandCursor)
   self.auto_adjust.setStyleSheet(f'QCheckBox{{border:1px solid {fg};padding:10px;spacing:10px;}} QCheckBox::indicator{{width:18px;height:18px;border:2px solid {fg};background:{bg};}} QCheckBox::indicator:checked{{background:{fg};}} QCheckBox:focus{{border:2px solid {fg};padding:9px;}}')
   self.weekly_notify.setStyleSheet(self.auto_adjust.styleSheet())
+  self.monthly_notify.setStyleSheet(self.auto_adjust.styleSheet())
   self.width_slider.setStyleSheet(f'QSlider::groove:horizontal{{height:4px;background:{bg};border:1px solid {fg};}} QSlider::sub-page:horizontal{{background:{fg};}} QSlider::handle:horizontal{{width:16px;margin:-7px 0;background:{fg};border:1px solid {fg};}}')
  def backup(self):
   from backup import create_backup

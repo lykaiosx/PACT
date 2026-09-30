@@ -1,6 +1,13 @@
-# PACT v1.6.0
+# PACT v1.7.0
 
-Run PACT_v1.6.0_Setup.exe to install or update on Windows 10/11 x64. The private runtime is included. Start Menu, Installed Apps, optional desktop/startup shortcuts and updater process management are preserved.
+Run PACT_v1.7.0_Setup.exe to install or update on Windows 10/11 x64. The private runtime is included. Start Menu, Installed Apps, optional desktop/startup shortcuts and updater process management are preserved.
+
+## New in v1.7.0
+
+- PACT Wrapped replaces the scrolling recap with eight animated slides: overview, work, busiest work day, learning, work-goal consistency, creatives, meals and sleep. Each uses Newsreader, theme colors and its own vector graphic.
+- Monthly is the default. The current month is explicitly marked so far; completed months and completed Monday-Sunday weeks are selectable. Missing values show an empty state, not invented achievements. Goals use current targets and edited/imported data remains identified.
+- Previous/Next, eight progress segments and left/right keys navigate slides. Optional Play advances every 5.5 seconds, stops after the last slide, and pauses when hidden. Transitions last 650 ms. Space toggles playback.
+- Monthly and weekly notification preferences are separate. Notifications open the corresponding completed period. Delivery still depends on PACT running and Windows notification settings.
 
 ## New in v1.6.0
 
@@ -76,10 +83,10 @@ The panel fits the complete dashboard on available heights of at least 994 logic
 
 ## Build
 
-Extract PACT_v1.6.0_Package.zip for its runtime. In the source folder run:
+Extract PACT_v1.7.0_Package.zip for its runtime. In the source folder run:
 
 ```powershell
 .\build.ps1 -RuntimeDirectory 'C:\path\to\runtime' -InnoCompiler 'C:\path\to\ISCC.exe'
 ```
 
-Output is `dist\PACT_v1.6.0_Setup.exe`. Build tools: Inno Setup 6.7.3, the Windows .NET Framework compiler and bundled Python 3.12.10. Pinned dependencies and licenses are included. compile_designs.py regenerates current geometry; compile_assets.py is retained for the old design only. See PACT_Validation.md. The installer remains unsigned.
+Output is `dist\PACT_v1.7.0_Setup.exe`. Build tools: Inno Setup 6.7.3, the Windows .NET Framework compiler and bundled Python 3.12.10. Pinned dependencies and licenses are included. compile_designs.py regenerates current geometry; compile_assets.py is retained for the old design only. See PACT_Validation.md. The installer remains unsigned.

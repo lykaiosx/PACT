@@ -1,9 +1,9 @@
-#define AppVersion "1.6.0"
+#define AppVersion "1.7.0"
 [Setup]
 AppId={code:AppIdentity}
 AppName=PACT
 AppVersion={#AppVersion}
-AppVerName=PACT v1.6.0
+AppVerName=PACT v1.7.0
 AppPublisher=PACT
 DefaultDirName={localappdata}\Programs\PACT
 DefaultGroupName={code:GroupName}
@@ -14,7 +14,7 @@ ArchitecturesAllowed=x64compatible
 ArchitecturesInstallIn64BitMode=x64compatible
 MinVersion=10.0
 OutputDir=dist
-OutputBaseFilename=PACT_v1.6.0_Setup
+OutputBaseFilename=PACT_v1.7.0_Setup
 SetupIconFile=app\assets\pact.ico
 Compression=lzma2/normal
 SolidCompression=yes
@@ -28,7 +28,7 @@ UsePreviousLanguage=no
 UsePreviousGroup=no
 VersionInfoProductName=PACT
 VersionInfoDescription=PACT Setup
-VersionInfoVersion=1.6.0.0
+VersionInfoVersion=1.7.0.0
 [Tasks]
 Name: desktopicon; Description: "Create a desktop shortcut"; Flags: unchecked
 Name: startup; Description: "Start PACT hidden when I sign in to Windows"; Flags: unchecked

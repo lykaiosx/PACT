@@ -68,27 +68,41 @@ class PACT(QWidget):
   QApplication.instance().screenAdded.connect(self.watch_screen);QApplication.instance().screenRemoved.connect(self.on_display_changed)
   if not testing:
    self.tray=QSystemTrayIcon(self.windowIcon(),self);self.tray.setToolTip('PACT');menu=QMenu(self)
-   for title,fn in [('Show / hide',self.toggle_visible),('Settings',self.settings),('Weekly review',self.open_weekly_review),('Sync Garmin',self.sync),('Quit PACT',self.quit)]:
+   for title,fn in [('Show / hide',self.toggle_visible),('Settings',self.settings),('PACT Wrapped',self.open_weekly_review),('Sync Garmin',self.sync),('Quit PACT',self.quit)]:
     act=menu.addAction(title);act.triggered.connect(fn)
    self.tray.setContextMenu(menu);self.tray.activated.connect(lambda reason:self.toggle_visible() if reason==QSystemTrayIcon.Trigger else None);self.tray.show()
    if Path(TOKENSTORE).exists():QTimer.singleShot(1500,self.sync)
    self.sync_timer.start()
    self.weekly_timer=QTimer(self);self.weekly_timer.setInterval(3600000);self.weekly_timer.timeout.connect(self.check_weekly_review);self.weekly_timer.start();QTimer.singleShot(15000,self.check_weekly_review)
-   self.tray.messageClicked.connect(lambda:self.open_weekly_review() if getattr(self,'last_notice',None)=='weekly' else self.settings())
+   self.tray.messageClicked.connect(self.open_review_notice)
+ def open_review_notice(self):
+  notice=getattr(self,'last_notice',None)
+  if notice in ('weekly','monthly'):self.open_weekly_review('Weekly' if notice=='weekly' else 'Monthly',completed=True)
+  else:self.settings()
  def check_weekly_review(self):
-  if self.quitting or not self.tray or not self.storage.get_setting('weekly_notifications',True):return
+  if self.quitting or not self.tray:return
+  month_end=date.today().replace(day=1)-timedelta(days=1);month=month_end.replace(day=1)
+  if self.storage.get_setting('monthly_notifications',True) and self.storage.get_setting('monthly_notified')!=month.isoformat():
+   from weekly_review import summary
+   if summary(self.storage,month,end=month_end)['has_data']:
+    self.last_notice='monthly';self.tray.showMessage('PACT · Your monthly Wrapped','Eight stories from your completed month are ready. Click to play.',QSystemTrayIcon.Information,10000);self.storage.set_setting('monthly_notified',month.isoformat());return
+  if not self.storage.get_setting('weekly_notifications',True):return
   from weekly_review import last_week,summary
   week=last_week().isoformat()
   if self.storage.get_setting('weekly_notified')==week:return
   report=summary(self.storage)
   if not report['has_data']:return
   self.last_notice='weekly';self.tray.showMessage('PACT · Your weekly review','Your completed week is ready. Click to review your time, habits and highlights.',QSystemTrayIcon.Information,10000);self.storage.set_setting('weekly_notified',week)
- def open_weekly_review(self):
+ def open_weekly_review(self,mode=None,completed=False):
   from weekly_review import WeeklyReview
   if self.settings_panel:self.settings_panel.flush();self.settings_panel.hide();self.settings_panel.deleteLater();self.settings_panel=None
   if self.panel_animation:self.panel_animation.stop()
   if not self.isVisible():self.reveal()
   self.canvas.details.clear_details();self.settings_panel=WeeklyReview(self);self.settings_panel.setGeometry(self.rect());self.settings_panel.show();self.settings_panel.raise_()
+  if mode=='Weekly':self.settings_panel.mode.setCurrentIndex(1)
+  elif completed:
+   from PySide6.QtCore import QDate
+   self.settings_panel.date.setDate(QDate((date.today().replace(day=1)-timedelta(days=1)).replace(day=1)))
  def return_to_settings(self):
   if self.settings_panel:self.settings_panel.hide();self.settings_panel.deleteLater();self.settings_panel=None
   self.settings()

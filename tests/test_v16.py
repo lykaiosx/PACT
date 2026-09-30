@@ -34,7 +34,7 @@ class ReviewTests(unittest.TestCase):
  def test_missing_habits_are_not_zero_and_edits_recompute(self):
   day=self.start.isoformat();self.s.edit_manual('creatives',3,day);self.s.edit_manual('breakfast',0,day);self.s.set_day_field('sleep_minutes',420,day);r=summary(self.s);self.assertEqual(r['creative_days'],1);self.assertEqual(r['meal_entries'],1);self.assertEqual(r['complete_meal_days'],0);self.assertEqual(r['sleep_average'],420);self.assertEqual(r['edited_days'],1);self.s.edit_manual('creatives',5,day);self.assertEqual(summary(self.s)['creatives'],5)
  def test_notification_once_and_opt_out(self):
-  self.add(0,1);self.w.tray=Mock();self.s.set_setting('weekly_notifications',False);self.w.check_weekly_review();self.w.tray.showMessage.assert_not_called();self.s.set_setting('weekly_notifications',True);self.w.check_weekly_review();self.w.check_weekly_review();self.w.tray.showMessage.assert_called_once()
+  self.add(0,1);self.w.tray=Mock();self.s.set_setting('monthly_notifications',False);self.s.set_setting('weekly_notifications',False);self.w.check_weekly_review();self.w.tray.showMessage.assert_not_called();self.s.set_setting('weekly_notifications',True);self.w.check_weekly_review();self.w.check_weekly_review();self.w.tray.showMessage.assert_called_once()
  def test_review_navigation_and_return_to_settings(self):
-  self.w.settings();self.w.open_weekly_review();self.assertIsInstance(self.w.settings_panel,WeeklyReview);self.assertIn('No recorded data',self.w.settings_panel.body.toPlainText());self.w.return_to_settings();self.assertTrue(hasattr(self.w.settings_panel,'width_slider'))
+  self.w.settings();self.w.open_weekly_review();self.assertIsInstance(self.w.settings_panel,WeeklyReview);self.assertIn('No recorded data',self.w.settings_panel.slides[0]['detail']);self.w.return_to_settings();self.assertTrue(hasattr(self.w.settings_panel,'width_slider'))
 if __name__=='__main__':unittest.main()
