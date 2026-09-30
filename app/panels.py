@@ -5,7 +5,7 @@ from datetime import date,datetime,timedelta
 from PySide6.QtCore import Qt,QRectF,QPoint,QPointF,QPropertyAnimation,QEasingCurve,QParallelAnimationGroup,QSize,QTimer
 from PySide6.QtGui import QColor,QPainter,QPen,QFont,QIcon,QPixmap
 from PySide6.QtSvg import QSvgRenderer
-from PySide6.QtWidgets import (QWidget,QPushButton,QInputDialog,QToolTip,QVBoxLayout,QFormLayout,QLabel,QComboBox,QDoubleSpinBox,QLineEdit,QScrollArea,QColorDialog,QHBoxLayout,QFileDialog,QMessageBox,QCheckBox,QTabWidget)
+from PySide6.QtWidgets import (QWidget,QPushButton,QInputDialog,QToolTip,QVBoxLayout,QFormLayout,QLabel,QComboBox,QDoubleSpinBox,QLineEdit,QScrollArea,QColorDialog,QHBoxLayout,QFileDialog,QMessageBox,QCheckBox,QTabWidget,QSlider)
 ASSETS=Path(__file__).resolve().parent/'assets'
 LIGHT='#FAFAFA';DARK='#100404'
 SOFT_DARK='#24191D'
@@ -71,6 +71,8 @@ class Settings(QWidget):
   scroll=QScrollArea();scroll.setWidgetResizable(True);scroll.setFrameShape(QScrollArea.NoFrame);body=QWidget();form=QFormLayout(body);form.setVerticalSpacing(8);scroll.setWidget(body);self.tabs=QTabWidget();self.tabs.addTab(scroll,"Settings");root.addWidget(self.tabs)
   def section(title):
    label=QLabel(title);label.setStyleSheet('font-weight:bold;font-size:20px;padding-top:10px;');form.addRow(label)
+  review=QPushButton('Open weekly review');review.clicked.connect(window.open_weekly_review);form.addRow(review)
+  self.weekly_notify=QCheckBox('Weekly review notifications');self.weekly_notify.setChecked(window.storage.get_setting('weekly_notifications',True));self.weekly_notify.toggled.connect(lambda enabled:window.storage.set_setting('weekly_notifications',bool(enabled)));form.addRow(self.weekly_notify)
   section('Garmin connection');self.state=QLabel(window.garmin_status);self.state.setWordWrap(True);form.addRow(self.state)
   self.email=QLineEdit();self.email.setPlaceholderText('Email');self.password=QLineEdit();self.password.setPlaceholderText('Password');self.password.setEchoMode(QLineEdit.Password);form.addRow(self.email);form.addRow(self.password)
   connect=QPushButton('Connect Garmin');connect.clicked.connect(self.connect);sync=QPushButton('Sync now');sync.clicked.connect(window.sync);form.addRow(connect,sync)
@@ -78,7 +80,9 @@ class Settings(QWidget):
   self.code=QLineEdit();self.code.setPlaceholderText('Verification code');self.code.hide();self.verify=QPushButton('Verify');self.verify.clicked.connect(self.submit_code);self.verify.hide();form.addRow(self.code,self.verify)
   section('Appearance');self.theme=QComboBox();self.theme.addItems(['Light','Dark','High Contrast','Custom']);self.theme.setCurrentText(window.storage.get_setting('theme','light').title());form.addRow('Theme',self.theme)
   self.auto_adjust=QCheckBox('Auto-adjust for readability');self.auto_adjust.setChecked(bool(window.storage.get_setting('display_auto_adjust',False)));form.addRow(self.auto_adjust)
-  display_note=QLabel('On makes the dashboard about 60% larger, with stronger text and vertical scrolling. Off restores the original layout.');display_note.setWordWrap(True);form.addRow(display_note)
+  self.width_slider=QSlider(Qt.Horizontal);self.width_slider.setRange(0,100);self.width_slider.setAccessibleName('Sidebar size from Original to Largest');self.width_slider.setValue(window.storage.get_setting('display_width',100) if self.auto_adjust.isChecked() else 0);form.addRow('Width',self.width_slider)
+  self.width_note=QLabel();form.addRow(self.width_note)
+  display_note=QLabel('0 = Original. 100 = Largest. Drag to preview the sidebar width immediately; it saves automatically. Larger sizes scroll when needed.');display_note.setWordWrap(True);form.addRow(display_note)
   self.color_values={};self.color_buttons={}
   for key,label,default in [('custom_background','Background',LIGHT),('custom_ink','Text and lines',DARK)]:
    self.add_color(form,key,label,window.storage.get_setting(key,default))
@@ -99,9 +103,10 @@ class Settings(QWidget):
   self.csv_note=QLabel('Import a PACT daily totals CSV, including daily.csv extracted from an exported ZIP.');self.csv_note.setWordWrap(True);form.addRow(self.csv_note)
   self.csv_confirm=QPushButton('Import new dates');self.csv_confirm.hide();self.csv_confirm.clicked.connect(self.import_csv);form.addRow(self.csv_confirm);self.csv_path=None
   reset=QPushButton('Reset progress…');reset.clicked.connect(self.reset_progress);form.addRow(reset)
-  section('About');form.addRow(QLabel('PACT 1.5.1'))
+  section('About');form.addRow(QLabel('PACT 1.6.0'))
   self.theme.currentIndexChanged.connect(self.save);self.use_custom.currentIndexChanged.connect(self.save)
   self.auto_adjust.toggled.connect(self.change_display)
+  self.width_slider.valueChanged.connect(self.change_width)
   self.apply_display_font()
   from edit_data import EditData,EditHistory
   self.edit_data=EditData(window);self.edit_history=EditHistory(window);self.tabs.addTab(self.edit_data,"Edit data");self.tabs.addTab(self.edit_history,"Edit history");self.tabs.currentChanged.connect(lambda _:self.edit_history.reload())
@@ -109,13 +114,23 @@ class Settings(QWidget):
  def paintEvent(self,event):
   p=QPainter(self);p.fillRect(self.rect(),QColor(colors(self.window)[0]));p.end()
  def change_display(self,enabled):
+  value=(self.window.storage.get_setting('display_width',100) or 100) if enabled else 0
+  self.width_slider.blockSignals(True);self.width_slider.setValue(value);self.width_slider.blockSignals(False)
+  if enabled:self.window.storage.set_setting('display_width',value)
   self.window.storage.set_setting('display_auto_adjust',bool(enabled));self.apply_display_font();self.window.refit_current_screen();self.window.canvas.retheme();self.saved_note.setText('Display adjustment saved automatically.')
+ def change_width(self,value):
+  self.window.storage.set_setting('display_width',value);self.window.storage.set_setting('display_auto_adjust',value>0)
+  self.auto_adjust.blockSignals(True);self.auto_adjust.setChecked(value>0);self.auto_adjust.blockSignals(False)
+  self.apply_display_font();self.window.refit_current_screen();self.window.canvas.retheme();self.saved_note.setText('Width saved automatically.')
  def apply_display_font(self):
   if hasattr(self,'edit_data'):self.edit_data.daily.reload()
-  self.setStyleSheet('QWidget{'+('font-size:18px;font-weight:500;' if self.window.storage.get_setting('display_auto_adjust',False) else 'font-size:14px;')+'}')
+  amount=self.width_slider.value();self.width_note.setText(f'Original  —  {amount}/100  —  Largest')
+  self.setStyleSheet('QWidget{font-size:'+str(round(14+4*amount/100))+'px;'+('font-weight:500;' if amount else '')+'}')
   bg,fg=colors(self.window)
   self.auto_adjust.setCursor(Qt.PointingHandCursor)
   self.auto_adjust.setStyleSheet(f'QCheckBox{{border:1px solid {fg};padding:10px;spacing:10px;}} QCheckBox::indicator{{width:18px;height:18px;border:2px solid {fg};background:{bg};}} QCheckBox::indicator:checked{{background:{fg};}} QCheckBox:focus{{border:2px solid {fg};padding:9px;}}')
+  self.weekly_notify.setStyleSheet(self.auto_adjust.styleSheet())
+  self.width_slider.setStyleSheet(f'QSlider::groove:horizontal{{height:4px;background:{bg};border:1px solid {fg};}} QSlider::sub-page:horizontal{{background:{fg};}} QSlider::handle:horizontal{{width:16px;margin:-7px 0;background:{fg};border:1px solid {fg};}}')
  def backup(self):
   from backup import create_backup
   self.flush();path,_=QFileDialog.getSaveFileName(self,'Create PACT backup',str(Path.home()/'Documents'/f'PACT_{date.today().isoformat()}.pact'),'PACT backup (*.pact)')
@@ -136,8 +151,8 @@ class Settings(QWidget):
   if not self.restore_path:return
   if self.window.job and self.window.job.isRunning():self.backup_note.setText('Wait for the current Garmin check to finish, then restore.');return
   try:
-   self.flush();previous_display=self.window.storage.get_setting('display_auto_adjust',False);safety=restore_backup(self.window.storage,self.restore_path);self.skip_save=True;self.window.history_at=0;self.window.sync_error=None;self.window.apply_theme();self.window.refresh();
-   if previous_display!=self.window.storage.get_setting('display_auto_adjust',False):self.window.refit_current_screen()
+   self.flush();previous_display=(self.window.storage.get_setting('display_auto_adjust',False),self.window.storage.get_setting('display_width',100));safety=restore_backup(self.window.storage,self.restore_path);self.skip_save=True;self.window.history_at=0;self.window.sync_error=None;self.window.apply_theme();self.window.refresh();
+   if previous_display!=(self.window.storage.get_setting('display_auto_adjust',False),self.window.storage.get_setting('display_width',100)):self.window.refit_current_screen()
    self.window.close_settings();self.window.settings();self.window.settings_panel.backup_note.setText('Backup restored. Safety copy: '+str(safety));self.window.settings_panel.saved_note.setText('Backup restored. All timers are stopped.')
   except (OSError,ValueError,sqlite3.Error):self.backup_note.setText('Restore failed. Your existing data has been kept. Check the file and retry.')
  def export(self,full):

@@ -68,11 +68,30 @@ class PACT(QWidget):
   QApplication.instance().screenAdded.connect(self.watch_screen);QApplication.instance().screenRemoved.connect(self.on_display_changed)
   if not testing:
    self.tray=QSystemTrayIcon(self.windowIcon(),self);self.tray.setToolTip('PACT');menu=QMenu(self)
-   for title,fn in [('Show / hide',self.toggle_visible),('Settings',self.settings),('Sync Garmin',self.sync),('Quit PACT',self.quit)]:
+   for title,fn in [('Show / hide',self.toggle_visible),('Settings',self.settings),('Weekly review',self.open_weekly_review),('Sync Garmin',self.sync),('Quit PACT',self.quit)]:
     act=menu.addAction(title);act.triggered.connect(fn)
    self.tray.setContextMenu(menu);self.tray.activated.connect(lambda reason:self.toggle_visible() if reason==QSystemTrayIcon.Trigger else None);self.tray.show()
    if Path(TOKENSTORE).exists():QTimer.singleShot(1500,self.sync)
    self.sync_timer.start()
+   self.weekly_timer=QTimer(self);self.weekly_timer.setInterval(3600000);self.weekly_timer.timeout.connect(self.check_weekly_review);self.weekly_timer.start();QTimer.singleShot(15000,self.check_weekly_review)
+   self.tray.messageClicked.connect(lambda:self.open_weekly_review() if getattr(self,'last_notice',None)=='weekly' else self.settings())
+ def check_weekly_review(self):
+  if self.quitting or not self.tray or not self.storage.get_setting('weekly_notifications',True):return
+  from weekly_review import last_week,summary
+  week=last_week().isoformat()
+  if self.storage.get_setting('weekly_notified')==week:return
+  report=summary(self.storage)
+  if not report['has_data']:return
+  self.last_notice='weekly';self.tray.showMessage('PACT · Your weekly review','Your completed week is ready. Click to review your time, habits and highlights.',QSystemTrayIcon.Information,10000);self.storage.set_setting('weekly_notified',week)
+ def open_weekly_review(self):
+  from weekly_review import WeeklyReview
+  if self.settings_panel:self.settings_panel.flush();self.settings_panel.hide();self.settings_panel.deleteLater();self.settings_panel=None
+  if self.panel_animation:self.panel_animation.stop()
+  if not self.isVisible():self.reveal()
+  self.canvas.details.clear_details();self.settings_panel=WeeklyReview(self);self.settings_panel.setGeometry(self.rect());self.settings_panel.show();self.settings_panel.raise_()
+ def return_to_settings(self):
+  if self.settings_panel:self.settings_panel.hide();self.settings_panel.deleteLater();self.settings_panel=None
+  self.settings()
  def auto_sync(self):
   if self.garmin.client is not None or Path(TOKENSTORE).exists():self.sync()
  def apply_theme(self):
@@ -91,7 +110,8 @@ class PACT(QWidget):
    # Qt supplies logical pixels: Windows DPI scaling is already accounted for.
    # Enlarge the complete design together rather than shrinking text to fit.
    default_width=min(520,g.width(),max(320,int(h*3000/9314)))
-   w=min(g.width(),max(560,round(default_width*1.6)))
+   largest=min(g.width(),max(560,round(default_width*1.6)));amount=max(0,min(100,int(self.storage.get_setting('display_width',100))))
+   w=round(default_width+(largest-default_width)*amount/100)
    scrolling=Qt.ScrollBarAsNeeded
   else:w=min(520,g.width(),max(320,int(h*3000/9314)));scrolling=Qt.ScrollBarAsNeeded if h<994 else Qt.ScrollBarAlwaysOff
   self.scroll.setVerticalScrollBarPolicy(scrolling);self.setGeometry(g.right()-w+1,g.bottom()-h+1,w,h);self.size_canvas()
@@ -185,7 +205,7 @@ class PACT(QWidget):
   self.garmin.client=None
   self.garmin_status=message
   self.refresh()
-  if self.tray:self.tray.showMessage('PACT · Garmin',message,QSystemTrayIcon.Information,5000)
+  if self.tray:self.last_notice='garmin';self.tray.showMessage('PACT · Garmin',message,QSystemTrayIcon.Information,5000)
  def quit(self):
   self.quitting=True
   if self.display_hint:self.display_hint.reject()

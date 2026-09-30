@@ -1,6 +1,12 @@
-# PACT v1.5.1
+# PACT v1.6.0
 
-Run PACT_v1.5.1_Setup.exe to install or update on Windows 10/11 x64. The private runtime is included. Start Menu, Installed Apps, optional desktop/startup shortcuts and updater process management are preserved.
+Run PACT_v1.6.0_Setup.exe to install or update on Windows 10/11 x64. The private runtime is included. Start Menu, Installed Apps, optional desktop/startup shortcuts and updater process management are preserved.
+
+## New in v1.6.0
+
+- Settings > Appearance > Width is a live 0–100 slider: 0 is the original layout for the monitor; 100 is the enlarged v1.4–v1.5 layout. Intermediate widths interpolate between those endpoints, resize immediately, save automatically and survive full backup/restore. Settings text also scales gradually. The existing readability checkbox switches between original and the remembered enlarged width. Screen bounds and docking remain respected.
+- Open weekly review from Settings or the tray menu. It reviews completed Monday–Sunday weeks and supports browsing earlier weeks. Work/Learning totals, busiest recorded days, current-goal days/streaks, previous-week comparisons, creatives, meals, average sleep and daily details are computed from stored data. Coverage counts identify missing records; goal calculations use current targets. Edits/imports are identified and corrections automatically update the review.
+- While PACT runs, it checks for a newly completed week at startup and hourly. If that week contains recorded data, one Windows notification announces the review; click it to open. The preference can be disabled in Settings. Windows notification settings may suppress delivery. If PACT was closed at the week boundary, the latest completed week is checked when it next runs. No email, account or external reporting service is involved.
 
 ## Fixed in v1.5.1
 
@@ -70,10 +76,10 @@ The panel fits the complete dashboard on available heights of at least 994 logic
 
 ## Build
 
-Extract PACT_v1.5.1_Package.zip for its runtime. In the source folder run:
+Extract PACT_v1.6.0_Package.zip for its runtime. In the source folder run:
 
 ```powershell
 .\build.ps1 -RuntimeDirectory 'C:\path\to\runtime' -InnoCompiler 'C:\path\to\ISCC.exe'
 ```
 
-Output is `dist\PACT_v1.5.1_Setup.exe`. Build tools: Inno Setup 6.7.3, the Windows .NET Framework compiler and bundled Python 3.12.10. Pinned dependencies and licenses are included. compile_designs.py regenerates current geometry; compile_assets.py is retained for the old design only. See PACT_Validation.md. The installer remains unsigned.
+Output is `dist\PACT_v1.6.0_Setup.exe`. Build tools: Inno Setup 6.7.3, the Windows .NET Framework compiler and bundled Python 3.12.10. Pinned dependencies and licenses are included. compile_designs.py regenerates current geometry; compile_assets.py is retained for the old design only. See PACT_Validation.md. The installer remains unsigned.
