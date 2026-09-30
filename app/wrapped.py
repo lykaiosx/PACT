@@ -67,19 +67,23 @@ class StoryCanvas(QWidget):
                 if v:p.fillRect(QRectF(30+i*slot,460-height,bar,height),fg)
         elif kind=='book':
             # Pages unfold sideways; unlike Work, this illustration is not a daily chart.
-            p.setBrush(paper)
-            for side in (-1,1):
+            def book_page(side,reveal):
+                p.setBrush(paper)
                 edge=180+side*(25+82*grow)
                 page=QPainterPath(QPointF(180,334));page.cubicTo(180+side*30,312,edge-side*25,320,edge,331)
                 page.lineTo(edge,439);page.cubicTo(edge-side*25,428,180+side*30,425,180,447);page.closeSubpath();p.drawPath(page)
                 for row in range(4):
-                    reveal=max(0,min(1,(grow-row*.12)/.64));y=354+row*18
-                    line=QPainterPath(QPointF(180+side*18,y));line.quadTo(180+side*(18+28*reveal),y-10,180+side*(18+65*reveal),y-3)
-                    if reveal:p.drawPath(line)
+                    amount=max(0,min(1,(reveal-row*.12)/.64));y=354+row*18
+                    line=QPainterPath(QPointF(180+side*18,y));line.quadTo(180+side*(18+28*amount),y-10,180+side*(18+65*amount),y-3)
+                    if amount:p.drawPath(line)
+            for side in (-1,1):book_page(side,grow)
             p.drawLine(QPointF(180,334),QPointF(180,447))
-            # A turning leaf settles onto the left page at the end of the ease-out.
-            if 0<grow<1:
-                tip=180+100*math.cos(math.pi*grow);leaf=QPainterPath(QPointF(180,334));leaf.quadTo(tip,300,tip,331);leaf.lineTo(tip,439);leaf.quadTo(tip,424,180,447);leaf.closeSubpath();p.drawPath(leaf)
+            # The leaf shares the resting page's curves and writing. It merges
+            # gradually instead of disappearing and exposing a different drawing.
+            def smooth(value):
+                value=max(0,min(1,value));return value*value*(3-2*value)
+            opacity=smooth(grow/.12)*(1-smooth((grow-.82)/.18))
+            p.save();p.setOpacity(p.opacity()*opacity);book_page(math.cos(math.pi*grow),max(0,2*grow-1));p.restore()
         elif kind=='peak':
             if any(values):
                 for i in range(18):

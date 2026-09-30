@@ -29,7 +29,7 @@ if ($LASTEXITCODE -ne 0) { throw 'PACT hover and hydration tests failed' }
 & package\runtime\python.exe tests\test_v11.py
 if ($LASTEXITCODE -ne 0) { throw 'PACT v1.1 tests failed' }
 & package\runtime\python.exe tests\test_v111.py
-if ($LASTEXITCODE -ne 0) { throw 'PACT v1.8.1 visual regression tests failed' }
+if ($LASTEXITCODE -ne 0) { throw 'PACT v1.8.2 visual regression tests failed' }
 & package\runtime\python.exe tests\test_v12.py
 if ($LASTEXITCODE -ne 0) { throw 'PACT reset and CSV tests failed' }
 & package\runtime\python.exe tests\test_history_restore.py
@@ -48,6 +48,8 @@ if ($LASTEXITCODE -ne 0) { throw 'PACT Wrapped tests failed' }
 if ($LASTEXITCODE -ne 0) { throw 'PACT report animation and export tests failed' }
 & package\runtime\python.exe tests\test_v181.py
 if ($LASTEXITCODE -ne 0) { throw 'PACT report clarity tests failed' }
+& package\runtime\python.exe tests\test_v182.py
+if ($LASTEXITCODE -ne 0) { throw 'PACT page-turn continuity tests failed' }
 & $InnoCompiler /Q PACT.iss
 if ($LASTEXITCODE -ne 0) { throw 'Installer build failed' }
-Write-Output 'Built dist\PACT_v1.8.1_Setup.exe'
+Write-Output 'Built dist\PACT_v1.8.2_Setup.exe'

@@ -1,6 +1,11 @@
-# PACT v1.8.1
+# PACT v1.8.2
 
-Run PACT_v1.8.1_Setup.exe to install or update on Windows 10/11 x64. The private runtime is included. Start Menu, Installed Apps, optional desktop/startup shortcuts and updater process management are preserved.
+Run PACT_v1.8.2_Setup.exe to install or update on Windows 10/11 x64. The private runtime is included. Start Menu, Installed Apps, optional desktop/startup shortcuts and updater process management are preserved.
+
+## Fixed in v1.8.2
+
+- The Learning page turn now settles into the resting illustration without a final-frame swap. Its moving sheet uses the same curves as the static page, brings writing in gradually, and blends into place. The 3.4-second ease-out and report exports remain intact.
+- A rendered regression test compares the last two frames at 30 fps in light, dark and custom colors, and separately verifies that the page still moves during the animation.
 
 ## New in v1.8.1
 
