@@ -1,4 +1,6 @@
-# PACT v1.5.0 validation
+# PACT v1.5.1 validation
+
+Patch checks: all 74 tests, five installer path cases, the 90-day restoration check and packaged startup self-test passed. Inspected the meal boxes and history containing multiple date groups. The existing dated-editor test now operates the actual meal buttons. Installer behavior is unchanged; upgrade integration results below are from v1.5.0.
 
 Windows x64, 30 September 2026.
 

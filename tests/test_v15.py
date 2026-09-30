@@ -19,7 +19,7 @@ class Editing(unittest.TestCase):
   self.w.hide();self.w.deleteLater();app.sendPostedEvents(None,QEvent.DeferredDelete);self.s.conn.close()
  def test_settings_dated_daily_editor(self):
   self.w.settings();p=self.w.settings_panel;self.assertEqual(p.tabs.count(),3);d=p.edit_data.daily;d.day.setDate(QDate.fromString(self.day,'yyyy-MM-dd'))
-  for box in d.meals.values():box.setCurrentIndex(2)
+  for box in d.meals.values():box.click()
   d.creatives.setValue(3);self.assertEqual(self.s.existing_day(self.day)['creatives'],3)
   self.assertTrue(all(self.s.existing_day(self.day)[k]==1 for k in d.meals));self.assertEqual(self.s.existing_day(date.today().isoformat())['creatives'],0)
   p.edit_history.reload();self.assertIn('Creatives',p.edit_history.text.toPlainText());self.assertIn('After: 3',p.edit_history.text.toPlainText())

@@ -99,7 +99,7 @@ class Settings(QWidget):
   self.csv_note=QLabel('Import a PACT daily totals CSV, including daily.csv extracted from an exported ZIP.');self.csv_note.setWordWrap(True);form.addRow(self.csv_note)
   self.csv_confirm=QPushButton('Import new dates');self.csv_confirm.hide();self.csv_confirm.clicked.connect(self.import_csv);form.addRow(self.csv_confirm);self.csv_path=None
   reset=QPushButton('Reset progress…');reset.clicked.connect(self.reset_progress);form.addRow(reset)
-  section('About');form.addRow(QLabel('PACT 1.5.0'))
+  section('About');form.addRow(QLabel('PACT 1.5.1'))
   self.theme.currentIndexChanged.connect(self.save);self.use_custom.currentIndexChanged.connect(self.save)
   self.auto_adjust.toggled.connect(self.change_display)
   self.apply_display_font()
@@ -111,6 +111,7 @@ class Settings(QWidget):
  def change_display(self,enabled):
   self.window.storage.set_setting('display_auto_adjust',bool(enabled));self.apply_display_font();self.window.refit_current_screen();self.window.canvas.retheme();self.saved_note.setText('Display adjustment saved automatically.')
  def apply_display_font(self):
+  if hasattr(self,'edit_data'):self.edit_data.daily.reload()
   self.setStyleSheet('QWidget{'+('font-size:18px;font-weight:500;' if self.window.storage.get_setting('display_auto_adjust',False) else 'font-size:14px;')+'}')
   bg,fg=colors(self.window)
   self.auto_adjust.setCursor(Qt.PointingHandCursor)

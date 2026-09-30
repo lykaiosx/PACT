@@ -1,6 +1,11 @@
-# PACT v1.5.0
+# PACT v1.5.1
 
-Run PACT_v1.5.0_Setup.exe to install or update on Windows 10/11 x64. The private runtime is included. Start Menu, Installed Apps, optional desktop/startup shortcuts and updater process management are preserved.
+Run PACT_v1.5.1_Setup.exe to install or update on Windows 10/11 x64. The private runtime is included. Start Menu, Installed Apps, optional desktop/startup shortcuts and updater process management are preserved.
+
+## Fixed in v1.5.1
+
+- Edit data uses the original Meals row with three outlined, theme-colored toggle boxes (breakfast, lunch, dinner). Filled means Yes; empty means not selected. Changes still save and enter history automatically.
+- Edit history groups entries by the date being edited, newest dates first, with bold headings and a divider between dates. Each entry retains its actual edit timestamp.
 
 ## New in v1.5.0
 
@@ -65,10 +70,10 @@ The panel fits the complete dashboard on available heights of at least 994 logic
 
 ## Build
 
-Extract PACT_v1.5.0_Package.zip for its runtime. In the source folder run:
+Extract PACT_v1.5.1_Package.zip for its runtime. In the source folder run:
 
 ```powershell
 .\build.ps1 -RuntimeDirectory 'C:\path\to\runtime' -InnoCompiler 'C:\path\to\ISCC.exe'
 ```
 
-Output is `dist\PACT_v1.5.0_Setup.exe`. Build tools: Inno Setup 6.7.3, the Windows .NET Framework compiler and bundled Python 3.12.10. Pinned dependencies and licenses are included. compile_designs.py regenerates current geometry; compile_assets.py is retained for the old design only. See PACT_Validation.md. The installer remains unsigned.
+Output is `dist\PACT_v1.5.1_Setup.exe`. Build tools: Inno Setup 6.7.3, the Windows .NET Framework compiler and bundled Python 3.12.10. Pinned dependencies and licenses are included. compile_designs.py regenerates current geometry; compile_assets.py is retained for the old design only. See PACT_Validation.md. The installer remains unsigned.

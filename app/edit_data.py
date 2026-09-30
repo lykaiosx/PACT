@@ -1,7 +1,8 @@
 """Dated manual entries and a visible, preserved correction trail."""
 import json
+from html import escape
 from PySide6.QtCore import QDate
-from PySide6.QtWidgets import QWidget,QVBoxLayout,QFormLayout,QLabel,QComboBox,QSpinBox,QDateEdit,QPushButton,QTabWidget,QPlainTextEdit,QCheckBox
+from PySide6.QtWidgets import QWidget,QVBoxLayout,QHBoxLayout,QFormLayout,QLabel,QSpinBox,QDateEdit,QPushButton,QTabWidget,QTextEdit
 from time_editor import TimeEditor
 
 def display_value(raw,field):
@@ -20,12 +21,21 @@ class EditHistory(QWidget):
     def __init__(self,window):
         super().__init__();self.window=window;self.limit=200;root=QVBoxLayout(self)
         note=QLabel('Local edit history. Undo stays in the history. Earlier unlogged changes cannot be reconstructed.');note.setWordWrap(True);root.addWidget(note)
-        self.text=QPlainTextEdit();self.text.setReadOnly(True);root.addWidget(self.text)
+        self.text=QTextEdit();self.text.setReadOnly(True);root.addWidget(self.text)
         more=QPushButton('Show more history');more.clicked.connect(self.more);root.addWidget(more);self.reload()
     def more(self):self.limit+=200;self.reload()
     def reload(self):
         rows=self.window.storage.conn.execute('SELECT * FROM edit_history ORDER BY id DESC LIMIT ?',(self.limit,)).fetchall()
-        self.text.setPlainText('\n\n'.join(f"{r['edited_at'].replace('T',' ')} · {r['action']}\n{r['day']} · {r['field'].title()}\nBefore: {display_value(r['before_json'],r['field'])}\nAfter: {display_value(r['after_json'],r['field'])}" for r in rows) or 'No recorded edits yet.')
+        from panels import colors
+        _,ink=colors(self.window);groups={}
+        for r in rows:groups.setdefault(r['day'],[]).append(r)
+        sections=[]
+        for day in sorted(groups,reverse=True):
+            entries=[]
+            for r in groups[day]:
+                entries.append('<p>'+escape(r['edited_at'].replace('T',' ')+' · '+r['action'])+'<br><b>'+escape(r['field'].title())+'</b><br>Before: '+escape(display_value(r['before_json'],r['field']))+'<br>After: '+escape(display_value(r['after_json'],r['field']))+'</p>')
+            sections.append('<h3>'+escape(day)+'</h3>'+''.join(entries))
+        self.text.setHtml(('<hr style="background-color:'+ink+';" color="'+ink+'">').join(sections) or 'No recorded edits yet.')
 
 class DailyEditor(QWidget):
     def __init__(self,window):
@@ -33,9 +43,10 @@ class DailyEditor(QWidget):
         self.day=QDateEdit(QDate.currentDate());self.day.setCalendarPopup(True);self.day.setDisplayFormat('dd MMM yyyy');self.day.setMinimumDate(QDate(2000,1,1));self.day.setMaximumDate(QDate.currentDate());form.addRow('Date',self.day)
         self.summary=QLabel();self.summary.setWordWrap(True);form.addRow(self.summary)
         self.creatives=QSpinBox();self.creatives.setRange(-1,999999);self.creatives.setSpecialValueText('Not entered');self.creatives.setKeyboardTracking(False);form.addRow('Creatives',self.creatives)
-        self.meals={}
+        self.meals={};meal_row=QWidget();meal_layout=QHBoxLayout(meal_row);meal_layout.setContentsMargins(0,0,0,0);meal_layout.setSpacing(5)
         for field in ('breakfast','lunch','dinner'):
-            box=QComboBox();box.addItems(['Not entered','No','Yes']);form.addRow(field.title(),box);self.meals[field]=box;box.currentIndexChanged.connect(lambda _,key=field:self.save(key))
+            box=QPushButton();box.setCheckable(True);box.setAccessibleName(field.title());box.setFixedSize(30,30);meal_layout.addWidget(box);self.meals[field]=box;box.clicked.connect(lambda _,key=field:self.save(key))
+        meal_layout.addStretch();form.addRow('Meals',meal_row)
         self.creatives.valueChanged.connect(lambda _:self.save('creatives'))
         self.health=QLabel();self.health.setWordWrap(True);form.addRow('Garmin · read-only',self.health)
         self.note=QLabel('Changes save automatically and appear in Edit history. Older zero entries without recording status appear as Not entered.');self.note.setWordWrap(True);form.addRow(self.note)
@@ -43,7 +54,10 @@ class DailyEditor(QWidget):
     def reload(self,*args):
         self.loading=True;s=self.window.storage;day=self.day.date().toString('yyyy-MM-dd')
         value=s.manual_value('creatives',day);self.creatives.setValue(-1 if value is None else value)
-        for field,box in self.meals.items():value=s.manual_value(field,day);box.setCurrentIndex(0 if value is None else 2 if value else 1)
+        from panels import colors
+        bg,ink=colors(self.window)
+        for field,box in self.meals.items():
+            value=s.manual_value(field,day);box.setChecked(bool(value));box.setStyleSheet(f'QPushButton{{background:{ink if value else bg};border:1px solid {ink};padding:0;}} QPushButton:focus{{border:2px solid {ink};}}')
         count=s.conn.execute('SELECT COUNT(*) FROM edit_history WHERE day=?',(day,)).fetchone()[0]
         totals=[]
         for kind in ('work','learning'):
@@ -53,7 +67,7 @@ class DailyEditor(QWidget):
         self.loading=False
     def save(self,field):
         if self.loading:return
-        value=self.creatives.value() if field=='creatives' else self.meals[field].currentIndex()-1
+        value=self.creatives.value() if field=='creatives' else int(self.meals[field].isChecked())
         self.window.storage.edit_manual(field,None if value<0 else value,self.day.date().toString('yyyy-MM-dd'));self.window.history_at=0;self.window.refresh();self.reload()
     def undo(self):
         try:self.window.storage.undo_manual();self.window.history_at=0;self.window.refresh();self.reload();self.note.setText('Last daily edit undone. The undo is recorded in history.')
