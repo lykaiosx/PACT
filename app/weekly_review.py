@@ -37,6 +37,7 @@ def summary(storage,start=None,today=None,end=None):
         result['edited_days']+=bool(storage.conn.execute('SELECT 1 FROM edit_history WHERE day=? LIMIT 1',(key,)).fetchone())
     result.update(creatives=sum(creatives),creative_days=len(creatives),meals=sum(meal_values),meal_entries=len(meal_values),complete_meal_days=complete_meals,sleep_average=sum(sleep)/len(sleep) if sleep else None,sleep_nights=len(sleep))
     result.update(days=days,creative_values=creative_values,sleep_values=sleep_values,meal_types=meal_types,covered_days=covered)
+    result.update(meal_skipped=sum(v==0 for v in meal_values),meal_unknown=len(days)*3-len(meal_values))
     result['has_data']|=bool(creatives or meal_values or sleep)
     return result
 

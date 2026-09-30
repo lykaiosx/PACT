@@ -1,6 +1,13 @@
-# PACT v1.8.0
+# PACT v1.8.1
 
-Run PACT_v1.8.0_Setup.exe to install or update on Windows 10/11 x64. The private runtime is included. Start Menu, Installed Apps, optional desktop/startup shortcuts and updater process management are preserved.
+Run PACT_v1.8.1_Setup.exe to install or update on Windows 10/11 x64. The private runtime is included. Start Menu, Installed Apps, optional desktop/startup shortcuts and updater process management are preserved.
+
+## New in v1.8.1
+
+- A visible export selector offers one PDF report or PNG slides in a ZIP. Images are grouped in a dated folder and named Slide 01 - Overview, Slide 02 - Work, and so on.
+- Learning has its own unfolding-book animation, distinct from Work's rising daily bars.
+- Thirty-day consistency grids use six columns and five rows. Other periods keep every real date and center any shorter final row; no extra dates are invented.
+- Meals now label eaten, explicitly skipped, and unrecorded totals separately. Previously the headline counted Yes entries while the footer counted both Yes and No entries, which was confusing. Breakfast/lunch/dinner counts and the headline still count only eaten meals.
 
 ## New in v1.8.0
 

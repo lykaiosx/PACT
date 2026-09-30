@@ -20,13 +20,13 @@ def make_slides(s,mode,selected,today=None):
       dict(tag='YOUR PACT, REVISITED',title='Small days.\nA bigger picture.',metric=f'{r["covered_days"]}',unit='days with a story',graphic='orbit',values=[],note=period,detail=edited if r['has_data'] else 'No recorded data for this period yet.'),
       dict(tag='THE WORK YOU PUT IN',title='You made\ntime count.',metric=compact(work['total']) if work['recorded'] else '—',unit='of recorded work',graphic='bars',values=work['values'],note=f'{work["recorded"]} of {n} days recorded',detail='Every bar is one day. Unrecorded days stay blank.'),
       dict(tag='YOUR STANDOUT DAY',title='One day\nstood taller.',metric=compact(best[1]) if best else '—',unit='on your busiest work day',graphic='peak',values=work['values'],note=best[0].strftime('%A, %d %B') if best else 'No work time recorded yet',detail='Your highest recorded work total in this period.'),
-      dict(tag='ROOM TO GROW',title='You kept\nyour curiosity.',metric=compact(learning['total']) if learning['recorded'] else '—',unit='of recorded learning',graphic='steps',values=learning['values'],note=f'{learning["recorded"]} of {n} days recorded',detail='One step, one session, one thing learned.' if learning['total'] else 'Your next learning session starts the story.'),
+      dict(tag='ROOM TO GROW',title='You kept\nyour curiosity.',metric=compact(learning['total']) if learning['recorded'] else '—',unit='of recorded learning',graphic='book',values=learning['values'],note=f'{learning["recorded"]} of {n} days recorded',detail='One page, one session, one thing learned.' if learning['total'] else 'Your next learning session starts the story.'),
       dict(tag='SHOWING UP',title='Consistency\nhas a rhythm.',metric=str(work['streak']) if work['recorded'] else '—',unit='days in your longest work-goal streak',graphic='grid',values=[int(k and v>=s.target('work')*3600) for k,v in zip(work['known'],work['values'])],note=f'{work["goal_days"]} work-goal days in total',detail=f'Filled squares met your current {s.target("work"):g}h work target. Missing days do not extend a streak.'),
       dict(tag='THINGS YOU CREATED',title='Ideas became\nsomething real.',metric=str(r['creatives']) if r['creative_days'] else '—',unit='creatives recorded',graphic='tiles',values=r['creative_values'],note=f'{r["creative_days"]} of {n} days with entries',detail='An idea, a mark, something made.'),
-      dict(tag='THE EVERYDAY BASICS',title='You made room\nfor yourself.',metric=str(r['meals']) if r['meal_entries'] else '—',unit='meals checked in',graphic='meals',values=r['meal_types'],note=f'{r["complete_meal_days"]} days with all three meals checked',detail=f'{r["meal_entries"]} of {n*3} meal entries recorded. Empty entries are unknown.'),
+      dict(tag='THE EVERYDAY BASICS',title='You made room\nfor yourself.',metric=str(r['meals']) if r['meal_entries'] else '—',unit='meals marked as eaten',graphic='meals',values=r['meal_types'],note=f'{r["complete_meal_days"]} days with all three meals eaten',detail=f'{r["meals"]} eaten · {r["meal_skipped"]} marked as skipped\n{r["meal_unknown"]} unrecorded. Unrecorded does not mean skipped.'),
       dict(tag='TIME TO RECHARGE',title='Rest was part\nof the picture.',metric=compact(r['sleep_average']*60) if r['sleep_average'] is not None else '—',unit='average recorded sleep',graphic='moon',values=r['sleep_values'],note=f'{r["sleep_nights"]} recorded nights',detail='From Garmin sleep records. Here’s to your next chapter.' if r['sleep_nights'] else 'No sleep records for this period yet.')]
     for slide,value in zip(slides,[r['covered_days'],work['total'],best[1] if best else 0,learning['total'],work['streak'],r['creatives'],r['meals'],(r['sleep_average'] or 0)*60]):
-        slide['number']=value;slide['duration']=slide['graphic'] in ('bars','peak','steps','moon')
+        slide['number']=value;slide['duration']=slide['graphic'] in ('bars','peak','book','moon')
     for slide in slides:
         if slide['metric']=='—':slide['title']='A chapter\nstill unwritten.'
     return slides,period,r
@@ -58,15 +58,28 @@ class StoryCanvas(QWidget):
             for i in range(5):
                 w=170-i*28;p.drawEllipse(QRectF(180-w/2,385-w/2,w,w))
             angle=-math.pi/2+(t-1)*math.pi*4;p.setBrush(fg);p.drawEllipse(QPointF(180+72*math.cos(angle),385+72*math.sin(angle)),11,11)
-        elif kind in ('bars','steps'):
+        elif kind=='bars':
             vals=[v or 0 for v in values];maximum=max(vals,default=0) or 1;slot=300/max(1,len(vals));bar=max(2,slot*.65)
             p.drawLine(QPointF(30,460),QPointF(330,460))
             for i,v in enumerate(vals):
                 height=140*v/maximum*grow
                 if height<1.5:continue
-                if kind=='steps':
-                    p.setBrush(Qt.NoBrush);p.drawRect(QRectF(30+i*slot,460-height,bar,height)) if v else None
-                elif v:p.fillRect(QRectF(30+i*slot,460-height,bar,height),fg)
+                if v:p.fillRect(QRectF(30+i*slot,460-height,bar,height),fg)
+        elif kind=='book':
+            # Pages unfold sideways; unlike Work, this illustration is not a daily chart.
+            p.setBrush(paper)
+            for side in (-1,1):
+                edge=180+side*(25+82*grow)
+                page=QPainterPath(QPointF(180,334));page.cubicTo(180+side*30,312,edge-side*25,320,edge,331)
+                page.lineTo(edge,439);page.cubicTo(edge-side*25,428,180+side*30,425,180,447);page.closeSubpath();p.drawPath(page)
+                for row in range(4):
+                    reveal=max(0,min(1,(grow-row*.12)/.64));y=354+row*18
+                    line=QPainterPath(QPointF(180+side*18,y));line.quadTo(180+side*(18+28*reveal),y-10,180+side*(18+65*reveal),y-3)
+                    if reveal:p.drawPath(line)
+            p.drawLine(QPointF(180,334),QPointF(180,447))
+            # A turning leaf settles onto the left page at the end of the ease-out.
+            if 0<grow<1:
+                tip=180+100*math.cos(math.pi*grow);leaf=QPainterPath(QPointF(180,334));leaf.quadTo(tip,300,tip,331);leaf.lineTo(tip,439);leaf.quadTo(tip,424,180,447);leaf.closeSubpath();p.drawPath(leaf)
         elif kind=='peak':
             if any(values):
                 for i in range(18):
@@ -87,9 +100,8 @@ class StoryCanvas(QWidget):
             p.save();p.translate(x,y);p.rotate(30);p.setBrush(paper)
             nib=QPainterPath(QPointF(0,0));nib.lineTo(-7,-17);nib.lineTo(-4,-54);nib.lineTo(4,-54);nib.lineTo(7,-17);nib.closeSubpath();p.drawPath(nib);p.restore()
         elif kind=='grid':
-            columns=7;rows=math.ceil(len(values)/columns);gap=7;size=min(32,(150-gap*(rows-1))/max(1,rows));left=180-(columns*(size+gap)-gap)/2
-            for i,value in enumerate(values):
-                p.setOpacity(1 if t>=1 else .65+.35*math.cos((self.owner.content_elapsed*2+i*.07)*math.pi));p.setBrush(fg if value else Qt.NoBrush);p.drawRect(QRectF(left+(i%columns)*(size+gap),310+(i//columns)*(size+gap),size,size))
+            for i,(value,rect) in enumerate(zip(values,consistency_cells(len(values)))):
+                p.setOpacity(1 if t>=1 else .65+.35*math.cos((self.owner.content_elapsed*2+i*.07)*math.pi));p.setBrush(fg if value else Qt.NoBrush);p.drawRect(rect)
         elif kind=='meals':
             # Plate and cutlery: a meal symbol, not a pie chart of unknown days.
             p.setBrush(Qt.NoBrush)
@@ -126,7 +138,9 @@ class WrappedReview(QWidget):
         for i,control in enumerate(self.header_controls):
             control.setFixedHeight(max(34,self.fontMetrics().height()+14));header.addWidget(control,i//3,i%3)
         root.addLayout(header)
-        self.export_button=QPushButton('Export report');self.export_button.clicked.connect(self.choose_export);root.addWidget(self.export_button)
+        export_row=QHBoxLayout();self.export_format=QComboBox();self.export_format.addItems(['One PDF report','PNG slides (ZIP)']);self.export_format.setAccessibleName('Report export format');export_row.addWidget(self.export_format,1)
+        self.export_button=QPushButton('Export');self.export_button.clicked.connect(self.choose_export);export_row.addWidget(self.export_button);root.addLayout(export_row)
+        for control in (self.export_format,self.export_button):control.setFixedHeight(self.mode.height())
         self.period_note=QLabel();self.period_note.setAlignment(Qt.AlignCenter);root.addWidget(self.period_note)
         self.canvas=StoryCanvas(self);root.addWidget(self.canvas,1);dots=QHBoxLayout();dots.setSpacing(4);self.dots=[]
         for i in range(8):
@@ -201,14 +215,16 @@ class WrappedReview(QWidget):
                     for i,slide in enumerate(self.slides):
                         image=QImage(1080,1950,QImage.Format_ARGB32);painter=QPainter(image);painter.setRenderHint(QPainter.Antialiasing);page(painter,1080,1950,slide,i);painter.end();buffer=QBuffer();buffer.open(QIODevice.WriteOnly)
                         if not image.save(buffer,'PNG'):raise OSError('Could not create a slide image.')
-                        archive.writestr(f'PACT-{i+1:02}.png',bytes(buffer.data()))
+                        title=('Overview','Work','Busiest work day','Learning','Consistency','Creatives','Meals','Sleep')[i]
+                        archive.writestr(f'PACT-Wrapped-{self.report["start"]}/Slide {i+1:02} - {title}.png',bytes(buffer.data()))
             os.replace(temp,target)
         finally:
             if os.path.exists(temp):os.unlink(temp)
     def choose_export(self):
-        filename,chosen=QFileDialog.getSaveFileName(self,'Export PACT report',f'PACT-Wrapped-{self.report["start"]}.pdf','PDF report (*.pdf);;Slide images (*.zip)')
+        images=self.export_format.currentIndex()==1;extension='.zip' if images else '.pdf'
+        filename,chosen=QFileDialog.getSaveFileName(self,'Export PNG slides' if images else 'Export PDF report',f'PACT-Wrapped-{self.report["start"]}{extension}','PNG slides (*.zip)' if images else 'PDF report (*.pdf)')
         if not filename:return
-        if not Path(filename).suffix:filename+='.zip' if 'zip' in chosen else '.pdf'
+        if Path(filename).suffix.lower()!=extension:filename+=extension
         try:self.export_report(filename);self.period_note.setText('Report exported · '+self.period)
         except Exception:self.period_note.setText('Could not export. Choose a writable location and try again.')
 
@@ -216,3 +232,14 @@ def animated_metric(slide,progress):
     if slide['metric']=='—' or progress>=1:return slide['metric']
     number=slide['number']*max(0,progress)
     return compact(number) if slide['duration'] else str(int(number))
+
+def consistency_cells(count):
+    """Balanced rows without introducing boxes for dates outside the report."""
+    if not count:return []
+    columns=count if count<=7 else 7 if count==28 else 8 if count==31 else 6
+    rows=math.ceil(count/columns);gap=7;size=min(32,(150-gap*(rows-1))/rows)
+    top=385-(rows*(size+gap)-gap)/2;cells=[]
+    for row in range(rows):
+        length=min(columns,count-row*columns);left=180-(length*(size+gap)-gap)/2
+        cells.extend(QRectF(left+col*(size+gap),top+row*(size+gap),size,size) for col in range(length))
+    return cells
