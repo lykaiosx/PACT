@@ -1,6 +1,12 @@
-# PACT v1.7.0
+# PACT v1.8.0
 
-Run PACT_v1.7.0_Setup.exe to install or update on Windows 10/11 x64. The private runtime is included. Start Menu, Installed Apps, optional desktop/startup shortcuts and updater process management are preserved.
+Run PACT_v1.8.0_Setup.exe to install or update on Windows 10/11 x64. The private runtime is included. Start Menu, Installed Apps, optional desktop/startup shortcuts and updater process management are preserved.
+
+## New in v1.8.0
+
+- Wrapped graphics and counters animate for 3.4 seconds after each 650 ms slide transition, easing out gradually. Orbit, rising bars, sun rays, softly pulsing goal grid, drawing motif, place setting, moon and stars each have a distinct treatment. All use your theme colors. Tiny outlined bars no longer leave a stray dot on the baseline.
+- Export report saves all eight final slides as a PDF or a ZIP of high-resolution PNG images, ready to share. Exports include the period and edited/imported disclosure, with no credentials or private session details. These are still images/pages; animations play in PACT.
+- Report selectors and navigation controls share equal heights and aligned columns. Settings and time-editor input heights are consistent, including hours and minutes.
 
 ## New in v1.7.0
 

@@ -104,7 +104,7 @@ class Settings(QWidget):
   self.csv_note=QLabel('Import a PACT daily totals CSV, including daily.csv extracted from an exported ZIP.');self.csv_note.setWordWrap(True);form.addRow(self.csv_note)
   self.csv_confirm=QPushButton('Import new dates');self.csv_confirm.hide();self.csv_confirm.clicked.connect(self.import_csv);form.addRow(self.csv_confirm);self.csv_path=None
   reset=QPushButton('Reset progress…');reset.clicked.connect(self.reset_progress);form.addRow(reset)
-  section('About');form.addRow(QLabel('PACT 1.7.0'))
+  section('About');form.addRow(QLabel('PACT 1.8.0'))
   self.theme.currentIndexChanged.connect(self.save);self.use_custom.currentIndexChanged.connect(self.save)
   self.auto_adjust.toggled.connect(self.change_display)
   self.width_slider.valueChanged.connect(self.change_width)
@@ -126,7 +126,8 @@ class Settings(QWidget):
  def apply_display_font(self):
   if hasattr(self,'edit_data'):self.edit_data.daily.reload()
   amount=self.width_slider.value();self.width_note.setText(f'Original  —  {amount}/100  —  Largest')
-  self.setStyleSheet('QWidget{font-size:'+str(round(14+4*amount/100))+'px;'+('font-weight:500;' if amount else '')+'}')
+  size=round(14+4*amount/100)
+  self.setStyleSheet('QWidget{font-size:'+str(size)+'px;'+('font-weight:500;' if amount else '')+'} QComboBox,QAbstractSpinBox,QLineEdit{min-height:'+str(size+6)+'px;max-height:'+str(size+6)+'px;}')
   bg,fg=colors(self.window)
   self.auto_adjust.setCursor(Qt.PointingHandCursor)
   self.auto_adjust.setStyleSheet(f'QCheckBox{{border:1px solid {fg};padding:10px;spacing:10px;}} QCheckBox::indicator{{width:18px;height:18px;border:2px solid {fg};background:{bg};}} QCheckBox::indicator:checked{{background:{fg};}} QCheckBox:focus{{border:2px solid {fg};padding:9px;}}')

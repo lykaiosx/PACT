@@ -7,7 +7,8 @@ from PySide6.QtWidgets import QWidget,QVBoxLayout,QHBoxLayout,QLabel,QPushButton
 class TimeEditor(QWidget):
     def __init__(self,window,kind,embedded=False):
         super().__init__(window);self.window=window;self.setAutoFillBackground(True)
-        if window.storage.get_setting('display_auto_adjust',False):self.setStyleSheet('QWidget{font-size:18px;}')
+        size=18 if window.storage.get_setting('display_auto_adjust',False) else 14
+        if not embedded:self.setStyleSheet(f'QWidget{{font-size:{size}px;}} QComboBox,QAbstractSpinBox{{min-height:{size+6}px;max-height:{size+6}px;}}')
         root=QVBoxLayout(self);root.setContentsMargins(16,18,16,36)
         head=QHBoxLayout();back=QPushButton('‹');back.clicked.connect(window.close_settings);head.addWidget(back);head.addWidget(QLabel('Correct time'),1);root.addLayout(head)
         if embedded:back.hide();root.setContentsMargins(0,0,0,0)
