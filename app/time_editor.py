@@ -18,7 +18,9 @@ class TimeEditor(QWidget):
         self.mode=QComboBox();self.mode.addItems(['Add time','Deduct time','Edit exact start / end']);form.addRow('I want to',self.mode)
         self.quick=QWidget();quick_form=QFormLayout(self.quick);quick_form.setContentsMargins(0,0,0,0);quick_form.setRowWrapPolicy(QFormLayout.WrapLongRows);form.addRow(self.quick)
         now=QTime.currentTime();initial=QTime(now.hour(),now.minute());initial=initial.addSecs(-1800) if now.hour() or now.minute()>=30 else QTime(0,0)
-        self.quick_start=QTimeEdit(initial);self.quick_start.setDisplayFormat('h:mm AP');self.start_label=QLabel('Start at');quick_form.addRow(self.start_label,self.quick_start)
+        self.quick_start=QTimeEdit(initial);self.quick_start.setDisplayFormat('h:mm:ss AP');self.start_label=QLabel('Start at');quick_form.addRow(self.start_label,self.quick_start)
+        self.last_end=None;self.last_session_note=QLabel();self.last_session_note.setWordWrap(True);quick_form.addRow(self.last_session_note)
+        self.use_last_end=QPushButton('Use last session end');self.use_last_end.clicked.connect(self.use_session_end);quick_form.addRow(self.use_last_end)
         amount=QWidget();amount_layout=QHBoxLayout(amount);amount_layout.setContentsMargins(0,0,0,0)
         self.hours=QSpinBox();self.hours.setRange(0,24);self.hours.setSuffix(' h');self.minutes=QSpinBox();self.minutes.setRange(0,59);self.minutes.setValue(30);self.minutes.setSuffix(' min')
         amount_layout.addWidget(self.hours);amount_layout.addWidget(self.minutes);quick_form.addRow('Amount',amount)
@@ -42,13 +44,34 @@ class TimeEditor(QWidget):
         self.quick_start.timeChanged.connect(self.update_quick);self.hours.valueChanged.connect(self.update_quick);self.minutes.valueChanged.connect(self.update_quick);self.update_quick()
     def update_quick(self,*args):
         mode=self.mode.currentIndex();self.quick.setVisible(mode!=2);self.advanced.setVisible(mode==2);self.quick_start.setVisible(mode==0);self.start_label.setVisible(mode==0)
+        self.last_session_note.setVisible(mode==0);self.use_last_end.setVisible(mode==0)
         self.quick_apply.setText('Add time' if mode==0 else 'Deduct time')
         if mode==0:
-            start=datetime.combine(self.day.date().toPython(),self.quick_start.time().toPython());end=start+timedelta(hours=self.hours.value(),minutes=self.minutes.value());self.preview.setText('Ends at '+end.strftime('%I:%M %p · %d %b').lstrip('0')+'.')
+            self.update_last_session()
+            start=datetime.combine(self.day.date().toPython(),self.quick_start.time().toPython());end=start+timedelta(hours=self.hours.value(),minutes=self.minutes.value());self.preview.setText('Ends at '+end.strftime('%I:%M:%S %p · %d %b').lstrip('0')+'.')
         else:
             seconds=self.window.storage.seconds_for_day(self.kind.currentText().lower(),self.day.date().toString('yyyy-MM-dd'));self.preview.setText(f'Recorded: {seconds//3600} h {(seconds%3600)//60} min. Removes the latest time on this date, including imported totals. Stop the timer first if it is running.')
+    def update_last_session(self):
+        kind=self.kind.currentText().lower();day=self.day.date().toString('yyyy-MM-dd');rows=self.window.storage.sessions_for_day(kind,day);self.last_end=None
+        running=next((r for r in rows if r['ended_at'] is None),None)
+        if running:
+            started=datetime.fromisoformat(running['started_at']).strftime('%I:%M:%S %p · %d %b %Y').lstrip('0')
+            note=f'{kind.title()} timer is still running (started {started}). Stop it first to get its end time.'
+        elif rows:
+            self.last_end=max(datetime.fromisoformat(r['ended_at']) for r in rows)
+            note=f'Last {kind.title()} session ended at '+self.last_end.strftime('%I:%M:%S %p · %d %b %Y').lstrip('0')+'.'
+        elif self.window.storage.conn.execute('SELECT 1 FROM imported_totals WHERE day=? AND kind=?',(day,kind)).fetchone():note='This date has an imported daily total, but no session start or end times.'
+        else:note=f'No {kind.title()} sessions recorded on this date.'
+        self.last_session_note.setText(note);self.use_last_end.setEnabled(self.last_end is not None)
+    def use_session_end(self):
+        self.update_last_session()
+        if self.last_end is None:return
+        end=self.last_end
+        # Old backups may have fractional seconds; move forward, never back into a session.
+        if end.microsecond:end=(end+timedelta(seconds=1)).replace(microsecond=0)
+        self.day.setDate(QDate(end.date()));self.quick_start.setTime(QTime(end.hour,end.minute,end.second));self.message.setText('Start set to the last session end. Check the amount, then select Add time.')
     def quick_save(self):
-        self.hours.interpretText();self.minutes.interpretText()
+        self.quick_start.interpretText();self.hours.interpretText();self.minutes.interpretText()
         try:
             seconds=self.hours.value()*3600+self.minutes.value()*60
             if seconds<=0:raise ValueError('Enter an amount greater than zero.')
@@ -57,7 +80,7 @@ class TimeEditor(QWidget):
             else:
                 start=datetime.combine(self.day.date().toPython(),self.quick_start.time().toPython());self.window.storage.correct_session(kind,start.isoformat(),(start+timedelta(seconds=seconds)).isoformat());message='Time added. All totals are updated.'
             self.changed(message)
-        except ValueError as e:self.message.setText(str(e))
+        except ValueError as e:self.update_last_session();self.message.setText(str(e))
     def paintEvent(self,event):
         from panels import colors
         p=QPainter(self);p.fillRect(self.rect(),QColor(colors(self.window)[0]));p.end()

@@ -1,6 +1,12 @@
-# PACT v1.9.0
+# PACT v1.9.1
 
-Run PACT_v1.9.0_Setup.exe to install or update on Windows 10/11 x64. The private runtime is included. Start Menu, Installed Apps, optional desktop/startup shortcuts and updater process management are preserved.
+Run PACT_v1.9.1_Setup.exe to install or update on Windows 10/11 x64. The private runtime is included. Start Menu, Installed Apps, optional desktop/startup shortcuts and updater process management are preserved.
+
+## Fixed in v1.9.1
+
+- Add time shows the last session end for the selected activity and date, including seconds. Use last session end fills the start time (and date for overnight sessions) without saving until you press Add time.
+- Overlap errors identify the conflicting activity and its exact start/end, or say when the overlapping timer is still running. Overlap validation remains in place; existing sessions are not changed by an invalid addition.
+- The start field and end preview display seconds. Imported daily totals without session timestamps are explicitly identified; no end time is invented. Fractional timestamps from older data are rounded forward to the next whole second when using the shortcut.
 
 ## New in v1.9.0
 

@@ -144,8 +144,12 @@ class Storage:
             if start.tzinfo or end.tzinfo or start>=end or end>datetime.now():raise ValueError('Use local times with the end after the start and no later than now.')
             if start.year<2000:raise ValueError('Choose a date from 2000 onward.')
             start=start.isoformat(timespec='seconds');end=end.isoformat(timespec='seconds')
-            overlap=self.conn.execute('SELECT 1 FROM sessions WHERE kind=? AND id!=? AND started_at<? AND COALESCE(ended_at,?)>?',(kind,session_id or -1,end,datetime.now().isoformat(),start)).fetchone()
-            if overlap:raise ValueError('This overlaps another session of the same activity. Adjust the times first.')
+            overlap=self.conn.execute('SELECT started_at,ended_at FROM sessions WHERE kind=? AND id!=? AND started_at<? AND COALESCE(ended_at,?)>? ORDER BY started_at LIMIT 1',(kind,session_id or -1,end,datetime.now().isoformat(),start)).fetchone()
+            if overlap:
+                begin=datetime.fromisoformat(overlap['started_at']).strftime('%I:%M:%S %p on %d %b %Y').lstrip('0')
+                if overlap['ended_at'] is None:raise ValueError(f'This overlaps your running {kind.title()} session, started at {begin}. Stop that timer first or choose an earlier free time.')
+                finish=datetime.fromisoformat(overlap['ended_at']).strftime('%I:%M:%S %p on %d %b %Y').lstrip('0')
+                raise ValueError(f'This overlaps a {kind.title()} session from {begin} to {finish}. Choose a different start time or amount.')
         with self.conn:
             after=None
             if remove:self.conn.execute('DELETE FROM sessions WHERE id=?',(session_id,))
