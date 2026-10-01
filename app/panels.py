@@ -90,6 +90,16 @@ class Settings(QWidget):
   self.use_custom=QComboBox();self.use_custom.addItems(['Theme default','Custom colors']);self.use_custom.setCurrentIndex(int(bool(window.storage.get_setting('intensity_colors'))));form.addRow('Chart palette',self.use_custom)
   for i,c in enumerate(intensity_colors(window)):self.add_color(form,f'level{i}',f'Intensity {i+1}',c)
   hint=QLabel('Custom intensity colors are ordered from lightest to darkest. Darker means more progress.');hint.setWordWrap(True);form.addRow(hint)
+  section('Desktop widget')
+  self.widget_enabled=QCheckBox('Show floating widget');self.widget_enabled.setChecked(window.storage.get_setting('widget_enabled',False));self.widget_enabled.toggled.connect(window.set_widget_enabled);form.addRow(self.widget_enabled)
+  self.widget_locked=QCheckBox('Lock widget position');self.widget_locked.setChecked(window.storage.get_setting('widget_locked',False));self.widget_locked.toggled.connect(lambda value:self.widget_change('widget_locked',bool(value)));form.addRow(self.widget_locked)
+  self.widget_size=QSlider(Qt.Horizontal);self.widget_size.setRange(70,150);self.widget_size.setValue(window.storage.get_setting('widget_scale',100));self.widget_size.setAccessibleName('Widget size');self.widget_size.valueChanged.connect(lambda value:self.widget_change('widget_scale',value));form.addRow('Size',self.widget_size)
+  self.widget_opacity=QSlider(Qt.Horizontal);self.widget_opacity.setRange(40,100);self.widget_opacity.setValue(window.storage.get_setting('widget_opacity',100));self.widget_opacity.setAccessibleName('Widget opacity');self.widget_opacity.valueChanged.connect(lambda value:self.widget_change('widget_opacity',value));form.addRow('Opacity',self.widget_opacity)
+  self.widget_options={}
+  from floating_widget import STATS,DEFAULT_STATS
+  for kind in STATS:
+   check=QCheckBox(kind.title());check.setChecked(kind in window.storage.get_setting('widget_stats',DEFAULT_STATS));self.widget_options[kind]=check;check.toggled.connect(self.widget_stats_changed);form.addRow(check)
+  widget_note=QLabel('Drag the widget header to place it. Click to open PACT; right-click for options. It stays visible when the sidebar is hidden and sits alongside your other desktop widgets.');widget_note.setWordWrap(True);form.addRow(widget_note)
   section('Customization')
   for key,label,default,maximum,suffix in [('target_work','Work target',8,24,' h'),('target_learning','Learning target',2,24,' h'),('target_sleep','Sleep target',8,24,' h'),('annual_work_goal','Annual work',2000,8784,' h'),('annual_learning_goal','Annual learning',730,8784,' h')]:
    f=QDoubleSpinBox();f.setRange(.25 if key.startswith('target') else 1,maximum);f.setSingleStep(.25 if key.startswith('target') else 1);f.setDecimals(2 if key.startswith('target') else 0);f.setSuffix(suffix);f.setValue(window.storage.get_setting(key,default));self.fields[key.replace('target_','')]=f;form.addRow(label,f)
@@ -104,7 +114,7 @@ class Settings(QWidget):
   self.csv_note=QLabel('Import a PACT daily totals CSV, including daily.csv extracted from an exported ZIP.');self.csv_note.setWordWrap(True);form.addRow(self.csv_note)
   self.csv_confirm=QPushButton('Import new dates');self.csv_confirm.hide();self.csv_confirm.clicked.connect(self.import_csv);form.addRow(self.csv_confirm);self.csv_path=None
   reset=QPushButton('Reset progress…');reset.clicked.connect(self.reset_progress);form.addRow(reset)
-  section('About');form.addRow(QLabel('PACT 1.8.2'))
+  section('About');form.addRow(QLabel('PACT 1.9.0'))
   self.theme.currentIndexChanged.connect(self.save);self.use_custom.currentIndexChanged.connect(self.save)
   self.auto_adjust.toggled.connect(self.change_display)
   self.width_slider.valueChanged.connect(self.change_width)
@@ -114,6 +124,10 @@ class Settings(QWidget):
   for field in self.fields.values():field.setKeyboardTracking(False);field.valueChanged.connect(self.save);field.editingFinished.connect(self.save)
  def paintEvent(self,event):
   p=QPainter(self);p.fillRect(self.rect(),QColor(colors(self.window)[0]));p.end()
+ def widget_change(self,key,value):
+  self.window.storage.set_setting(key,value);self.window.update_widget()
+ def widget_stats_changed(self,*args):
+  self.widget_change('widget_stats',[kind for kind,check in self.widget_options.items() if check.isChecked()])
  def change_display(self,enabled):
   value=(self.window.storage.get_setting('display_width',100) or 100) if enabled else 0
   self.width_slider.blockSignals(True);self.width_slider.setValue(value);self.width_slider.blockSignals(False)
@@ -133,6 +147,7 @@ class Settings(QWidget):
   self.auto_adjust.setStyleSheet(f'QCheckBox{{border:1px solid {fg};padding:10px;spacing:10px;}} QCheckBox::indicator{{width:18px;height:18px;border:2px solid {fg};background:{bg};}} QCheckBox::indicator:checked{{background:{fg};}} QCheckBox:focus{{border:2px solid {fg};padding:9px;}}')
   self.weekly_notify.setStyleSheet(self.auto_adjust.styleSheet())
   self.monthly_notify.setStyleSheet(self.auto_adjust.styleSheet())
+  for check in [self.widget_enabled,self.widget_locked,*self.widget_options.values()]:check.setStyleSheet(self.auto_adjust.styleSheet())
   self.width_slider.setStyleSheet(f'QSlider::groove:horizontal{{height:4px;background:{bg};border:1px solid {fg};}} QSlider::sub-page:horizontal{{background:{fg};}} QSlider::handle:horizontal{{width:16px;margin:-7px 0;background:{fg};border:1px solid {fg};}}')
  def backup(self):
   from backup import create_backup

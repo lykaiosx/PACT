@@ -8,6 +8,7 @@ SETTINGS={'theme','custom_background','custom_ink','intensity_colors','target_wo
 EXTRAS={'sleep_score','sleep_stages','body_battery','calories','hydration_ml','hydration_goal_ml','water','garmin_data_through','garmin_checked_at'}
 TABLES['edit_history']=['id','edited_at','day','field','action','before_json','after_json']
 SETTINGS.update({'display_width','weekly_notifications','weekly_notified','monthly_notifications','monthly_notified'})
+SETTINGS.update({'widget_enabled','widget_locked','widget_scale','widget_opacity','widget_stats','widget_position'})
 EXTRAS.add('manual_fields')
 LIMIT=100*1024*1024
 
@@ -24,7 +25,7 @@ def create_backup(storage,path):
     running=sum(r['ended_at'] is None for r in data['sessions'])
     for r in data['sessions']:
         if r['ended_at'] is None:r['ended_at']=now
-    raw=json.dumps({'format':'PACT backup','version':1,'app_version':'1.8.2','created_at':now,'running_timers_stopped':running,'tables':data},allow_nan=False).encode()
+    raw=json.dumps({'format':'PACT backup','version':1,'app_version':'1.9.0','created_at':now,'running_timers_stopped':running,'tables':data},allow_nan=False).encode()
     path=Path(path);fd,tmp=tempfile.mkstemp(prefix='.pact-backup-',dir=path.parent);os.close(fd)
     try:
         with zipfile.ZipFile(tmp,'w',zipfile.ZIP_DEFLATED) as z:
@@ -77,6 +78,11 @@ def load_backup(path):
                     if not allowed_key(r['key']):raise ValueError('Unsupported setting in backup.')
                     v=json.loads(r['value']);key=r['key']
                     if key=='display_width' and (type(v)!=int or not 0<=v<=100):raise ValueError('Invalid width preference.')
+                    if key in ('widget_enabled','widget_locked') and type(v)!=bool:raise ValueError('Invalid widget preference.')
+                    if key=='widget_scale' and (type(v)!=int or not 70<=v<=150):raise ValueError('Invalid widget size.')
+                    if key=='widget_opacity' and (type(v)!=int or not 40<=v<=100):raise ValueError('Invalid widget opacity.')
+                    if key=='widget_stats' and (not isinstance(v,list) or len(v)>6 or len(set(v))!=len(v) or any(x not in ('work','learning','sleep','steps','meals','creatives') for x in v)):raise ValueError('Invalid widget stats.')
+                    if key=='widget_position' and (not isinstance(v,list) or len(v)!=2 or any(type(x)!=int or not -100000<=x<=100000 for x in v)):raise ValueError('Invalid widget position.')
                     if key in ('weekly_notifications','monthly_notifications') and type(v)!=bool:raise ValueError('Invalid notification preference.')
                     if key in ('weekly_notified','monthly_notified'):date.fromisoformat(v)
                     if key in ('display_auto_adjust','display_hint_seen') and type(v)!=bool:raise ValueError('Invalid display preference.')

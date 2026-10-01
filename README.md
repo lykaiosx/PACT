@@ -1,6 +1,14 @@
-# PACT v1.8.2
+# PACT v1.9.0
 
-Run PACT_v1.8.2_Setup.exe to install or update on Windows 10/11 x64. The private runtime is included. Start Menu, Installed Apps, optional desktop/startup shortcuts and updater process management are preserved.
+Run PACT_v1.9.0_Setup.exe to install or update on Windows 10/11 x64. The private runtime is included. Start Menu, Installed Apps, optional desktop/startup shortcuts and updater process management are preserved.
+
+## New in v1.9.0
+
+- Enable the optional floating widget in Settings > Desktop widget or from the tray's Show / hide widget action. Select Work, Learning, sleep score, steps, meals and creatives. It reads the same local data and uses the same theme as PACT, refreshing each second without another Garmin connection.
+- Drag its header to position it; right-click to lock, hide or open settings. Size (70–150%) and opacity (40–100%) save automatically. It stays visible when the sidebar is hidden, opens PACT on click, and is not always on top. No Rainmeter dependency is required. It starts disabled; once enabled it returns on subsequent launches.
+- Widget preferences are included in full backups. Its position is clamped to an available screen if a monitor is removed or the layout changes. Missing values stay unavailable; the sleep row labels the date when showing a prior night's record.
+- The Learning slide replaces page turning with writing that gradually appears across a stationary open book. There is no turning sheet or final shape replacement.
+- The existing PDF/named-PNG exports, six-by-five 30-day consistency layout and explicit eaten/skipped/unrecorded meal counts are retained.
 
 ## Fixed in v1.8.2
 

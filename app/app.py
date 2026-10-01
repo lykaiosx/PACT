@@ -56,7 +56,7 @@ class PACT(QWidget):
  def __init__(self,testing=False):
   super().__init__();self.testing=testing;self.storage=Storage();self.garmin=GarminBridge();self.job=None;self.sync_error=None;self.sync_busy=False;self.garmin_status='Not synced';self.corner_since=None;self.corner_latched=False
   self.dark=self.storage.get_setting('theme','light')=='dark';self.setWindowTitle('PACT');self.setWindowFlags(Qt.Window|Qt.FramelessWindowHint)
-  self.settings_panel=None;self.panel_animation=None;self.display_hint=None;self.quitting=False;self.last_backfill=0;self.setWindowIcon(QIcon(str(ASSETS/'pact.ico')));self.canvas=Canvas(self)
+  self.floating_widget=None;self.settings_panel=None;self.panel_animation=None;self.display_hint=None;self.quitting=False;self.last_backfill=0;self.setWindowIcon(QIcon(str(ASSETS/'pact.ico')));self.canvas=Canvas(self)
   root=QVBoxLayout(self);root.setContentsMargins(0,0,0,0);self.scroll=QScrollArea();self.scroll.setFrameShape(QScrollArea.NoFrame);self.scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff);self.scroll.setWidget(self.canvas);root.addWidget(self.scroll)
   self.scroll.verticalScrollBar().valueChanged.connect(self.canvas.details.clear_details)
   self.apply_theme();self.refresh();self.fit_screen();self.timer=QTimer(self);self.timer.timeout.connect(self.refresh);self.timer.start(1000)
@@ -68,13 +68,26 @@ class PACT(QWidget):
   QApplication.instance().screenAdded.connect(self.watch_screen);QApplication.instance().screenRemoved.connect(self.on_display_changed)
   if not testing:
    self.tray=QSystemTrayIcon(self.windowIcon(),self);self.tray.setToolTip('PACT');menu=QMenu(self)
-   for title,fn in [('Show / hide',self.toggle_visible),('Settings',self.settings),('PACT Wrapped',self.open_weekly_review),('Sync Garmin',self.sync),('Quit PACT',self.quit)]:
+   for title,fn in [('Show / hide',self.toggle_visible),('Settings',self.settings),('Show / hide widget',self.toggle_widget),('PACT Wrapped',self.open_weekly_review),('Sync Garmin',self.sync),('Quit PACT',self.quit)]:
     act=menu.addAction(title);act.triggered.connect(fn)
    self.tray.setContextMenu(menu);self.tray.activated.connect(lambda reason:self.toggle_visible() if reason==QSystemTrayIcon.Trigger else None);self.tray.show()
    if Path(TOKENSTORE).exists():QTimer.singleShot(1500,self.sync)
    self.sync_timer.start()
    self.weekly_timer=QTimer(self);self.weekly_timer.setInterval(3600000);self.weekly_timer.timeout.connect(self.check_weekly_review);self.weekly_timer.start();QTimer.singleShot(15000,self.check_weekly_review)
    self.tray.messageClicked.connect(self.open_review_notice)
+  if not testing:self.update_widget()
+ def set_widget_enabled(self,enabled):
+  self.storage.set_setting('widget_enabled',bool(enabled));self.update_widget()
+  if self.settings_panel and hasattr(self.settings_panel,'widget_enabled'):
+   field=self.settings_panel.widget_enabled;field.blockSignals(True);field.setChecked(bool(enabled));field.blockSignals(False)
+ def toggle_widget(self):self.set_widget_enabled(not self.storage.get_setting('widget_enabled',False))
+ def update_widget(self):
+  if self.storage.get_setting('widget_enabled',False):
+   if self.floating_widget is None:
+    from floating_widget import FloatingWidget
+    self.floating_widget=FloatingWidget(self);self.destroyed.connect(self.floating_widget.deleteLater)
+   self.floating_widget.refresh();self.floating_widget.show()
+  elif self.floating_widget:self.floating_widget.hide()
  def open_review_notice(self):
   notice=getattr(self,'last_notice',None)
   if notice in ('weekly','monthly'):self.open_weekly_review('Weekly' if notice=='weekly' else 'Monthly',completed=True)
@@ -135,6 +148,8 @@ class PACT(QWidget):
   QTimer.singleShot(0,self.refit_current_screen)
  def refit_current_screen(self):
   self.fit_screen(QApplication.screenAt(self.geometry().center()) or QApplication.primaryScreen())
+  if self.floating_widget:self.floating_widget.refresh()
+  if hasattr(self,'timer') and self.storage.get_setting('widget_enabled',False)!=(self.floating_widget is not None and self.floating_widget.isVisible()):self.update_widget()
  def reveal(self):
   self.fit_screen();self.show();self.raise_();self.activateWindow()
   if not self.testing:QTimer.singleShot(350,self.show_display_hint)
@@ -189,6 +204,8 @@ class PACT(QWidget):
    self.histories={k:self.storage.history(k,366) for k in ('work','learning')};self.history=self.histories['work'];self.annual={k:sum(v for d,v in hist if d.year==date.today().year) for k,hist in self.histories.items()};self.history_at=time.monotonic()
   for i,k in enumerate(('work','learning')):self.canvas.controls[i][0].setText('Stop' if self.storage.active_session(k) else 'Start')
   self.canvas.update()
+  if self.floating_widget:self.floating_widget.refresh()
+  if not self.quitting and hasattr(self,'timer') and self.storage.get_setting('widget_enabled',False)!=(self.floating_widget is not None and self.floating_widget.isVisible()):self.update_widget()
   if self.settings_panel and hasattr(self.settings_panel,'state'):self.settings_panel.state.setText(self.garmin_status)
  def connect_garmin(self):self.settings()
  def sync(self,email=None,password=None):
@@ -222,6 +239,7 @@ class PACT(QWidget):
   if self.tray:self.last_notice='garmin';self.tray.showMessage('PACT · Garmin',message,QSystemTrayIcon.Information,5000)
  def quit(self):
   self.quitting=True
+  if self.floating_widget:self.floating_widget.hide()
   if self.display_hint:self.display_hint.reject()
   if self.settings_panel:self.settings_panel.flush()
   self.sync_timer.stop()

@@ -66,24 +66,20 @@ class StoryCanvas(QWidget):
                 if height<1.5:continue
                 if v:p.fillRect(QRectF(30+i*slot,460-height,bar,height),fg)
         elif kind=='book':
-            # Pages unfold sideways; unlike Work, this illustration is not a daily chart.
+            # A stationary book fills with writing: no turning sheet or final swap.
             def book_page(side,reveal):
                 p.setBrush(paper)
-                edge=180+side*(25+82*grow)
+                edge=180+side*107
                 page=QPainterPath(QPointF(180,334));page.cubicTo(180+side*30,312,edge-side*25,320,edge,331)
                 page.lineTo(edge,439);page.cubicTo(edge-side*25,428,180+side*30,425,180,447);page.closeSubpath();p.drawPath(page)
                 for row in range(4):
-                    amount=max(0,min(1,(reveal-row*.12)/.64));y=354+row*18
-                    line=QPainterPath(QPointF(180+side*18,y));line.quadTo(180+side*(18+28*amount),y-10,180+side*(18+65*amount),y-3)
-                    if amount:p.drawPath(line)
+                    index=row+(4 if side==1 else 0);amount=max(0,min(1,reveal*8-index));y=354+row*18
+                    line=QPainterPath(QPointF(180+side*18,y))
+                    for step in range(1,33):
+                        u=amount*step/32;line.lineTo(180+side*(18+56*u+9*u*u),y-20*u+17*u*u)
+                    if amount:p.setBrush(Qt.NoBrush);p.drawPath(line)
             for side in (-1,1):book_page(side,grow)
             p.drawLine(QPointF(180,334),QPointF(180,447))
-            # The leaf shares the resting page's curves and writing. It merges
-            # gradually instead of disappearing and exposing a different drawing.
-            def smooth(value):
-                value=max(0,min(1,value));return value*value*(3-2*value)
-            opacity=smooth(grow/.12)*(1-smooth((grow-.82)/.18))
-            p.save();p.setOpacity(p.opacity()*opacity);book_page(math.cos(math.pi*grow),max(0,2*grow-1));p.restore()
         elif kind=='peak':
             if any(values):
                 for i in range(18):
